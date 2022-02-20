@@ -1,3 +1,5 @@
+package array;
+
 import org.testng.annotations.Test;
 
 public class ArrayTwoDimensional {
