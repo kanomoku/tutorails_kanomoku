@@ -7,8 +7,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static java.lang.System.out;
-
 public class ArrayBasic {
 
     /**
@@ -18,20 +16,22 @@ public class ArrayBasic {
     @Test
     public void intToByteArray() {
 
-        int intNum = 100;
         byte[] bytes = ByteBuffer
             // 从堆空间中分配缓冲区4个字节
             .allocate(4)
             //向ByteBuffer写数据
-            .putInt(intNum).array();
+            .putInt(100).array();
 
-        // Stream.of(bytes).forEach(a -> out.format("0x%x ", a)); 报错
+        // Stream.of(bytes).forEach(a -> System.out.format("0x%x ", a)); 报错
         for (byte t : bytes) {
-            out.format("0x%x ", t);
+            System.out.format("0x%x ", t);
         }
 
     }
 
+    /**
+     * 初始化数组
+     */
 	@Test
     public void arrayInitialization() {
 		// Initialization 1
@@ -39,33 +39,45 @@ public class ArrayBasic {
 		Arrays.fill(s1, "wyy");
 
 		for (String s : s1) {
-			out.println(s);
+			System.out.println(s);
 		}
-		out.println(s1.toString());
-		out.println(Arrays.toString(s1));
+		System.out.println(s1.toString());
+		System.out.println(Arrays.toString(s1));
 
 		// Initialization 2
 		String[] s2 = {"wyy", "wzz", "wxx", "wxx"};
-		out.println(s2.toString());
-		out.println(Arrays.toString(s2));
-
+		System.out.println(Arrays.toString(s2));
+        
 		// Initialization 3
 		String[] s3 = new String[] {"zyy", "zxx", "zww"};
-		out.println(s3.toString());
-		out.println(Arrays.toString(s3));
+		System.out.println(Arrays.toString(s3));
 	}
 
     /**
-     * Arrays.asList()和 new ArrayList()返回的List的都继承了AbstractList<E>
-     * 但new ArrayList<>对某些方法做了重写，
+     * 数组转List
+     *
+     * Arrays.asList()和new ArrayList()区别：
+     * Arrays.asList()和new ArrayList()返回的List的都继承了AbstractList<E>
+     * 但new ArrayList<>对某些方法做了重写、支持 add(),remove()操作
      * 而Arrays.asList(st1)只做了继承，没有重写、不支持 add(),remove()操作，只支持遍历读操作;
+     * 
+     * List.of()和Arrays.asList()区：
+     * https://blog.csdn.net/qq_42520962/article/details/109380430
+     * 1、Arrays.asList()可以包含/contains null，而List.of()不可以包含/contains null (NullPointerException)
+     * 2、List.of生成的List不能修改，Arrays.asList生成的List能修改；如ls1.set(0,5);
+     * 3、关于数组修改对List的影响。数组修改对Arrays.asList生成的List有影响，对List.of 生成的List无影响
      */
     @Test
     public void arrayToList() {
         String[] s2 = {"wyy", "wzz", "wxx", "wxx"};
 
-        List<String> list = new ArrayList<>(Arrays.asList(s2));
-        out.print(list.toString());
+        List<String> list = new ArrayList<>(List.of(s2));
+        list.add("aa");
+        System.out.println(list);
+        List<String> list2 = Arrays.asList(s2);
+        System.out.println(list2);
+        List<String> list3 = List.of(s2);
+        System.out.println(list3);
     }
 
     /**
@@ -78,7 +90,7 @@ public class ArrayBasic {
         String[] s2 = {"wyy", "wzz", "wxx", "wxx"};
 
         Set<String> set = new HashSet<>(Arrays.asList(s2));
-        out.print(set.toString());
+        System.out.print(set);
     }
 
     @Test
@@ -86,13 +98,13 @@ public class ArrayBasic {
         int[] s5 = new int[] {7, 3, 2, 8, 9};
 
         for (Integer s : s5) {
-            out.print(s);
+            System.out.print(s);
         }
 
-        out.println();
+        System.out.println();
 
         for (int i = 0; i < s5.length; i++) {
-            out.print(s5[i]);
+            System.out.print(s5[i]);
         }
     }
 }
