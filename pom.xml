@@ -10,6 +10,7 @@
     <modules>
         <module>collection-prac</module>
         <module>java8-prac</module>
+        <module>date-prac</module>
     </modules>
 
     <packaging>pom</packaging>
