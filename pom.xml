@@ -11,6 +11,7 @@
         <module>collection-prac</module>
         <module>java8-prac</module>
         <module>date-prac</module>
+        <module>business-prac</module>
     </modules>
 
     <packaging>pom</packaging>
