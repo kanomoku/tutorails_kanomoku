@@ -1,3 +1,5 @@
+package method;
+
 import org.junit.Test;
 
 import java.util.Objects;
