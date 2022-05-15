@@ -239,5 +239,8 @@ public class Build {
         System.out.println(ZonedDateTime.parse("2019-07-07T20:18:18.000000888+09:00[Asia/Tokyo]"));//2019-07-07T20:18:18.000000888+09:00[Asia/Tokyo]
         System.out.println(ZonedDateTime.parse("2019-07-07T20:18:18+09:00[Asia/Tokyo]"));//2019-07-07T20:18:18+09:00[Asia/Tokyo]
         System.out.println(ZonedDateTime.parse("2019-07-07T20:18+09:00[Asia/Tokyo]"));//2019-07-07T20:18+09:00[Asia/Tokyo]
+
+        System.out.println(ZonedDateTime.parse("Sun Oct 01 00:00:00 EDT 2017",DateTimeFormatter.ofPattern("EEE MMM dd HH:mm:ss zzz yyyy").withLocale(Locale.US)));
+        System.out.println(ZonedDateTime.parse("Sun Oct 01 00:00:00 EDT 2017 GMT+0800",DateTimeFormatter.ofPattern("EEE MMM dd HH:mm:ss zzz yyyy 'GMT'Z").withLocale(Locale.US)));
     }
 }

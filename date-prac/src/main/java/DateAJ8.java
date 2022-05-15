@@ -11,6 +11,7 @@ import java.time.Period;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.TimeZone;
 
@@ -145,6 +146,8 @@ public class DateAJ8 {
         System.out.println(LOCAL_DATE_TIME.plusDays(3));
         System.out.println(LOCAL_DATE_TIME.plusHours(-3));
         System.out.println(LOCAL_DATE_TIME.minusMinutes(3));
+        System.out.println(LOCAL_DATE_TIME.plus(1, ChronoUnit.WEEKS));
+        System.out.println(LOCAL_DATE_TIME.minus(1, ChronoUnit.YEARS));
 
         LocalDateTime after = LOCAL_DATE_TIME.plusDays(3);
         after = after.plusHours(-3);
