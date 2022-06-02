@@ -4,6 +4,7 @@ import org.apache.commons.collections.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class MethodUtils {
@@ -23,7 +24,8 @@ public class MethodUtils {
 
         // addTagIds,deleteTagIds都为空表示置换、用newTagIds整个替换原来的TagIds
         if (CollectionUtils.isEmpty(addTagIds) && CollectionUtils.isEmpty(deleteTagIds)) {
-            if (CollectionUtils.isNotEmpty(newTagIds)) {
+            // 不为null就表示要去置换、因为存在置空的情况
+            if (Objects.nonNull(newTagIds)) {
                 tagIds = newTagIds;
             }
         } else {
