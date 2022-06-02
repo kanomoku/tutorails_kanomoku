@@ -63,33 +63,53 @@ public class Build {
         System.out.println("----------");
 
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        System.out.println("格式化器用的时区是：" + dateFormat.getTimeZone().getID() + ":" + dateFormat.parse("2019-07-07 20:18:18"));
+        System.out.println(
+            "格式化器用的时区是：" + dateFormat.getTimeZone().getID() + ":" + dateFormat.parse("2019-07-07 20:18:18"));
         dateFormat.setTimeZone(TimeZone.getTimeZone("Asia/Tokyo"));
-        System.out.println("格式化器用的时区是：" + dateFormat.getTimeZone().getID() + ":" + dateFormat.parse("2019-07-07 20:18:18"));
+        System.out.println(
+            "格式化器用的时区是：" + dateFormat.getTimeZone().getID() + ":" + dateFormat.parse("2019-07-07 20:18:18"));
 
-        System.out.println(DateUtils.parseDate("2019-07-07 20:18:18 +0800","yyyy-MM-dd HH:mm:ss Z"));
-        System.out.println(DateUtils.parseDate("2019-07-07 20:18:18.888","yyyy-MM-dd HH:mm:ss.SSS"));
-        System.out.println(DateUtils.parseDate("2019-07-07 20:18:18","yyyy-MM-dd HH:mm:ss"));
-        System.out.println(DateUtils.parseDate("2019-07-07 20:18","yyyy-MM-dd HH:mm"));
-        System.out.println(DateUtils.parseDate("2019/07/07 20:18:18 +0800","yyyy/MM/dd HH:mm:ss Z"));
-        System.out.println(DateUtils.parseDate("2019/07/07 20:18:18.888","yyyy/MM/dd HH:mm:ss.SSS"));
-        System.out.println(DateUtils.parseDate("2019/07/07 20:18:18","yyyy/MM/dd HH:mm:ss"));
-        System.out.println(DateUtils.parseDate("2019/07/07 20:18","yyyy/MM/dd HH:mm"));
-        System.out.println(DateUtils.parseDate("20190707201818 +0800","yyyyMMddHHmmss Z"));
-        System.out.println(DateUtils.parseDate("20190707201818888","yyyyMMddHHmmsSSS"));
-        System.out.println(DateUtils.parseDate("20190707201818","yyyyMMddHHmmss"));
-        System.out.println(DateUtils.parseDate("201907072018","yyyyMMddHHmm"));
-        System.out.println("----------");
-
-        System.out.println(DateUtils.parseDate("2019-07-32 20:18:18 +0800","yyyy-MM-dd HH:mm:ss Z"));//Thu Aug 01 20:18:18 CST 2019
-        System.out.println(DateUtils.parseDateStrictly("2019-07-07 20:18:18 +0800","yyyy-MM-dd HH:mm:ss Z"));
-        System.out.println("----------");
-
+        System.out.println("---1-------");
+        System.out.println(DateUtils.parseDate("2019-7-07 20:18:18.888 +0800", "yyyy-MM-dd HH:mm:ss.SSS Z"));
+        System.out.println(DateUtils.parseDate("2019-7-07 20:18:18 +0800", "yyyy-MM-dd HH:mm:ss Z"));
+        System.out.println(DateUtils.parseDate("2019-7-07 20:18:18.888", "yyyy-MM-dd HH:mm:ss.SSS"));
+        System.out.println(DateUtils.parseDate("2019-7-07 20:18:18", "yyyy-MM-dd HH:mm:ss"));
+        System.out.println(DateUtils.parseDate("2019-7-07 20:18", "yyyy-MM-dd HH:mm"));
+        System.out.println(DateUtils.parseDate("2019-7-07 20", "yyyy-MM-dd HH"));
+        System.out.println(DateUtils.parseDate("2019-7-07", "yyyy-MM-dd"));
+        System.out.println(DateUtils.parseDate("2019-7", "yyyy-MM"));
+        System.out.println(DateUtils.parseDate("2019", "yyyy"));
+        System.out.println("---2-------");
+        System.out.println(DateUtils.parseDate("2019/7/07 20:18:18.888 +0800", "yyyy/MM/dd HH:mm:ss.SSS Z"));
+        System.out.println(DateUtils.parseDate("2019/7/07 20:18:18 +0800", "yyyy/MM/dd HH:mm:ss Z"));
+        System.out.println(DateUtils.parseDate("2019/7/07 20:18:18.888", "yyyy/MM/dd HH:mm:ss.SSS"));
+        System.out.println(DateUtils.parseDate("2019/7/07 20:18:18", "yyyy/MM/dd HH:mm:ss"));
+        System.out.println(DateUtils.parseDate("2019/7/07 20:18", "yyyy/MM/dd HH:mm"));
+        System.out.println(DateUtils.parseDate("2019/7/07 20", "yyyy/MM/dd HH"));
+        System.out.println(DateUtils.parseDate("2019/7/07", "yyyy/MM/dd"));
+        System.out.println(DateUtils.parseDate("2019/7", "yyyy/MM"));
+        System.out.println(DateUtils.parseDate("2019", "yyyy"));
+        System.out.println("---3-------");
+        System.out.println(DateUtils.parseDate("20190707 20:18:18.888 +0800", "yyyyMMdd HH:mm:ss.SSS Z"));
+        System.out.println(DateUtils.parseDate("20190707 20:18:18 +0800", "yyyyMMdd HH:mm:ss Z"));
+        System.out.println(DateUtils.parseDate("20190707 20:18:18.888", "yyyyMMdd HH:mm:ss.SSS"));
+        System.out.println(DateUtils.parseDate("20190707 20:18:18", "yyyyMMdd HH:mm:ss"));
+        System.out.println(DateUtils.parseDate("20190707 20:18", "yyyyMMdd HH:mm"));
+        System.out.println(DateUtils.parseDate("20190707 20", "yyyyMMdd HH"));
+        System.out.println(DateUtils.parseDate("20190707", "yyyyMMdd"));
+        System.out.println(DateUtils.parseDate("201907", "yyyyMM"));
+        System.out.println(DateUtils.parseDate("2019", "yyyy"));
+        System.out.println("---4-------");
+        System.out.println(
+            DateUtils.parseDate("2019-07-32 20:18:18 +0800", "yyyy-MM-dd HH:mm:ss Z"));//Thu Aug 01 20:18:18 CST 2019
+        System.out.println(DateUtils.parseDateStrictly("2019-07-07 20:18:18 +0800", "yyyy-MM-dd HH:mm:ss Z"));
+        System.out.println("---5-------");
         System.out.println(Date.from(Instant.ofEpochMilli(1562501898888L)));//Sun Jul 07 20:18:18 CST 2019
-        System.out.println(Date.from(Instant.ofEpochSecond(1562501898,888)));//Sun Jul 07 20:18:18 CST 2019
+        System.out.println(Date.from(Instant.ofEpochSecond(1562501898, 888)));//Sun Jul 07 20:18:18 CST 2019
         System.out.println(Date.from(Instant.ofEpochSecond(1562501898)));//Sun Jul 07 20:18:18 CST 2019
         System.out.println(Date.from(Instant.parse("2019-07-07T20:18:18.000000888Z")));//Mon Jul 08 04:18:18 CST 2019
         System.out.println(Date.from(Instant.parse("2019-07-07T20:18:18Z")));//Mon Jul 08 04:18:18 CST 2019
+        System.out.println("---6-------");
         System.out.println(Date.from(ZONED_DATE_TIME.toInstant()));//Sun Jul 07 19:18:18 CST 2019
         System.out.println(Date.from(OFFSET_DATE_TIME.toInstant()));//Sun Jul 07 19:18:18 CST 2019
         System.out.println(Date.from(LOCAL_DATE_TIME.toInstant(ZoneOffset.UTC)));//Mon Jul 08 04:18:18 CST 2019
