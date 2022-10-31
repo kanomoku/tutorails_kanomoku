@@ -16,8 +16,18 @@ public class A_extends_RunningMan extends Thread {
     @Override
     public void run() {
         for (int i = 0; i <= 100; i++) {
-            System.out.println(Thread.currentThread().getId() +" "+ Thread.currentThread().getName() +" "+ this.threadTaskName
-                + " 跑到第" + i + "米啦");
+            StringBuilder sb = new StringBuilder();
+            sb.append("线程ID: ")
+                    .append(Thread.currentThread().getId())
+                    .append(" ")
+                    .append("线程Name: ")
+                    .append(Thread.currentThread().getName())
+                    .append(" ")
+                    .append(threadTaskName)
+                    .append(" 跑到第")
+                    .append(i)
+                    .append("米啦");
+            System.out.println(sb);
         }
     }
 }
