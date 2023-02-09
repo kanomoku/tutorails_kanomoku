@@ -4,13 +4,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * 面试题 08.08. 有重复字符串的排列组合
+ */
 public class APermutationOfRepeatedStrings {
     public static void main(String[] args) {
-
         String[] res = permutation("qqe");
         String s = Arrays.toString(res);
         System.out.println(s);
-
     }
 
     public static String[] permutation(String S) {
@@ -31,12 +32,11 @@ public class APermutationOfRepeatedStrings {
 
     /**
      * @param arr     素材字符串
-     * @param sb
+     * @param sb      拼接字符串的临时变量
      * @param visited 标记是否走过
      * @param res     收集结果
      */
     public static void dfs(char[] arr, StringBuilder sb, boolean[] visited, List<String> res) {
-
         if (sb.length() == arr.length) { // 字符串拼接到和数组一样长的时候就停止收集了
             res.add(sb.toString());
             return;
@@ -46,6 +46,8 @@ public class APermutationOfRepeatedStrings {
 
                 // 第一项以后,两个字符相等时的场景
                 // 理解arr[i] == arr[i - 1] && book[i - 1]和arr[i] == arr[i - 1] && !book[i - 1]的区别
+                // 不加if的话→[eqq, eqq, qeq, qqe, qeq, qqe]
+                // 加if→["eqq","qeq","qqe"]
                 if (0 < i && arr[i] == arr[i - 1] && !visited[i - 1]) {
                     continue;
                 } else {
