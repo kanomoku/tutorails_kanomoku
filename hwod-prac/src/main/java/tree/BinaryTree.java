@@ -92,6 +92,8 @@ public class BinaryTree {
         // Stack
         Deque<BinTreeNode<Character>> stack = new LinkedList<>();
 
+        // root != null 表示当前节点是作为根节点进入的
+        // root == null 表示当前节点得位置是作为右节点进来的
         // root != null是针对有值处理的场景、!stack.isEmpty()是针对root = null时的场景
         while (root != null || !stack.isEmpty()) {
             while (root != null) { // 子节点有值就先入Stack
