@@ -34,7 +34,7 @@ public class AttendanceInformation {
         // 结果收集容器
         List<Boolean> res = new ArrayList<>();
 
-        for (List<String> person : persons) {
+        for (List<String> person : persons) { // 挨个判断每个人的考勤
 
             // 1.缺勤不超过1次
             long count = person.stream().filter("absent"::equals).count();
@@ -72,7 +72,7 @@ public class AttendanceInformation {
                     int[] ints = Arrays.copyOfRange(arr, i, i + 7); // 任意7天
                     int sum = Arrays.stream(ints).sum();
                     if (sum > 3) {
-                        isBad = true;
+                        isBad2 = true;
                         break;
                     }
                 }
