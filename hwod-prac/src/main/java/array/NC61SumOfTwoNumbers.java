@@ -10,7 +10,10 @@ import java.util.stream.Collectors;
 import static java.lang.Integer.parseInt;
 import static java.lang.System.in;
 
-public class SumOfTwoNumbers {
+/**
+ * NC61.两数之和
+ */
+public class NC61SumOfTwoNumbers {
     public static void main(String[] args) throws IOException {
         BufferedReader bf = new BufferedReader(new InputStreamReader(in));
         int[] arr = Arrays.stream(bf.readLine().split(",")).mapToInt(Integer::parseInt).toArray();
