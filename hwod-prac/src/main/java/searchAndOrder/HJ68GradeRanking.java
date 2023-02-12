@@ -11,7 +11,10 @@ import java.util.stream.Collectors;
 import static java.lang.Integer.parseInt;
 import static java.lang.System.in;
 
-public class GradeRanking {
+/**
+ * HJ68 成绩排序
+ */
+public class HJ68GradeRanking {
     public static void main(String[] args) throws IOException {
         // 收集数据源
         BufferedReader bf = new BufferedReader(new InputStreamReader(in));
