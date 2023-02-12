@@ -12,7 +12,7 @@ import static java.lang.System.in;
 /**
  * HJ3 明明的随机数
  */
-public class MingMingRandom {
+public class HJ3MingMingRandom {
     public static void main(String[] args) throws IOException {
         BufferedReader bf = new BufferedReader(new InputStreamReader(in));
 

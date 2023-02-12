@@ -5,14 +5,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class CombinedArea {
+/**
+ * NC37 合并区间
+ */
+public class NC37CombinedArea {
     public static void main(String[] args) throws IOException {
         ArrayList<Interval> list = new ArrayList<>();
         list.add(new Interval(10, 30));
         list.add(new Interval(20, 60));
         list.add(new Interval(80, 100));
         list.add(new Interval(150, 180));
-        CombinedArea combinedArea = new CombinedArea();
+        NC37CombinedArea combinedArea = new NC37CombinedArea();
         ArrayList<Interval> merge = combinedArea.merge(list);
         merge.stream().forEach(System.out::println);
     }
