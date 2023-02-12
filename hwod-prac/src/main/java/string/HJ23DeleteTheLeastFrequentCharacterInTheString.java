@@ -10,7 +10,10 @@ import java.util.stream.Collectors;
 
 import static java.lang.System.in;
 
-public class DeleteTheLeastFrequentCharacterInTheString {
+/**
+ * HJ23.删除字符串中出现次数最少的字符
+ */
+public class HJ23DeleteTheLeastFrequentCharacterInTheString {
     public static void main(String[] args) throws IOException {
         // 收集数据源
         BufferedReader bf = new BufferedReader(new InputStreamReader(in));

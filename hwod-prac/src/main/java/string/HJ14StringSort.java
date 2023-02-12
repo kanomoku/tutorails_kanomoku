@@ -10,7 +10,10 @@ import java.util.stream.Collectors;
 
 import static java.lang.System.in;
 
-public class StringSort {
+/**
+ * HJ14 字符串排序
+ */
+public class HJ14StringSort {
     public static void main(String[] args) throws IOException {
         // 收集数据源
         BufferedReader bf = new BufferedReader(new InputStreamReader(in));
