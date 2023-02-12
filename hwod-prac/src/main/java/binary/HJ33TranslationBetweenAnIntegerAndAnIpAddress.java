@@ -10,7 +10,10 @@ import java.util.stream.Collectors;
 
 import static java.lang.System.in;
 
-public class TranslationBetweenAnIntegerAndAnIpAddress {
+/**
+ * HJ33 整数与IP地址间的转换
+ */
+public class HJ33TranslationBetweenAnIntegerAndAnIpAddress {
     public static void main(String[] args) throws IOException {
         // 收集数据源
         BufferedReader bf = new BufferedReader(new InputStreamReader(in));

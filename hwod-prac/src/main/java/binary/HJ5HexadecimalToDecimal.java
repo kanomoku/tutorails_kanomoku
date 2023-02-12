@@ -8,7 +8,10 @@ import java.util.Map;
 
 import static java.lang.System.in;
 
-public class HexadecimalToDecimal {
+/**
+ * HJ5.进制转换
+ */
+public class HJ5HexadecimalToDecimal {
     private static Map<Character, Integer> map = new HashMap<>() {{
         put('0', 0);
         put('1', 1);
