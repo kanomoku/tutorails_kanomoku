@@ -3,6 +3,11 @@ package tree;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * 【leetcode】144. 二叉树的前序遍历
+ * 【leetcode】194. 二叉树的中序遍历
+ * 【leetcode】145. 二叉树的后序遍历
+ */
 public class BinaryTree {
     public static void main(String[] args) {
 
