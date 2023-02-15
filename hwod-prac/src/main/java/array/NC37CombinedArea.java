@@ -41,25 +41,18 @@ public class NC37CombinedArea {
         // 基底
         Interval base = orderedIntervals.get(0);
 
-        for (int i = 1; i < orderedIntervals.size(); ) {
-
+        for (int i = 1; i < orderedIntervals.size(); i++) {
             if (isNotUnit(base, orderedIntervals.get(i))) {
                 res.add(base); // 不相交，收集基底
                 base = orderedIntervals.get(i); // 变基
-
                 if (i == orderedIntervals.size() - 1) { // 当前项为最后一项的话、直接收集起来
                     res.add(base);
                 }
-
-                i = i + 1; // 指针跳一下，指向下一个目标
             } else {
                 base = getNew(base, orderedIntervals.get(i)); // 当前区间和Base区间取最大区间
-
                 if (i == orderedIntervals.size() - 1) { // 当前项为最后一项的话、直接收集起来
                     res.add(base);
                 }
-
-                i = i + 1; // 指针跳一下，指向下一个目标
             }
         }
         return res;
