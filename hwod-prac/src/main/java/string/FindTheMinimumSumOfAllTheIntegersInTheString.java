@@ -11,6 +11,7 @@ import java.util.List;
  * bb1234aa
  * bb12-34aa
  * bb12-34aa+11-11
+ * bb12-34aa+11-11-----3---
  */
 public class FindTheMinimumSumOfAllTheIntegersInTheString {
     public static void main(String[] args) throws IOException {
@@ -19,6 +20,12 @@ public class FindTheMinimumSumOfAllTheIntegersInTheString {
         String str = bf.readLine();
         bf.close();
 
+        int sum = getSum(str);
+        System.out.println(sum);
+
+    }
+
+    private static int getSum(String str) {
         // 结果收集容器
         List<Integer> res = new ArrayList<>();
 
@@ -33,16 +40,18 @@ public class FindTheMinimumSumOfAllTheIntegersInTheString {
                 while (i < str.length() && Character.isDigit(str.charAt(i))) { // 如果下一位在范围内，且是数字，继续蚕食
                     i = i + 1;
                 }
-                // i为下一个位置的坐标，也就可以视为当前子串的右边界
-                res.add(Integer.parseInt(str.substring(start, i)));
+                if (i - start > 1) { // 如果只有一个负号，这种数据舍弃，负号和数字组合长度必然大于1才收集
+                    // i为下一个位置的坐标，也就可以视为当前子串的右边界
+                    res.add(Integer.parseInt(str.substring(start, i)));
+                }
             } else {
                 i = i + 1; // 非数字，非负号，皆跳过
             }
         }
 
+        System.out.println(res);
         // 输出结果
         int sum = res.stream().mapToInt(Integer::intValue).sum();
-        System.out.println(sum);
-
+        return sum;
     }
 }
