@@ -15,18 +15,16 @@ public class NC37CombinedArea {
         list.add(new Interval(20, 60));
         list.add(new Interval(80, 100));
         list.add(new Interval(150, 180));
-        NC37CombinedArea combinedArea = new NC37CombinedArea();
-        ArrayList<Interval> merge = combinedArea.merge(list);
-        merge.stream().forEach(System.out::println);
+        ArrayList<Interval> merge = merge(list);
+        System.out.println(merge);
     }
 
-    public ArrayList<Interval> merge(ArrayList<Interval> intervals) {
-        // 要处理边界值
+    public static ArrayList<Interval> merge(ArrayList<Interval> intervals) {
         if (intervals.size() <= 1) {
             return intervals;
         }
 
-        // 排序
+        // 两个指标都排序排序
         List<Interval> orderedIntervals = intervals.stream().sorted((a, b) -> {
             if (a.start == b.start) {
                 return a.end - b.end;
@@ -35,24 +33,20 @@ public class NC37CombinedArea {
             }
         }).collect(Collectors.toList());
 
-        // 结果收集容器
-        ArrayList<Interval> res = new ArrayList<>();
 
         // 基底
         Interval base = orderedIntervals.get(0);
 
+        ArrayList<Interval> res = new ArrayList<>();
         for (int i = 1; i < orderedIntervals.size(); i++) {
             if (isNotUnit(base, orderedIntervals.get(i))) {
                 res.add(base); // 不相交，收集基底
                 base = orderedIntervals.get(i); // 变基
-                if (i == orderedIntervals.size() - 1) { // 当前项为最后一项的话、直接收集起来
-                    res.add(base);
-                }
             } else {
-                base = getNew(base, orderedIntervals.get(i)); // 当前区间和Base区间取最大区间
-                if (i == orderedIntervals.size() - 1) { // 当前项为最后一项的话、直接收集起来
-                    res.add(base);
-                }
+                base = getNew(base, orderedIntervals.get(i)); // 当前区间和Base区间取并集
+            }
+            if (i == orderedIntervals.size() - 1) { // 当前项为最后一项的话、直接收集起来
+                res.add(base);
             }
         }
         return res;
