@@ -78,7 +78,7 @@ public class NC100StringToInt {
             // Integer.MAX_VALUE -2147483648
             // Integer.MAX_VALUE / 10 -214748364
             // Integer.MAX_VALUE % 10 -8
-            if (res < Integer.MIN_VALUE / 10 || (res == Integer.MIN_VALUE / 10 && (chr - '0') < (Integer.MIN_VALUE % 10))) {
+            if (res < Integer.MIN_VALUE / 10 || (res == Integer.MIN_VALUE / 10 && (chr - '0') > -(Integer.MIN_VALUE % 10))) {
                 return Integer.MIN_VALUE;
             }
             res = res * 10 + operator * (chr - '0');
