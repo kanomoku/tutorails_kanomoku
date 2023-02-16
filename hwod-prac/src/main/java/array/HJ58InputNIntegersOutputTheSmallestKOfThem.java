@@ -16,15 +16,26 @@ import static java.lang.System.in;
 public class HJ58InputNIntegersOutputTheSmallestKOfThem {
     public static void main(String[] args) throws IOException {
         BufferedReader bf = new BufferedReader(new InputStreamReader(in));
-        List<Integer> collect = Arrays.stream(bf.readLine().split(" ")).map(Integer::parseInt).collect(Collectors.toList());
-        List<String> collect1 = Arrays.stream(bf.readLine().split(" ")).collect(Collectors.toList());
+        String totalLimitStr = bf.readLine();
+        String numsStr = bf.readLine();
         bf.close();
 
-        Integer total = collect.get(0);
-        Integer limit = collect.get(1);
-        List<Integer> collect2 = collect1.stream().limit(total).map(Integer::parseInt).collect(Collectors.toList());
-        List<Integer> collect3 = collect2.stream().sorted(Comparator.naturalOrder()).limit(limit).collect(Collectors.toList());
-        String collect4 = collect3.stream().map(String::valueOf).collect(Collectors.joining(" "));
+        int[] totalLimit = Arrays.stream(totalLimitStr.split(" ")).mapToInt(Integer::parseInt).toArray();
+
+        Integer total = totalLimit[0];
+        Integer limit = totalLimit[1];
+
+        List<Integer> limitNums = getIntegers(numsStr, total, limit);
+
+        String collect4 = limitNums.stream().map(String::valueOf).collect(Collectors.joining(" "));
         System.out.println(collect4);
+    }
+
+    private static List<Integer> getIntegers(String numsStr, Integer total, Integer limit) {
+        List<String> numsStrs = Arrays.stream(numsStr.split(" ")).collect(Collectors.toList());
+        // 收集固定个数
+        List<Integer> nums = numsStrs.stream().limit(total).map(Integer::parseInt).collect(Collectors.toList());
+        // 排序后，截取指定个数
+        return nums.stream().sorted(Comparator.naturalOrder()).limit(limit).collect(Collectors.toList());
     }
 }
