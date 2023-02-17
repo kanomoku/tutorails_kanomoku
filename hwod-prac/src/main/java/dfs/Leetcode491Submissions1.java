@@ -36,7 +36,7 @@ public class Leetcode491Submissions1 {
     }
 
     /**
-     * 递归枚举子序列的通用模板
+     * 不好理解回头消化
      */
     private static void dfs(int index, int preValue, int[] arr, Deque<Integer> queue, List<List<Integer>> res) {
         if (index >= arr.length) {  // 遍历结束
