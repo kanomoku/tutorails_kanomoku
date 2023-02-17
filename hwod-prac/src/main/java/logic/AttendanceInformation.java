@@ -67,7 +67,7 @@ public class AttendanceInformation {
      * 判断是否任意连续7次考勤 缺勤/迟到/早退 超过3次
      */
     private static boolean isBad2(List<String> attendances) {
-        if (attendances.size() == 1) {
+        if (attendances.isEmpty()) {
             return false;
         }
 
@@ -83,8 +83,7 @@ public class AttendanceInformation {
                 int[] ints = Arrays.copyOfRange(arr, i, i + 7); // 任意7天
                 int sum = Arrays.stream(ints).sum();
                 if (sum > 3) {
-                    // 存在有问题数据就直接终止判断并返回
-                    return true;
+                    return true; // 存在有问题数据就直接终止判断并返回
                 }
             }
         }
