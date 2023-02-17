@@ -22,8 +22,8 @@ public class Leetcode128LongestConsecutiveSequence {
 
         // 序列起码自己所以初始值为1而非0
         int max = 1;
-        int temp = 1;
 
+        int tempMax = 1; // 下边从1开始和前面的值比较,起码有前面这个值,所以tempMax从1开始
         for (int i = 1; i < nums.length; i++) {
             if ((nums[i - 1]) == nums[i]) {
                 // 数字连续即要求严格递增，当前处理是针对如下场景
@@ -33,15 +33,15 @@ public class Leetcode128LongestConsecutiveSequence {
 
             if ((nums[i - 1] + 1) == nums[i]) {
                 // 符合连续条件
-                temp++;
+                tempMax++;
             } else {
-                max = Math.max(temp, max); // 动态收集最大值
-                temp = 1; // 开启新一轮
+                max = Math.max(tempMax, max); // 动态收集最大值
+                tempMax = 1; // 当前值字符为新一轮的开始,故tempMax其实为1
             }
         }
 
-        // 此处针对最后一位走的是 符合连续条件 然后循环完毕 这种场景
-        max = Math.max(temp, max);
+        // 此处针对最后一位走的是（符合连续条件→然后循环完毕）这种场景
+        max = Math.max(tempMax, max);
 
         return max;
     }
