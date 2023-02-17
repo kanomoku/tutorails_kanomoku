@@ -20,30 +20,7 @@ public class TheProductOfPrimeNumbers {
         int num = parseInt(bf.readLine());
         bf.close();
 
-        // 收集结果
-        List<Integer> res = new ArrayList<>();
-
-        // 讨巧算法，两个数相乘最大的也就是平方
-        double sqrt = Math.sqrt(num);
-        for (int i = 2; i <= sqrt; i++) {
-            // 第一个因数不为素数则返回
-            if (!isPrime(i)) {
-                continue;
-            }
-            // 不能整除则返回
-            if (num % i != 0) {
-                continue;
-            }
-
-            // 第二个因数不为素数则返回
-            if (!isPrime(num / i)) {
-                continue;
-            }
-
-            // 输出结果
-            res.add(i);
-            res.add(num / i);
-        }
+        List<Integer> res = getIntegers(num);
 
         // 输出结果
         if (res.isEmpty()) {
@@ -52,6 +29,34 @@ public class TheProductOfPrimeNumbers {
             String collect = res.stream().map(String::valueOf).collect(Collectors.joining(","));
             System.out.println(collect);
         }
+    }
+
+    /**
+     * 判断是否为素数之积
+     */
+    private static List<Integer> getIntegers(int num) {
+        List<Integer> res = new ArrayList<>();
+
+        double sqrt = Math.sqrt(num); // 讨巧算法，两个数相乘最大的也就是平方
+        for (int i = 2; i <= sqrt; i++) { // 求素数之积,要跳过1的特殊场景,所以从2开始查找
+
+            if (!isPrime(i)) {
+                continue; // 第一个因数不为素数则处理下个数
+            }
+
+            if (num % i != 0) {
+                continue; // 不能整除则处理下个数
+            }
+
+            if (!isPrime(num / i)) {
+                continue; // 第二个因数不为素数则处理下个数
+            }
+
+            res.add(i);
+            res.add(num / i);
+        }
+
+        return res;
     }
 
     /**
