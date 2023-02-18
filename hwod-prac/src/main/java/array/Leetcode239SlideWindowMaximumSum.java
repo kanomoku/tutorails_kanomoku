@@ -13,7 +13,7 @@ import java.util.PriorityQueue;
  * 1 3 -1 -3 5 3 6 7
  * 3
  */
-public class SlideWindowMaximumSum_Array {
+public class Leetcode239SlideWindowMaximumSum {
     public static void main(String[] args) throws IOException {
         // 收集数据源
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
@@ -61,9 +61,9 @@ public class SlideWindowMaximumSum_Array {
         }
 
         int arrLen = nums.length;
-        // 数组长为6,k为3时,前面3个后面还剩3个,加上前三个最大值还要收集一下,故再+1
-        int[] res = new int[arrLen - k + 1];
 
+        // 数组长为6,k为3时,前面3个后面还剩3个,前3个最大值还要收集一下,故再+1
+        int[] res = new int[arrLen - k + 1];
 
         res[0] = pq.peek()[0]; // 收集第1个窗口的最大值
 
