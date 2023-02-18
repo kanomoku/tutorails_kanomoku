@@ -1,4 +1,4 @@
-package doublepoint;
+package src.main.java.doublepoint;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -19,19 +19,24 @@ public class NC17LongestPalindrome {
         System.out.println(longestPalindrome);
     }
 
+    /**
+     * NC17 最长回文子串
+     */
     public static int getLongestPalindrome(String A) {
-        int maxLen = 0;
-        int n = A.length();
+        int max = 0;
+
+        int len = A.length();
         //暴力解法
-        for (int i = 0; i < n; i++) {
-            for (int j = i + 1; j <= n; j++) {
-                String now = A.substring(i, j);//确定字符
-                if (isPalindrome(now) && now.length() > maxLen) {
-                    maxLen = now.length();//最大长度
+        for (int i = 0; i < len; i++) {
+            for (int j = i + 1; j <= len; j++) {
+                String subStr = A.substring(i, j);//确定字符
+                if (isPalindrome(subStr) && subStr.length() > max) {
+                    max = subStr.length();//最大长度
                 }
             }
         }
-        return maxLen;
+
+        return max;
     }
 
     /**
