@@ -3,7 +3,9 @@ package stack;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Deque;
+import java.util.LinkedList;
 
 import static java.lang.Integer.parseInt;
 import static java.lang.System.in;
@@ -23,17 +25,18 @@ public class HJ70CalculationOfMatrixMultiplication {
             matrix[i][0] = s[0];
             matrix[i][1] = s[1];
         }
+
         // 矩阵运算顺序
         String actionStr = bf.readLine();
         bf.close();
 
-        int sum = getSum(groups, matrix, actionStr);
-        System.out.println(sum);
-
-        int result = getSum2(matrix, actionStr);
+        int result = matrixMultiplication(matrix, actionStr);
         System.out.println(result);
     }
 
+    /**
+     * HJ70 矩阵乘法计算量估算
+     */
     private static int getSum(int groups, int[][] matrix, String actionStr) {
         int sum = 0;
         Deque<Integer> stack = new LinkedList<>(); // 存放矩阵行数和列数
@@ -58,17 +61,21 @@ public class HJ70CalculationOfMatrixMultiplication {
         return sum;
     }
 
-    private static int getSum2(int[][] matrix, String actionStr) {
-        int index = 0;
+    /**
+     * HJ70 矩阵乘法计算量估算
+     */
+    private static int matrixMultiplication(int[][] matrix, String actionStr) {
         int result = 0;
+
+        int slow = 0;
         Deque<int[]> stack1 = new LinkedList<>(); // 存放矩阵行数和列数
-        for (int i = 0; i < actionStr.length(); i++) {
-            if (actionStr.charAt(i) == '(') {
+        for (int fast = 0; fast < actionStr.length(); fast++) {
+            if (actionStr.charAt(fast) == '(') {
                 // 啥也不做
-            } else if ('A' <= actionStr.charAt(i) && actionStr.charAt(i) <= 'Z') {
-                stack1.push(matrix[index]);
-                index++;
-            } else if (actionStr.charAt(i) == ')') {
+            } else if ('A' <= actionStr.charAt(fast) && actionStr.charAt(fast) <= 'Z') {
+                stack1.push(matrix[slow]);
+                slow++;
+            } else if (actionStr.charAt(fast) == ')') {
                 int[] pop2 = stack1.pop();
                 int[] pop1 = stack1.pop();
                 result += pop1[0] * pop2[1] * pop1[1];
