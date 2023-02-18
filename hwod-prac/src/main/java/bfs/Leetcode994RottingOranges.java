@@ -62,6 +62,10 @@ public class Leetcode994RottingOranges {
         return res;
     }
 
+    /**
+     * 通用解法
+     * 当前业务其实不用加visited辅助的,业务场景用不上,这里是练习一下这个思路
+     */
     public int orangesRotting(int[][] grid) {
         int rowSize = grid.length; // 行数
         int columnSize = grid[0].length; // 列数
@@ -121,6 +125,9 @@ public class Leetcode994RottingOranges {
         return totalStep;
     }
 
+    /**
+     * 本题相适应的解法
+     */
     public int orangesRotting2(int[][] grid) {
         int rowSize = grid.length; // 行数
         int columnSize = grid[0].length; // 列数
