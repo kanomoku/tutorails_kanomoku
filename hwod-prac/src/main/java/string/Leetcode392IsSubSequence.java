@@ -36,16 +36,17 @@ public class Leetcode392IsSubSequence {
             return false;
         }
 
-        int index = 0;
-        for (int i = 0; i < t.length(); i++) {
-            if (s.charAt(index) == t.charAt(i)) {
-                index++;
-                if (index >= s.length()) {
+        // 快慢指针
+        int slow = 0;
+        for (int fast = 0; fast < t.length(); fast++) {
+            if (s.charAt(slow) == t.charAt(fast)) {
+                slow++; // 相等的话指向慢指针的下个位置
+                if (slow >= s.length()) {
                     return true;
                 }
             }
-
         }
+
         return false;
     }
 
