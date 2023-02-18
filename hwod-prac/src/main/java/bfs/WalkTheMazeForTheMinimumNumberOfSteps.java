@@ -77,7 +77,7 @@ public class WalkTheMazeForTheMinimumNumberOfSteps {
         int[] location = getLocation(i, j);// 第一步的坐标
         queue.add(location); // 第一步开始走
 
-        int[][] nestStep = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}}; // 左右上下
+        int[][] nestStep = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}}; // 上、下、左、右
 
         while (!queue.isEmpty()) {
             int queueSize = queue.size();// queue 动态复制，这里只遍历上一层的元素
