@@ -25,12 +25,16 @@ public class PrintABinaryTreeFromTopToBottom {
         if (root == null) {
             return new int[0];
         }
+
         Deque<TreeNode> queue = new LinkedList<>();
         queue.offer(root);
+
         ArrayList<Integer> result = new ArrayList<>();
         while (!queue.isEmpty()) {
             TreeNode node = queue.poll();
+
             result.add(node.val);
+
             if (node.left != null) {
                 queue.offer(node.left);
             }
@@ -40,6 +44,7 @@ public class PrintABinaryTreeFromTopToBottom {
         }
 
         Integer[] integers = result.toArray(new Integer[0]);
+
         return Arrays.stream(integers).mapToInt(Integer::intValue).toArray();
     }
 
@@ -60,21 +65,23 @@ public class PrintABinaryTreeFromTopToBottom {
      * ]
      */
     public List<List<Integer>> levelOrder(TreeNode root) {
-        List<List<Integer>> result = new ArrayList<>();
-        // 临界值返回
         if (root == null) {
-            return result;
+            return new ArrayList<>();
         }
 
         // BFS走迷宫那个思路
         Deque<TreeNode> queue = new LinkedList<>();
         queue.offer(root);
+
+        List<List<Integer>> result = new ArrayList<>();
         while (!queue.isEmpty()) {
             List<Integer> levelValueList = new ArrayList<>();
+
             int queueSize = queue.size();
             for (int i = 0; i < queueSize; i++) {
                 TreeNode node = queue.poll();
                 levelValueList.add(node.val);
+
                 if (node.left != null) {
                     queue.offer(node.left);
                 }
@@ -115,10 +122,10 @@ public class PrintABinaryTreeFromTopToBottom {
 
         while (!queue.isEmpty()) {
             Deque<Integer> levelValueQueue = new LinkedList<>();
+
             int queueSize = queue.size();
             for (int i = 0; i < queueSize; i++) {
                 TreeNode curNode = queue.poll();
-
                 if (isOrderLeftToRight) {
                     levelValueQueue.offerLast(curNode.val);
                 } else {
