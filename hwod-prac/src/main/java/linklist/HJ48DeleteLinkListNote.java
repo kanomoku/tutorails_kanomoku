@@ -39,6 +39,38 @@ public class HJ48DeleteLinkListNote {
         bf.close();
     }
 
+    /**
+     * HJ48 从单向链表中删除指定值的节点
+     * 官方题解的基础上结合了好理解的方式的实现
+     */
+    private static ListNode buildListNode(String[] split) {
+        int noteCounts = Integer.parseInt(split[0]); // 总共有多少个节点
+
+        ListNode head = new ListNode(Integer.parseInt(split[1])); // 头结点
+
+        String[] strings = Arrays.copyOfRange(split, 2, split.length); // 余下的成对的节点
+
+        for (int i = 0; i < noteCounts - 1; i++) { // 头结点为2已确定,6组数据还剩5组,i表示组数
+            // 剩下的2个一组表示第2个节点值后面插入第1个节点值
+            int willInsert = Integer.parseInt(strings[2 * i]); // 被插入的值
+            int afterWho = Integer.parseInt(strings[2 * i + 1]); // 在谁的后面插入值
+
+            ListNode dynamicNode = head; // 临时遍历链表
+            while (dynamicNode.val != afterWho) { // 找到插入的位置
+                dynamicNode = dynamicNode.next;
+            }
+
+            ListNode newNode = new ListNode(willInsert);
+            newNode.next = dynamicNode.next; // 插入位置的节点的后序面节点跟踪上
+            dynamicNode.next = newNode; // 当前节点挂靠到插入位置的节点上
+        }
+
+        return head;
+    }
+
+    /**
+     * 官方题解
+     */
     private static ListNode buildListNode2(String[] split) {
         // 第一个参数6表示输入总共6个节点
         int noteCounts = Integer.parseInt(split[0]); // 总共有多少个节点
@@ -63,29 +95,7 @@ public class HJ48DeleteLinkListNote {
         return head;
     }
 
-    private static ListNode buildListNode(String[] split) {
-        int noteCounts = Integer.parseInt(split[0]); // 总共有多少个节点
 
-        ListNode head = new ListNode(Integer.parseInt(split[1])); // 头结点
-
-        String[] strings = Arrays.copyOfRange(split, 2, split.length); // 余下的成对的节点
-
-        for (int i = 0; i < noteCounts - 1; i++) { // 头结点为2已确定,6组数据还剩5组
-            // 剩下的2个一组表示第2个节点值后面插入第1个节点值
-            int willInsert = Integer.parseInt(strings[2 * i]); // 被插入的值
-            int afterWho = Integer.parseInt(strings[2 * i + 1]); // 在谁的后面插入值
-
-            ListNode temp = head; // 临时遍历链表
-            while (temp.val != afterWho) { // 找到插入的位置
-                temp = temp.next;
-            }
-
-            ListNode newNode = new ListNode(willInsert);
-            newNode.next = temp.next; // 插入位置的节点的后序面节点跟踪上
-            temp.next = newNode; // 当前节点挂靠到插入位置的节点上
-        }
-        return head;
-    }
 }
 
 /**
