@@ -24,15 +24,18 @@ public class Leetcode77Combinations {
         System.out.println(res);
     }
 
+    /**
+     * LeetCode77. 组合
+     * 范围 [1, n] 中所有可能的 k 个数的组合
+     */
     public static List<List<Integer>> combine(int n, int k) {
-        List<List<Integer>> res = new ArrayList<>();
-        // 范围 [1, n] 中所有可能的 k 个数的组合
         // k<=0时没意义;
         // n<k时没意义,一共才n个想取k个不合理
         if (k <= 0 || n < k) {
-            return res;
+            return new ArrayList<>();
         }
 
+        List<List<Integer>> res = new ArrayList<>();
         Deque<Integer> stack = new LinkedList<>();
         dfs(1, n, k, stack, res);
 
@@ -40,7 +43,7 @@ public class Leetcode77Combinations {
     }
 
     public static void dfs(int start, int milestone, int limit, Deque<Integer> stack, List<List<Integer>> res) {
-        if (stack.size() == limit) { // 一共收集limit层,已经收集到limit层时直接收工大退
+        if (stack.size() == limit) {
             res.add(new ArrayList<>(stack));
             System.out.println(new ArrayList<>(stack));
             return;
