@@ -69,24 +69,38 @@ public class HJ65LongestCommonSubstring {
         String longStr = s1.length() > s2.length() ? s1 : s2;
 
         int maxLen = 0;
+
         int start = 0;
+        int endBound = 0;
 
         for (int left = 0; left < shortStr.length(); left++) {
-            if (shortStr.length() - left + 1 <= maxLen) { // 剪枝，子串长度已经不超过maxLen没必要计算，退出循环（性能优化）
+            // 1 [2 3 4 5 6 7 8 9]
+            // 0 [1 2 3 4 5 6 7 8]
+            // 求子串长度：shortStr.length() - left
+            // 求子串长度：right - left + 1
+            if (shortStr.length() - left <= maxLen) { // 剪枝，余下的子串长度已经不超过maxLen没必要计算，退出循环（性能优化）
                 break;
             }
 
             for (int right = shortStr.length(); right > left; right--) { // 左指针i，右指针right, 右指针逐渐向左逼近
                 String subStr = shortStr.substring(left, right);
-                if (longStr.contains(subStr) && maxLen < subStr.length()) {
+
+                if (longStr.contains(subStr) && subStr.length() > maxLen) {
                     maxLen = subStr.length();
-                    start = left;
+
+                    start = left; // start 记录一下此时的下标为了后续截取字符串
+                    endBound = right;
                     break;
                 }
             }
         }
 
-        return shortStr.substring(start, start + maxLen);
-    }
+        // 1 [2 3 4 5 6 7] 8 9
+        // 0 [1 2 3 4 5 6] 7 8
+        // 方法1
+        // return shortStr.substring(start, start + maxLen);
 
+        // 方法2
+        return shortStr.substring(start, endBound);
+    }
 }
