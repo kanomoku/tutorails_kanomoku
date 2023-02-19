@@ -74,6 +74,11 @@ public class Leetcode239SlideWindowMaximumSum {
                 pq.poll();
             }
 
+            // k = 3
+            // [1 2 3] 4 5 6 7 8 9 10 11
+            // [0 1 2] 3 4 5 6 7 8 09 10
+            //     [0  1 2 3 4 5 6 07 08]   new int[arrLen - k + 1]; → 11-3+1 = 9
+            // 新坐标 → i - k + 1 （还不理解背景含义,但是可以推导出来）
             res[i - k + 1] = pq.peek()[0]; // 收集第2个窗口的最大值
         }
 
