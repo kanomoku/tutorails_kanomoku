@@ -23,6 +23,9 @@ public class Leetcode300LongestStrictlyIncreasingSubsequence {
         System.out.println(max);
     }
 
+    /**
+     * leetcode  300. 整数数组的最长严格递增子序列的长度
+     */
     private static int lengthOfLIS(int[] nums) {
         if (nums.length == 0) {
             return 0;
@@ -37,16 +40,13 @@ public class Leetcode300LongestStrictlyIncreasingSubsequence {
         int max = 1; // 每个序列起码有自己所以长度最小为1
 
         for (int i = 1; i < nums.length; i++) {
-            // 通过回放计算出dp[i]的最优值
-            for (int j = 0; j < i; j++) {
+            for (int j = 0; j < i; j++) { // 通过回放计算出dp[i]的最优值
                 if (nums[j] < nums[i]) {
-                    // 状态转移方程
-                    dp[i] = Math.max(dp[j] + 1, dp[i]);
+                    dp[i] = Math.max(dp[j] + 1, dp[i]); // 状态转移方程
                 }
             }
 
-            // dp[i]的最优值和max相比计算出max的最优值
-            max = Math.max(dp[i], max);
+            max = Math.max(dp[i], max); // dp[i]的最优值和max相比计算出max的最优值
         }
 
         return max;
