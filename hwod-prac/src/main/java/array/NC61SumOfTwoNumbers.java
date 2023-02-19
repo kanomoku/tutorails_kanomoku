@@ -26,6 +26,9 @@ public class NC61SumOfTwoNumbers {
         System.out.println(collect);
     }
 
+    /**
+     * NC61.两数之和
+     */
     private static int[] getIntegers(int[] numbers, int target) {
         int[] res = new int[2];
         for (int i = 0; i < numbers.length; i++) {
