@@ -1,0 +1,22 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class Car1
+class Driver1
+class Car2
+class Driver2
+class Car3
+class Driver3
+class Car4
+class Driver4
+class Car5
+class Driver5
+
+
+Car1 "1"<-->"1..1" Driver1 : only 1
+Car2 "1"<-->"0..*" Driver2 : >=0
+Car3 "1"<-->"1..*" Driver3 : >=1
+Car4 "1"<-->"0..1" Driver4 : 0 or 1
+Car5 "1"<-->"m..n" Driver5 : m<= && <=n
+
+@enduml

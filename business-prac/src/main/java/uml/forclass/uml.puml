@@ -1,0 +1,17 @@
+@startuml
+'https://plantuml.com/class-diagram
+skinparam classAttributeIconSize 0
+class Dummy {
+    -private String name1;
+    ~String name3;
+    #protected String name2;
+    +public String name4;
+
+    -private void method1(){}
+    ~void method3(){}
+    #protected void method2(){}
+    +public void method4(){}
+}
+
+
+@enduml

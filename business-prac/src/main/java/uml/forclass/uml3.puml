@@ -1,0 +1,10 @@
+@startuml
+'https://plantuml.com/class-diagram
+skinparam classAttributeIconSize 0
+class Dummy {
+     String name1;
+
+    void method1()
+}
+
+@enduml

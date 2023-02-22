@@ -1,0 +1,14 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class Person
+class Head
+class Leg
+
+Person *-- Head
+Person *-- Leg
+
+
+
+
+@enduml

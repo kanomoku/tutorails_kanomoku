@@ -1,0 +1,9 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class Car
+class Oil
+
+Car .> Oil
+
+@enduml

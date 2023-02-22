@@ -1,0 +1,16 @@
+@startuml
+'https://plantuml.com/class-diagram
+skinparam classAttributeIconSize 0
+class Dummy {
+    {static} String name1;
+    {static} name3;
+    {abstract} String name2;
+    {abstract} String name4;
+
+    {static} void method1(){}
+    {static} method3(){}
+    {abstract} void method2(){}
+    {abstract} void method4(){}
+}
+
+@enduml

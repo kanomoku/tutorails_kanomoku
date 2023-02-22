@@ -1,0 +1,11 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class Clothes
+class Hat
+class Person
+
+Person o-- Clothes
+Person o-- Hat
+
+@enduml

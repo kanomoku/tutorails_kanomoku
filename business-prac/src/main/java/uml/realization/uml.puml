@@ -1,0 +1,18 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+ interface Action {
+    public static final int NUM = 12;
+    {abstract} doSomething();
+}
+
+
+interface Action
+class RunAction
+class SleepAction
+
+Action <|.. RunAction
+Action <|.. SleepAction
+
+
+@enduml
