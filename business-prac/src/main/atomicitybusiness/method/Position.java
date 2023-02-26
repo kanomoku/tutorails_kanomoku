@@ -1,4 +1,4 @@
-package method;
+package atomicitybusiness.method;
 
 import org.junit.Test;
 

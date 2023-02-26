@@ -1,4 +1,4 @@
-package method;
+package atomicitybusiness.method;
 
 import com.google.common.base.Ascii;
 import com.google.common.base.CaseFormat;
