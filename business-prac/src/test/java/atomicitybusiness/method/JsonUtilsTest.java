@@ -1,5 +1,6 @@
+package atomicitybusiness.method;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
-import method.JsonUtils;
 import model.Person;
 import org.junit.Test;
 
