@@ -18,7 +18,7 @@ public class JsonUtilsTest {
         person.setName("name");
         person.setAge(18);
 
-        String json = JsonUtils.toJson(person);
+        String json = JsonUtils.fromObjectToJson(person);
         System.out.println(json);
         assertThat(json).isEqualTo("{\"id\":1,\"name\":\"name\",\"age\":18}");
     }
@@ -30,7 +30,7 @@ public class JsonUtilsTest {
         map.put("name","name");
         map.put("age",18);
 
-        String json = JsonUtils.toJson(map);
+        String json = JsonUtils.fromObjectToJson(map);
         System.out.println(json);
         assertThat(json).isEqualTo("{\"name\":\"name\",\"id\":1,\"age\":18}");
     }
@@ -39,14 +39,14 @@ public class JsonUtilsTest {
     public void testJsonToBean() {
         String json = "{\"id\":1,\"name\":\"name\",\"age\":18}";
         ObjectMapper mapper = new ObjectMapper();
-        Person person = JsonUtils.fromJson(json, Person.class);
+        Person person = JsonUtils.fromJsonToObject(json, Person.class);
         System.out.println(person);
     }
 
     @Test
     public void testJsonToMap(){
         String json = "{\"id\":1,\"name\":\"name\",\"age\":18}";
-        Map map = JsonUtils.fromJson(json, Map.class);
+        Map map = JsonUtils.fromJsonToObject(json, Map.class);
         System.out.println(map);
     }
 }

@@ -6,7 +6,7 @@ import com.google.json.JsonSanitizer;
 
 public class JsonUtils {
 
-    public static <T> T fromJson(String json, Class<T> clazz) {
+    public static <T> T fromJsonToObject(String json, Class<T> clazz) {
         ObjectMapper objectMapper = new ObjectMapper();
         T object = null;
         try {
@@ -17,7 +17,7 @@ public class JsonUtils {
         return object;
     }
 
-    public static <T> String toJson(T object) {
+    public static <T> String fromObjectToJson(T object) {
         ObjectMapper objectMapper = new ObjectMapper();
         String jsonStr = null;
         try {
