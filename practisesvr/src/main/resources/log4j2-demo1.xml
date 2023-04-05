@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration status="info" monitorInterval="10">
+
+    <properties>
+        <property name="LOG_HOME">./logs</property>
+        <Property name="FILE_NAME" value="practisesvr"/>
+        <!--        <Property name="LOG_PATTERN" value="[%X{traceId}] [%d{yyyy-MM-dd HH:mm:ss}] [%-5level] [%thread] [%file:%line] 1 [%logger{15}] 2 [%c{1}] 3 [%p] 4 [%l] → [%enc{%m}{CRLF}]%n"/>-->
+        <Property name="LOG_PATTERN" value="[%d{yyyy-MM-dd HH:mm:ss}] [%-5level] [%thread] [%file:%line] → [%enc{%m}{CRLF}]%n"/>
+    </properties>
+
+    <appenders>
+        <console name="CONSOLE"
+                 target="SYSTEM_OUT">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <Filters>
+                <ThresholdFilter level="error" onMatch="DENY" onMismatch="NEUTRAL"/>
+                <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>
+            </Filters>
+        </console>
+
+        <!--文件会打印出所有信息，这个log每次运行程序会自动清空，由append属性决定，当设为true时，不会清空-->
+        <File name="log"
+              fileName="applog/log/raiLway_den.log"
+              filePattern="applog/log/raiLway_den_%d{yyyy-MM-dd}_%i.log"
+              append="true">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <ThresholdFilter level="WARN" onMatch="ACCEPT" onMismatch="DENY"/>
+        </File>
+
+        <RollingFile name="SIZE_BASED_TRIGGERING"
+                     fileName="applog/logs/${FILE_NAME}.log"
+                     filePattern="applog/logs/${FILE_NAME}_%d{yyyy-MM-dd}_%i.log"
+                     createOnDemand="true">
+
+            <ThresholdFilter level="WARN" onMatch="ACCEPT" onMismatch="DENY"/>
+
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+
+            <Policies>
+                <TimeBasedTriggeringPolicy modulate="true" interval="1"/>
+                <!-- 自定义的策略，会不停的往一个里面加，直到满足其余的策略，才更换 -->
+                <!-- <CronTriggeringPolicy schedule="0 0 * * * ?"/> -->
+                <SizeBasedTriggeringPolicy size="1KB"/>
+            </Policies>
+
+            <!-- 用来指定同一个文件夹下最多有几个日志文件时开始删除最旧的，创建新的 -->
+            <DefaultRolloverStrategy max="10000"/>
+        </RollingFile>
+    </appenders>
+
+    <!--只有定义了logger并引入的appender，appender才会生效-->
+    <loggers>
+
+        <!--记录执行的HQL语句 -->
+        <!-- additivity="false"是为了避免日志在root里再次输出 -->
+        <Logger name="org.hibernate.hql" level="error" additivity="false">
+            <AppenderRef ref="CONSOLE"/>
+            <AppenderRef ref="LOGFILE"/>
+        </Logger>
+
+        <!-- 当解析查询语句时记录HQL和SQL -->
+        <Logger name="org.hibernate.hql.ast.AST" level="error" additivity="false">
+            <AppenderRef ref="CONSOLE"/>
+            <AppenderRef ref="LOGFILE"/>
+        </Logger>
+
+        <!-- 记录与事务有关的活动 -->
+        <Logger name="org.hibernate.transaction" level="error" additivity="false">
+            <AppenderRef ref="CONSOLE"/>
+            <AppenderRef ref="LOGFILE"/>
+        </Logger>
+
+        <!-- 与数据库连接的 -->
+        <Logger name="org.hibernate.ps.PreparedStatementCache" level="error" additivity="false">
+            <AppenderRef ref="CONSOLE"/>
+            <AppenderRef ref="LOGFILE"/>
+        </Logger>
+
+        <!--level是日志记录的优先级 -->
+        <root level="all">
+            <AppenderRef ref="CONSOLE"/>
+            <AppenderRef ref="SIZE_BASED_TRIGGERING"/>
+            <AppenderRef ref="log"/>
+        </root>
+    </loggers>
+</configuration>
