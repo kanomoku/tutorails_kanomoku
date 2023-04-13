@@ -20,6 +20,17 @@ public class ArrayOrder {
         System.out.println("排序前：" + Arrays.toString(size1));
         Arrays.sort(size1, Comparator.naturalOrder()); //必须Integer
         System.out.println("排序后：" + Arrays.toString(size1));
+
+
+        char[] chars = "bca".toCharArray();
+        Arrays.sort(chars); // [a, b, c]
+        System.out.println(Arrays.toString(chars));
+
+        String[] strs = {"abc","abe","abd","bc"};
+        Arrays.sort(strs); // [abc, abd, abe, bc]
+        System.out.println(Arrays.toString(strs));
+
+
     }
 
 
@@ -30,6 +41,13 @@ public class ArrayOrder {
         System.out.println("排序前：" + Arrays.toString(size1));
         Arrays.sort(size1, Comparator.reverseOrder()); //必须Integer [7, 5, 4, 3, 2, 1]
         System.out.println("排序后：" + Arrays.toString(size1));
+
+        char[] chars = "bca".toCharArray();
+        // Arrays.sort(chars, Comparator.reverseOrder()); // 编译不过
+
+        String[] strs = {"abc","abe","abd","bc"};
+        Arrays.sort(strs, Comparator.reverseOrder()); // [bc, abe, abd, abc]
+        System.out.println(Arrays.toString(strs));
     }
 
     @Test
