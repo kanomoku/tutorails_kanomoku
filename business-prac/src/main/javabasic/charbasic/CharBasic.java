@@ -3,6 +3,8 @@ package charbasic;
 import jdk.swing.interop.SwingInterOpUtils;
 import org.junit.Test;
 
+import java.util.Locale;
+
 public class CharBasic {
 
     @Test
@@ -13,8 +15,8 @@ public class CharBasic {
         boolean b3 = 'a' == 97.0f;    //true
 
 
-        int  a0 = 'a';      //97
-        double  a1 = 'a';   //97.0
+        int a0 = 'a';      //97
+        double a1 = 'a';   //97.0
 
         char d0 = 98;           //b
         char d1 = (char) 98.0;  //b
@@ -138,5 +140,57 @@ public class CharBasic {
 
         System.out.println(c);
         System.out.println(cs);
+    }
+
+    /**
+     * 字符串ASC码+偏移量实现加密
+     */
+    public static char isBro(char c, int offset) {
+        // 字符串ASC码+偏移量实现加密
+        int newChar = c + offset;
+
+        if (newChar < 'a') {
+            // <a 给个默认值
+            return 'a';
+        } else if ('a' <= newChar && newChar <= 'z') {
+            // a-z范围内，直接收集
+            return (char) newChar;
+        } else {
+            // >z 取模算结果
+            return (char) ((newChar - 'a') % 26 + 'a');
+        }
+    }
+
+    /**
+     * 统计字符个数 （忽略大小写）
+     */
+    public static int countChars(String str, char targetChar) {
+        char[] chars = str.toCharArray();
+
+        int count = 0;
+        for (int i = 0; i < chars.length; i++) {
+            if (chars[i] == targetChar) {
+                count++;
+            }
+        }
+
+        return count;
+    }
+
+    /**
+     * 统计字符个数 （区分大小写）
+     */
+    public static int countCharsIgnoreCase(String str, char targetChar) {
+        char[] chars = str.toLowerCase(Locale.ROOT).toCharArray();
+        char c = Character.toLowerCase(targetChar);
+
+        int count = 0;
+        for (int i = 0; i < chars.length; i++) {
+            if (chars[i] == c) {
+                count++;
+            }
+        }
+
+        return count;
     }
 }
