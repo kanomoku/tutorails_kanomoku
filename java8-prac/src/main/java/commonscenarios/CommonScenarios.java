@@ -5,7 +5,9 @@ import org.apache.commons.lang3.BooleanUtils;
 import org.junit.Test;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -195,4 +197,42 @@ public class CommonScenarios {
         });
     }
 
+    public static void flatten(String[] args) {
+        Object[] arr = {1, 2, new Object[]{1, 2, 44}, 4};
+        Object[] arr1 = java8Flatten(arr).toArray();                                                // [1, 2, 1, 2, 44, 4]
+        Object[] arr2 = java8Flatten(arr).map(String::valueOf).toArray();                           // [1, 2, 1, 2, 44, 4]
+        String[] arr3 = java8Flatten(arr).map(String::valueOf).toArray(String[]::new);              // [1, 2, 1, 2, 44, 4]
+        List<String> arr4 = java8Flatten(arr).map(String::valueOf).collect(Collectors.toList());    // [1, 2, 1, 2, 44, 4]
+        System.out.println(Arrays.toString(arr1));
+        System.out.println(Arrays.toString(arr2));
+        System.out.println(Arrays.toString(arr3));
+        System.out.println(arr4);
+    }
+
+    /**
+     * 展平嵌套数组
+     */
+    public static Stream<Object> java8Flatten(Object[] arr) {
+        return Arrays.stream(arr).flatMap(obj -> obj instanceof Object[] ? java8Flatten((Object[]) obj) : Stream.of(obj));
+    }
+
+
+    /**
+     * Bean列表根据Bean的某个属性去重
+     */
+    public static List<Person> distinctByName(List<Person> list) {
+        return list.stream().filter(distinctByKey(Person::getName)).toList();
+    }
+
+    /**
+     * Bean列表根据Bean的某个属性去重
+     */
+    public static <T> Predicate<T> distinctByKey(Function<? super T, ?> function) {
+        Map<Object, Boolean> map = new ConcurrentHashMap<>();
+        // map.putIfAbsent
+        // 先判断指定的键（key）是否存在,不存在则将键/值对插入到 HashMap 中.
+        // 如果所指定的 key 已经在 HashMap 中存在,则返回和这个 key 值对应的 value,如果所指定的 key 在 HashMap 中不存在,则返回 null.
+        // 注意：如果指定 key 之前已经和一个 null 值相关联了,则该方法也返回 null,此时无法确认是不存在这个key,还是存在这个key只是value为null.
+        return item -> map.putIfAbsent(function.apply(item), Boolean.TRUE) == null;
+    }
 }
