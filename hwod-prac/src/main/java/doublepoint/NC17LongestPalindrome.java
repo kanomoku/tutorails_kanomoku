@@ -1,4 +1,4 @@
-package src.main.java.doublepoint;
+package doublepoint;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -43,14 +43,15 @@ public class NC17LongestPalindrome {
      * 判断子串是不是回文子串
      */
     public static boolean isPalindrome(String s) {
-        // abcba  奇数时 5/2=2 范围for (int i = 0; i < 2; i++) [0 1] 2 3 4
-        // abccba 偶数时 6/2=3 范围for (int i = 0; i < 3; i++) [0 1 2] 3 4 5
+        if (s == null || s.length() <= 1) {
+            return true;
+        }
         int strLength = s.length();
         for (int i = 0; i < strLength / 2; i++) {
-            // 数组折叠对应下标相加为strLength - 1
-            if (s.charAt(i) != s.charAt(strLength - 1 - i))//不相等
+            if (s.charAt(i) != s.charAt(strLength - 1 - i)) // 不相等
                 return false;
         }
+
         return true;
     }
 }

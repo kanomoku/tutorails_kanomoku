@@ -60,18 +60,24 @@ public class StringUtils {
      * 判断子串是不是回文子串
      */
     public static boolean isPalindrome(String s) {
-        // 知识点1:
+        // null, ""（空字符串场景）, "a"（单字符字符串场景）
+        if (s == null || s.length() <= 1) {
+            return true;
+        }
+
+        // 知识点1: [0,arr.length/2)为数组对称部分左一半
         // abcba  奇数时 5/2=2 范围for (int i = 0; i < 2; i++) [0 1] ② 3 4
         // abccba 偶数时 6/2=3 范围for (int i = 0; i < 3; i++) [0 1 2] ③ 4 5
         int strLength = s.length();
         for (int i = 0; i < strLength / 2; i++) {
-            // 知识点2:
-            // 数组折叠对应下标相加为length - 1
-            if (s.charAt(i) != s.charAt(strLength - 1 - i))//不相等
+
+            // 知识点2: 数组折叠对应下标相加为length - 1
+            if (s.charAt(i) != s.charAt(strLength - 1 - i)) // 不相等
                 return false;
         }
 
-        return true; // "a"（单字符字符串场景）,""（空字符串场景）
+        // 知识点3: 基于找事思路，存在不符合条件的就算失败，不然就算通过
+        return true;
 
 //        System.out.println(isPalindrome("abccba")); // true
 //        System.out.println(isPalindrome("aa"));     // true
