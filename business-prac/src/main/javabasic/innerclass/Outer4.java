@@ -1,5 +1,8 @@
 package innerclass;
 
+/**
+ * 局部内部类
+ */
 class Outer4 {
     private int age = 20;
 
@@ -13,8 +16,10 @@ class Outer4 {
             }
         }
 
-        Inner i = new Inner();
-        i.show();
+        System.out.println("外部类输出1");
+        Inner inner = new Inner();
+        inner.show();
+        System.out.println("外部类输出2");
     }
 
     public static void main(String[] args) {

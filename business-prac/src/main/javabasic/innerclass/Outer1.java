@@ -1,7 +1,10 @@
 package innerclass;
 
+/**
+ * 成员内部类
+ */
 class Outer1 {
-    // 属性的位置
+    // 类成员位置位置
     private class Inner {
         public void show() {
             System.out.println("密码备份文件");
@@ -13,9 +16,18 @@ class Outer1 {
         return new Inner();
     }
 
+    private class Inner2 {
+        public void show() {
+            System.out.println("密码备份文件2");
+        }
+    }
+
     public static void main(String[] args) {
         Outer1 outer1 = new Outer1();
         Outer1.Inner inner = outer1.getInner();
         inner.show();
+
+        Outer1.Inner2 inner2 = new Outer1().new Inner2();
+        inner2.show();
     }
 }

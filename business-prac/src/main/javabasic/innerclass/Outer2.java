@@ -1,5 +1,8 @@
 package innerclass;
 
+/**
+ * 成员内部类
+ */
 class Outer2 {
     public int age = 18;
 
@@ -15,7 +18,7 @@ class Outer2 {
     }
 
     public static void main(String[] args) {
-        Outer2.Inner oi = new Outer2().new Inner();
-        oi.showAge();
+        Outer2.Inner inner = new Outer2().new Inner();
+        inner.showAge();
     }
 }

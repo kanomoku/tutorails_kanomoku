@@ -1,5 +1,8 @@
 package innerclass;
 
+/**
+ * 用匿名内部类实现回调功能
+ */
 interface IBusiness {
     void execute();
 }

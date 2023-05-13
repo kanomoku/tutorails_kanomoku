@@ -1,5 +1,8 @@
 package innerclass;
 
+/**
+ * 静态内部类
+ */
 class Outer3 {
     int age = 10;
     static int age2 = 20;
