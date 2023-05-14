@@ -1,22 +1,22 @@
 package superthis;
 
 public class Animal {
-    public String name = "animal";
+    public String name = "animal name";
 
-    Animal() {
+    public Animal() {
         System.out.println("Animal 无参数构造方法");
     }
 
-    Animal(String name) {
+    public Animal(String name) {
         System.out.println("Animal 有参数构造方法");
     }
 
     public void eat() {
         this.sleep();
-        System.out.println("animal eat");
+        System.out.println("Animal eat");
     }
 
     public void sleep() {
-        System.out.println("animal sleep");
+        System.out.println("Animal sleep");
     }
 }

@@ -1,19 +1,21 @@
 package superthis;
 
+import org.junit.Test;
+
 public class MainTest {
     public static void main(String[] args) {
-        SuperPerson p = new SuperPerson();
-        System.out.println();
+//        SuperPerson p = new SuperPerson();
 
-        SuperPerson p1 = new SuperPerson("aa");
-        System.out.println();
+//        SuperPerson p1 = new SuperPerson("孙悟空");
 
-        Person p2 = new Person();
-        System.out.println(p2.name);
-        p2.eat();
-        System.out.println();
+//        SuperPerson p3 = new SuperPerson("aa");
+//        p3.eat();
+    }
 
-        SuperPerson p3 = new SuperPerson("aa");
-        p3.eat();
+    @Test
+    public void test() {
+        Person person = new Person();
+        System.out.println(person.name);
+        person.eat();
     }
 }
