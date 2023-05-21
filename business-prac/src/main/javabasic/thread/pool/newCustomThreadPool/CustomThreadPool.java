@@ -1,4 +1,4 @@
-package thread.pool.custom;
+package thread.pool.newCustomThreadPool;
 
 import java.util.Date;
 import java.util.concurrent.ArrayBlockingQueue;

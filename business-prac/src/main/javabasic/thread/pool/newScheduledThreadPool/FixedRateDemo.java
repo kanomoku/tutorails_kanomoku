@@ -1,6 +1,6 @@
 package thread.pool.newScheduledThreadPool;
 
-import thread.pool.custom.Task;
+import thread.pool.newCustomThreadPool.Task;
 
 import java.text.DateFormat;
 import java.text.ParseException;

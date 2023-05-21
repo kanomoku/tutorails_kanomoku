@@ -1,6 +1,6 @@
 package thread.pool.newSingleThreadExecutor;
 
-import thread.pool.custom.Task;
+import thread.pool.newCustomThreadPool.Task;
 
 import java.util.Date;
 import java.util.concurrent.ExecutionException;
