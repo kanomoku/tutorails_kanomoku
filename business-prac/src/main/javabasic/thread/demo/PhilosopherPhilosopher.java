@@ -1,11 +1,11 @@
-package thread.threadDemo;
+package thread.demo;
 
-public class Philosopher_Philosopher extends Thread {
+public class PhilosopherPhilosopher extends Thread {
     private String name;
-    private Philosopher_Chopstick left;
-    private Philosopher_Chopstick right;
+    private PhilosopherChopstick left;
+    private PhilosopherChopstick right;
 
-    public Philosopher_Philosopher(String name, Philosopher_Chopstick left, Philosopher_Chopstick right) {
+    public PhilosopherPhilosopher(String name, PhilosopherChopstick left, PhilosopherChopstick right) {
         this.name = name;
         this.left = left;
         this.right = right;

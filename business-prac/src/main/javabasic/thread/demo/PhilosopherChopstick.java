@@ -1,9 +1,9 @@
-package thread.xiancheng_Philosopher;
+package thread.demo;
 
-public class Philosopher_Chopstick {
+public class PhilosopherChopstick {
     private int number;
 
-    public Philosopher_Chopstick(int number) {
+    public PhilosopherChopstick(int number) {
         this.number = number;
     }
 
