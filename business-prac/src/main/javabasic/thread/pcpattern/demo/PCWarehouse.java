@@ -1,4 +1,4 @@
-package thread.demo;
+package thread.pcpattern.demo;
 
 import lombok.SneakyThrows;
 

@@ -1,4 +1,4 @@
-package thread.demo;
+package thread.pcpattern.demo;
 
 public class PCMainTest {
     public static void main(String[] args) {
