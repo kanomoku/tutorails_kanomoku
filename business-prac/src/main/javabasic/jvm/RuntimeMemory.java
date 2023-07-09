@@ -1,6 +1,6 @@
 package jvm;
 
-public class RuntimePrac {
+public class RuntimeMemory {
     public static void main(String[] args) {
         printRuntime();
 

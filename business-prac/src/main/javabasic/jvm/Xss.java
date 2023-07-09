@@ -1,6 +1,6 @@
 package jvm;
 
-public class Jvm4_Xss {
+public class Xss {
     private static int count;
 
     private static void recursion() {
