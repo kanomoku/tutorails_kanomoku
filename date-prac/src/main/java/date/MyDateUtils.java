@@ -15,7 +15,7 @@ import java.util.Objects;
 
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 
-public class MyDateUtil {
+public class MyDateUtils {
 
     /**
      * 当前时区时间 → 目标时区时间
