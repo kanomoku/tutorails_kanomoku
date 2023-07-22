@@ -35,7 +35,7 @@ public class DateBuilder {
      * 时间戳 是不会跟着 时区 的改变而改变。
      */
     @Test
-    public void TimestampSameInDifferentZone() {
+    public void timestampSameInDifferentZone() {
         System.out.println(ZonedDateTime.now().toEpochSecond()); // 1689775687
         System.out.println(ZonedDateTime.now(ZoneId.of("Asia/Tokyo")).toEpochSecond()); // 1689775687
         System.out.println(ZonedDateTime.now(ZoneId.of("Asia/Shanghai")).toEpochSecond()); // 1689775687
@@ -122,12 +122,22 @@ public class DateBuilder {
     @Test
     public void instantBuild() {
         System.out.println(Instant.now());// 2023-07-20T04:52:37.670793700Z
+
+        System.out.println(Instant.MIN);//-1000000000-01-01T00:00:00Z
+        System.out.println(Instant.MAX);//+1000000000-12-31T23:59:59.999999999Z
+        System.out.println(Instant.EPOCH);//1970-01-01T00:00:00Z
         System.out.println("1----------");
 
         System.out.println(Instant.ofEpochMilli(1562501898000L));//2019-07-07T12:18:18Z
         System.out.println(Instant.ofEpochMilli(1562501898888L));//2019-07-07T12:18:18.888Z
         System.out.println(Instant.ofEpochSecond(1562501898));//2019-07-07T12:18:18Z
         System.out.println(Instant.ofEpochSecond(1562501898, 888));//2019-07-07T12:18:18.000000888Z
+
+        Instant instant = Instant.parse("2019-07-07T20:18:18.000000888Z");
+        System.out.println(instant.toString());//2019-07-07T20:18:18.000000888Z
+        System.out.println(instant.getEpochSecond());//1562530698
+        System.out.println(instant.toEpochMilli());//1562530698000
+        System.out.println(instant.getNano());//888
         System.out.println("2----------");
 
         System.out.println(ZONED_DATE_TIME.toInstant());//2019-07-07T11:18:18.000000888Z
