@@ -3,18 +3,9 @@ package date;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.time.DayOfWeek;
-import java.time.Duration;
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.Month;
-import java.time.OffsetDateTime;
-import java.time.Period;
-import java.time.ZoneId;
-import java.time.ZoneOffset;
-import java.time.ZonedDateTime;
+import java.time.*;
 import java.time.temporal.ChronoUnit;
-import java.util.Date;
+import java.util.Arrays;
 import java.util.TimeZone;
 
 /**
@@ -24,7 +15,6 @@ public class DateAJ8 {
     public static final LocalDateTime LOCAL_DATE_TIME = LocalDateTime.of(2019, 7, 7, 20, 18, 18, 888);
     public static final ZonedDateTime ZONED_DATE_TIME = ZonedDateTime.of(2019, 7, 7, 20, 18, 18, 888, ZoneId.of("Asia/Tokyo"));
     public static final OffsetDateTime OFFSET_DATE_TIME = OffsetDateTime.of(2019, 7, 7, 20, 18, 18, 888, ZoneOffset.ofHours(9));
-    protected static final Date DATE = new Date(1562501898000L);
 
     @Test
     public void dateYearMonthDay() {
@@ -131,10 +121,14 @@ public class DateAJ8 {
         Assert.assertEquals("Asia/Shanghai", TimeZone.getDefault().getID());
         Assert.assertEquals("GMT+08:00", TimeZone.getTimeZone("GMT+08:00").getID());
         Assert.assertEquals("GMT-05:00", TimeZone.getTimeZone("GMT-05:00").getID());
+        // 查询所有可用的zoneId
+        Arrays.stream(TimeZone.getAvailableIDs()).forEach(System.out::println);
 
         // JDK 1.8之后做法
         Assert.assertEquals("Asia/Shanghai", ZoneId.systemDefault().getId());
         Assert.assertEquals("Asia/Shanghai", ZonedDateTime.now().getZone().getId());
+        // 查询所有可用的zoneId
+        ZoneId.getAvailableZoneIds().forEach(System.out::println);
 
         // 2、指定字符串得到一个ZoneId
         Assert.assertEquals("Asia/Shanghai", ZoneId.of("Asia/Shanghai").getId());
