@@ -21,7 +21,6 @@ public class ToString {
     public static final LocalDateTime LOCAL_DATE_TIME = LocalDateTime.of(2019, 7, 7, 20, 18, 18, 888);
     public static final ZonedDateTime ZONED_DATE_TIME = ZonedDateTime.of(2019, 7, 7, 20, 18, 18, 888, ZoneId.of("Asia/Tokyo"));
     public static final OffsetDateTime OFFSET_DATE_TIME = OffsetDateTime.of(2019, 7, 7, 20, 18, 18, 888, ZoneOffset.ofHours(9));
-    protected static final Date DATE = new Date(1562501898888L);//2019-07-07 20:18:18.888
 
     @Test
     public void timestampToString() {
@@ -34,11 +33,20 @@ public class ToString {
 
     @Test
     public void dateToString() {
+        Date DATE = new Date(1562501898000L);
+
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Assert.assertEquals("2019-07-07 20:18:18", df.format(DATE));
 
         df.setTimeZone(TimeZone.getTimeZone("Asia/Tokyo"));
         Assert.assertEquals("2019-07-07 21:18:18", df.format(DATE));
+
+        // 标准的UTC时间
+        System.out.println(DATE);// Sun Jul 07 20:18:18 CST 2019
+        // 本地时间,已经@Deprecated
+        System.out.println(DATE.toLocaleString());// 2019年7月7日 下午8:18:18
+        // GTM时间(格林威治这个时候的时间)，已经@Deprecated
+        System.out.println(DATE.toGMTString());// 7 Jul 2019 12:18:18 GMT
     }
 
     @Test
