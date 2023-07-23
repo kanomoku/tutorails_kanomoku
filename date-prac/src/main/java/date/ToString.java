@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import java.sql.Timestamp;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
@@ -228,5 +229,18 @@ public class ToString {
         //Assert.assertEquals(localDateTime1,ZonedDateTime.parse("第3季度 2019-07-07 20:18:18", formatter1));java.time.format.DateTimeParseException
         //Assert.assertEquals(localDateTime1,OffsetDateTime.parse("第3季度 2019-07-07 20:18:18", formatter));java.time.format.DateTimeParseException
         //Assert.assertEquals(localDateTime1,OffsetDateTime.parse("第3季度 2019-07-07 20:18:18", formatter1));java.time.format.DateTimeParseException
+    }
+
+    @Test
+    public void mean() throws ParseException {
+        Date DATE = new Date(1562501898000L); //2019-07-07T12:18:18.888Z
+
+        DateFormat dfChina = new SimpleDateFormat("G GG GGGGG E EE EEEEE a aa aaaaa", Locale.CHINA);
+        System.out.println(dfChina.format(DATE)); // 公元 公元 公元 周日 周日 星期日 下午 下午 下午
+        System.out.println(dfChina.parse("公元 公元 公元 周日 周日 星期日 下午 下午 下午")); // Sun Jan 04 12:00:00 CST 1970
+
+        DateFormat dfUs = new SimpleDateFormat("G GG GGGGG E EE EEEEE a aa aaaaa", Locale.US);
+        System.out.println(dfUs.format(DATE)); // AD AD AD Sun Sun Sunday PM PM PM
+        System.out.println(dfUs.parse("AD AD AD Sun Sun Sunday PM PM PM")); // Sun Jan 04 12:00:00 CST 1970
     }
 }

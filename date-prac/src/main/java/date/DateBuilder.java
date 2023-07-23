@@ -29,7 +29,7 @@ public class DateBuilder {
     public static final ZonedDateTime ZONED_DATE_TIME = ZonedDateTime.of(2019, 7, 7, 20, 18, 18, 888, ZoneId.of("Asia/Tokyo"));
     public static final OffsetDateTime OFFSET_DATE_TIME = OffsetDateTime.of(2019, 7, 7, 20, 18, 18, 888, ZoneOffset.ofHours(9));
     public static final LocalDateTime LOCAL_DATE_TIME = LocalDateTime.of(2019, 7, 7, 20, 18, 18, 888);
-    protected static final Date DATE = new Date(1562501898000L);
+    protected static final Date DATE = new Date(1562501898000L); //2019-07-07T12:18:18.888Z
 
     /**
      * 时间戳 是不会跟着 时区 的改变而改变。
