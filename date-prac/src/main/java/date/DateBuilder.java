@@ -36,11 +36,17 @@ public class DateBuilder {
      */
     @Test
     public void timestampSameInDifferentZone() {
-        System.out.println(ZonedDateTime.now().toEpochSecond()); // 1689775687
-        System.out.println(ZonedDateTime.now(ZoneId.of("Asia/Tokyo")).toEpochSecond()); // 1689775687
-        System.out.println(ZonedDateTime.now(ZoneId.of("Asia/Shanghai")).toEpochSecond()); // 1689775687
-        System.out.println(Instant.now().atZone(ZoneOffset.UTC).toEpochSecond()); // 1689775687
-        System.out.println(new Date().getTime()); // 1689775687682
+        System.out.println(ZonedDateTime.now().toEpochSecond()); // 1690081722
+        System.out.println(ZonedDateTime.now(ZoneOffset.UTC).toEpochSecond()); // 1690081722
+        System.out.println(ZonedDateTime.now(ZoneId.of("Asia/Tokyo")).toEpochSecond()); // 1690081722
+        System.out.println(ZonedDateTime.now(ZoneId.of("Asia/Shanghai")).toEpochSecond()); // 1690081722
+
+        System.out.println(Instant.now().atZone(ZoneOffset.UTC).toEpochSecond()); // 1690081722
+        System.out.println(Instant.now().atZone(ZoneId.of("Asia/Tokyo")).toEpochSecond()); // 1690081722
+
+        System.out.println(Instant.now().toEpochMilli()); // 1690081722309
+        System.out.println(System.currentTimeMillis()); // 1690081722309
+        System.out.println(new Date().getTime()); // 1690081722309
     }
 
     /**
@@ -121,7 +127,7 @@ public class DateBuilder {
 
     @Test
     public void instantBuild() {
-        System.out.println(Instant.now());// 2023-07-20T04:52:37.670793700Z
+        System.out.println(Instant.now());// 2023-07-23T02:55:32.238166300Z
 
         System.out.println(Instant.MIN);//-1000000000-01-01T00:00:00Z
         System.out.println(Instant.MAX);//+1000000000-12-31T23:59:59.999999999Z
