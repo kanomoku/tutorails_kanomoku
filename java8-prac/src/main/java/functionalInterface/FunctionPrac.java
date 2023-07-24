@@ -29,20 +29,21 @@ public class FunctionPrac {
 
     @Test
     public void compose() {
-        Function<Integer, Integer> times2 = i -> i * 2; // 扩大两倍
+        Function<Integer, Integer> multiplyBy2 = i -> i * 2; // 扩大两倍
         Function<Integer, Integer> squared = i -> i * i; // 求平方
 
-        System.out.println(times2.apply(4)); // 8
+        System.out.println(multiplyBy2.apply(4)); // 8
 
         System.out.println(squared.apply(4)); // 16
 
         //32 先平方再乘2 → 先4×4然后16×2
-        System.out.println(times2.compose(squared).apply(4));
+        System.out.println(multiplyBy2.compose(squared).apply(4));//32
 
         //64 先乘2再平方 → 先4×2然后8×8
-        System.out.println(times2.andThen(squared).apply(4));
+        System.out.println(multiplyBy2.andThen(squared).apply(4));//64
 
-        Map<String, Integer> map = Stream.of("This", "is", "a", "test").collect(Collectors.toMap(Function.identity(), String::length));
+        Map<String, Integer> map = Stream.of("This", "is", "a", "test")
+                .collect(Collectors.toMap(Function.identity(), String::length));
         // {a=1, test=4, This=4, is=2}
         System.out.println(map);
     }
