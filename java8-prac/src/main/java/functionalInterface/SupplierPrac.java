@@ -17,11 +17,11 @@ public class SupplierPrac {
         System.out.println(supplier.get());
 
         // 2、lambda表达式
-        supplier = () -> new Random().nextDouble();
-        System.out.println(supplier.get());
+        Supplier<Double> supplier1 = () -> new Random().nextDouble();
+        System.out.println(supplier1.get());
 
         // 3、语法糖
-        supplier = Math::random;
-        System.out.println(supplier.get());
+        Supplier<Double> supplier2 = Math::random;
+        System.out.println(supplier2.get());
     }
 }
