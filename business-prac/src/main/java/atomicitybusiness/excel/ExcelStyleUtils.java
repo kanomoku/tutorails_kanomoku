@@ -55,7 +55,7 @@ public class ExcelStyleUtils {
         cellStyle.setVerticalAlignment(VerticalAlignment.CENTER);
 
         cellStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
-        cellStyle.setFillForegroundColor(new XSSFColor(new Color(181, 230, 181),new DefaultIndexedColorMap()));
+        cellStyle.setFillForegroundColor(new XSSFColor(new Color(100, 210, 181),new DefaultIndexedColorMap()));
         return cellStyle;
     }
 

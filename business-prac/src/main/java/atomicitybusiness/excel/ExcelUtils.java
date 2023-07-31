@@ -18,8 +18,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class ExcelUtils {
-
-    public static final String INPUT_PATH = "C:\\Users\\zhang\\Desktop\\input.xlsx";
     public static final String OUT_PATH = "D:\\projects\\tutorails_kanomoku\\business-prac\\src\\main\\resources\\output\\";
 
     @PostMapping(value = "/upload")
@@ -92,20 +90,23 @@ public class ExcelUtils {
         File file = new File(path);
         if (!file.exists()) {
             boolean mkdirs = file.mkdirs();
-            if (!mkdirs){
+            if (!mkdirs) {
                 throw new IOException("mkdirs failed");
             }
         }
     }
 
-    public static void output(Workbook workbook) throws Exception {
+    public static void writeExcel(Workbook workbook) throws Exception {
+        ExcelUtils.deleteOldExcelFile(OUT_PATH);
+        ExcelUtils.makeExcelFile(OUT_PATH);
         FileOutputStream fileOutputStream = new FileOutputStream(genExcelName(OUT_PATH), false);
         workbook.write(fileOutputStream);
         fileOutputStream.close();
     }
 
-    public static void output2(Workbook workbook) throws Exception {
-        makeExcelFile(OUT_PATH);
+    public static void writeExcel2(Workbook workbook) throws Exception {
+        ExcelUtils.deleteOldExcelFile(OUT_PATH);
+        ExcelUtils.makeExcelFile(OUT_PATH);
         OutputStream outputStream = new FileOutputStream(genExcelName(OUT_PATH));
         workbook.write(outputStream);
         outputStream.close();
@@ -134,23 +135,24 @@ public class ExcelUtils {
     public static void buildStyle(Workbook wb) {
         Sheet sheet;
         Row row;
-        for (int i = 0; i < wb.getNumberOfSheets(); i++) {
-            sheet = wb.getSheetAt(i);
-            for (int j = sheet.getFirstRowNum(); j <= sheet.getLastRowNum(); j++) {
-                row = sheet.getRow(j);
-                if (j == 0) {
-                    for (int k = row.getFirstCellNum(); k < row.getLastCellNum(); k++) {
-                        row.getCell(k).setCellStyle(ExcelStyleUtils.headerStyle(wb));
-                    }
-                } else {
-                    for (int k = row.getFirstCellNum(); k < row.getLastCellNum(); k++) {
-                        row.getCell(k).setCellStyle(ExcelStyleUtils.cellsStyle(wb));
+        for (int s = 0; s < wb.getNumberOfSheets(); s++) {
+            sheet = wb.getSheetAt(s);
+            for (int r = sheet.getFirstRowNum(); r <= sheet.getLastRowNum(); r++) {
+                row = sheet.getRow(r);
+                for (int c = row.getFirstCellNum(); c < row.getLastCellNum(); c++) {
+                    if (r == 0) { // 表头
+                        row.getCell(c).setCellStyle(ExcelStyleUtils.headerStyle(wb));
+                        sheet.autoSizeColumn(c);
+                    } else { // 数据
+                        row.getCell(c).setCellStyle(ExcelStyleUtils.cellsStyle(wb));
+                        if (sheet.getColumnWidth(c) > 50 * 256) {
+                            sheet.setColumnWidth(c, 50 * 256);
+                        }
                     }
                 }
             }
         }
     }
-
 
     private static String genExcelName(String path) {
         String postName = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHMMSS"));
