@@ -8,7 +8,6 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static excel.ExcelUtils.OUT_PATH;
 
 
 public class ExcelUtilsTest {
@@ -64,6 +63,7 @@ public class ExcelUtilsTest {
         persons.add(new Person(13, "John3", 11, "nickName3"));
         persons.add(new Person(14, "John4", 11, "nickName4"));
 
+        String OUT_PATH = "D:\\projects\\tutorails_kanomoku\\business-prac\\src\\main\\resources\\output\\";
         ExcelUtils.deleteOldExcelFile(OUT_PATH);
         XSSFWorkbook wb = new XSSFWorkbook();
         ExcelUtils.buildData(wb, persons);
