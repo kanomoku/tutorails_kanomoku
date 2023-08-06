@@ -1,4 +1,4 @@
-package thread.lock.customlock;
+package javabasic.thread.lock.customlock;
 
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;

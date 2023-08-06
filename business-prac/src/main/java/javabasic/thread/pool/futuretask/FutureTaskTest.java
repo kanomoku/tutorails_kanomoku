@@ -1,4 +1,4 @@
-package thread.pool.futuretask;
+package javabasic.thread.pool.futuretask;
 
 import java.util.concurrent.*;
 

@@ -1,5 +1,4 @@
-package thread.lock;
-
+package javabasic.thread.lock;
 public class MainTest {
     public static void main(String[] args) {
 //        test_diff_task();

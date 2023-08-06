@@ -1,4 +1,4 @@
-package thread.threadmethod.isInterrupted;
+package javabasic.thread.threadmethod.isInterrupted;
 
 import java.util.concurrent.TimeUnit;
 

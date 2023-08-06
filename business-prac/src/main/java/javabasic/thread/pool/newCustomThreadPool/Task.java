@@ -1,4 +1,4 @@
-package thread.pool.newCustomThreadPool;
+package javabasic.thread.pool.newCustomThreadPool;
 
 import java.util.Date;
 

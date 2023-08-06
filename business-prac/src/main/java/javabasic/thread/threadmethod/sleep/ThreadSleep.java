@@ -1,4 +1,4 @@
-package thread.threadmethod.sleep;
+package javabasic.thread.threadmethod.sleep;
 
 public class ThreadSleep {
     public static void main(String[] args) {

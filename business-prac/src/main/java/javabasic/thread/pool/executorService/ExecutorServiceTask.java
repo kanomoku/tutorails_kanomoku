@@ -1,7 +1,7 @@
-package thread.pool.executorService;
+package javabasic.thread.pool.executorService;
 
-import thread.pool.newCustomThreadPool.Task;
-import thread.pool.newCustomThreadPool.TaskC;
+import javabasic.thread.pool.newCustomThreadPool.Task;
+import javabasic.thread.pool.newCustomThreadPool.TaskC;
 
 import java.util.ArrayList;
 import java.util.Date;

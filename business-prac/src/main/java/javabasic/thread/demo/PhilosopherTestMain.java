@@ -1,4 +1,4 @@
-package thread.demo;
+package javabasic.thread.demo;
 
 /**
  * 哲学家就餐的例子

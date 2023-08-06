@@ -1,4 +1,4 @@
-package innerclass;
+package javabasic.innerclass;
 
 /**
  * 静态内部类

@@ -1,4 +1,4 @@
-package thread.newthread.callable;
+package javabasic.thread.newthread.callable;
 
 import java.util.concurrent.Callable;
 

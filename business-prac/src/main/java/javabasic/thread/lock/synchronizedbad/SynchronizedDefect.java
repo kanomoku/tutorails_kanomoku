@@ -1,4 +1,4 @@
-package thread.lock.synchronizedbad;
+package javabasic.thread.lock.synchronizedbad;
 
 import java.util.concurrent.TimeUnit;
 

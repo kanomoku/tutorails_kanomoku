@@ -1,4 +1,4 @@
-package thread.threadmethod.join.flightdemo;
+package javabasic.thread.threadmethod.join.flightdemo;
 
 import java.util.List;
 

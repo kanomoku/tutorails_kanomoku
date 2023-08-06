@@ -1,4 +1,4 @@
-package innerclass;
+package javabasic.innerclass;
 
 interface Inner {
     void show();

@@ -1,4 +1,4 @@
-package thread.demo;
+package javabasic.thread.demo;
 
 public class PhilosopherChopstick {
     private int number;

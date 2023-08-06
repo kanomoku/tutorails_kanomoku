@@ -1,4 +1,4 @@
-package thread.demo;
+package javabasic.thread.demo;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;

@@ -1,4 +1,4 @@
-package thread.newthread.runnable;
+package javabasic.thread.newthread.runnable;
 
 public class RunningManMainTest {
     public static void main(String[] args) {

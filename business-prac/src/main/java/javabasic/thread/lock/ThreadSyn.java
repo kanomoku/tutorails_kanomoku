@@ -1,4 +1,4 @@
-package thread.lock;
+package javabasic.thread.lock;
 
 public class ThreadSyn extends Thread {
     private Service service;

@@ -1,4 +1,4 @@
-package thread.demo;
+package javabasic.thread.demo;
 
 public class System12306Windows extends Thread {
     private String name;

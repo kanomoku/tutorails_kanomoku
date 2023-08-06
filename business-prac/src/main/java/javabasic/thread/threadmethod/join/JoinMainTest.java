@@ -1,4 +1,4 @@
-package thread.threadmethod.join;
+package javabasic.thread.threadmethod.join;
 
 public class JoinMainTest {
     public static void main(String[] args){

@@ -1,4 +1,4 @@
-package thread.threadmethod.closethread;
+package javabasic.thread.threadmethod.closethread;
 
 import java.util.Date;
 import java.util.concurrent.TimeUnit;

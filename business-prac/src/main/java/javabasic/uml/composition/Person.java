@@ -1,4 +1,4 @@
-package uml.composition;
+package javabasic.uml.composition;
 
 public class Person {
     private Leg leg;

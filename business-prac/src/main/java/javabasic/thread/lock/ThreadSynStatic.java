@@ -1,4 +1,4 @@
-package thread.lock;
+package javabasic.thread.lock;
 
 
 public class ThreadSynStatic extends Thread {

@@ -1,4 +1,4 @@
-package uml.aggregate;
+package javabasic.uml.aggregate;
 
 public class Clothes {
 }

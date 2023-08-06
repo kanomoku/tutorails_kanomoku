@@ -1,4 +1,4 @@
-package thread.lock.deadlock;
+package javabasic.thread.lock.deadlock;
 
 import java.util.HashMap;
 

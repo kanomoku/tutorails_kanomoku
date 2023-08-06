@@ -1,4 +1,4 @@
-package thread.pcpattern.demo;
+package javabasic.thread.pcpattern.demo;
 
 public class PCMainTest {
     public static void main(String[] args) {

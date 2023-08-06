@@ -1,4 +1,4 @@
-package innerclass;
+package javabasic.innerclass;
 
 /**
  * 成员内部类
@@ -23,11 +23,10 @@ class Outer1 {
     }
 
     public static void main(String[] args) {
-        Outer1 outer1 = new Outer1();
-        Outer1.Inner inner = outer1.getInner();
-        inner.show();
-
         Outer1.Inner2 inner2 = new Outer1().new Inner2();
         inner2.show();
+
+        Outer1.Inner inner = new Outer1().getInner();
+        inner.show();
     }
 }

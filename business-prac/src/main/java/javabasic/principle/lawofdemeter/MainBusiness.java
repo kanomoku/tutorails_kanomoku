@@ -1,4 +1,4 @@
-package principle.lawofdemeter;
+package javabasic.principle.lawofdemeter;
 
 public class MainBusiness {
     public static void main(String[] args) {

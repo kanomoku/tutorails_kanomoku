@@ -1,4 +1,4 @@
-package thread.pcpattern.demo;
+package javabasic.thread.pcpattern.demo;
 
 import lombok.SneakyThrows;
 

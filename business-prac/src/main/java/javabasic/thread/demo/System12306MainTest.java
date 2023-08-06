@@ -1,4 +1,4 @@
-package thread.demo;
+package javabasic.thread.demo;
 
 public class System12306MainTest {
     public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package uml.forclass;
+package javabasic.uml.forclass;
 
 public class Dummy {
     private String name1;

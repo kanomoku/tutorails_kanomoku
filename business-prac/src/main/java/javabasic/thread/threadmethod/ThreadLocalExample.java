@@ -1,4 +1,4 @@
-package thread.threadmethod;
+package javabasic.thread.threadmethod;
 
 import java.text.SimpleDateFormat;
 import java.util.Random;

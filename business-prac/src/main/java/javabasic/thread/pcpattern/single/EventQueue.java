@@ -1,4 +1,4 @@
-package thread.pcpattern.single;
+package javabasic.thread.pcpattern.single;
 
 import java.util.LinkedList;
 

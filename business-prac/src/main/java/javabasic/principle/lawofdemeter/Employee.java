@@ -1,4 +1,5 @@
-package principle.lawofdemeter;
+package javabasic.principle.lawofdemeter;
+
 
 import java.util.ArrayList;
 import java.util.List;

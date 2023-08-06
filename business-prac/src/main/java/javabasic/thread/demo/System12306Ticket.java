@@ -1,4 +1,4 @@
-package thread.demo;
+package javabasic.thread.demo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

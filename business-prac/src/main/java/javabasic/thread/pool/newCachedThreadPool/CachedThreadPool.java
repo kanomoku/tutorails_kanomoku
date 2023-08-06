@@ -1,6 +1,6 @@
-package thread.pool.newCachedThreadPool;
+package javabasic.thread.pool.newCachedThreadPool;
 
-import thread.pool.newCustomThreadPool.Task;
+import javabasic.thread.pool.newCustomThreadPool.Task;
 
 import java.util.Date;
 import java.util.concurrent.ExecutionException;

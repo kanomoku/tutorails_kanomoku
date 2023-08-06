@@ -1,4 +1,4 @@
-package thread.unsafe;
+package javabasic.thread.unsafe;
 
 public class RunnableSellTicketsMainTest {
     public static void main(String[] args) {

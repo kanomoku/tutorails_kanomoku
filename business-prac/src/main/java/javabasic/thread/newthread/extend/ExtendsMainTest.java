@@ -1,4 +1,4 @@
-package thread.newthread.extend;
+package javabasic.thread.newthread.extend;
 
 public class ExtendsMainTest {
     public static void main(String[] args) {

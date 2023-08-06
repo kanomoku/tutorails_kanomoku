@@ -1,4 +1,4 @@
-package thread.unsafe;
+package javabasic.thread.unsafe;
 
 public class RunnableSellTickets implements Runnable {
     private int ticket = 5;

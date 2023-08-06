@@ -1,4 +1,6 @@
-package thread.lock;
+package javabasic.thread.lock;
+
+import javabasic.thread.lock.Service;
 
 public class ThreadLocLock extends Thread {
     private Service service;

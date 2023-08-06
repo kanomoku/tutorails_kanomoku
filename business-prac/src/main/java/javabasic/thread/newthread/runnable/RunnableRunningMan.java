@@ -1,4 +1,4 @@
-package thread.newthread.runnable;
+package javabasic.thread.newthread.runnable;
 
 public class RunnableRunningMan implements Runnable {
     private String name;

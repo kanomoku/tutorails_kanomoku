@@ -1,4 +1,4 @@
-package thread.threadmethod.join;
+package javabasic.thread.threadmethod.join;
 
 import java.util.Date;
 

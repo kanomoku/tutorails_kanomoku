@@ -1,4 +1,4 @@
-package thread.threadmethod.currentthread;
+package javabasic.thread.threadmethod.currentthread;
 
 public class CurrentThread {
     public static void main(String[] args) {
