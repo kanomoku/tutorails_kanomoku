@@ -1,19 +1,20 @@
-package initclass;
+package javabasic.initclass;
 
 public class Father {
+    public static Integer FATHER_NUM = 1;
+
     static {
-        System.out.println("父静态代码块");
+        System.out.println("父 → static {}, FATHER_NUM = " + FATHER_NUM);
     }
 
-    public int age = 10;
+    public int age = 0;
 
     {
-        System.out.println("父非静态代码块 " + age + " 有值说明确实先初始化变量再执行语句块");
-        System.out.println("父非静态代码块");
+        System.out.println("父 → {}, father age : " + age);
     }
 
-    public Father() {
-        System.out.println("父构造器 " + age + " 父构造函数里查看值");
-        System.out.println("父构造器执行完毕");
+    public Father(int age) {
+        this.age = age;
+        System.out.println("父 → 构造方法, father age : " + age);
     }
 }

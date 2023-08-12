@@ -1,23 +1,25 @@
-package initclass;
+package javabasic.initclass;
 
 public class Son extends Father {
+    public static Integer SON_NUM = 1;
+
     static {
-        System.out.println("子静态代码块");
+        System.out.println("子 → static {}, SON_NUM = " + SON_NUM);
     }
 
-    public int age = 20;
+    public int age = 0;
 
     {
-        System.out.println("子非静态代码块 " + age + " 有值说明确实先初始化变量再执行语句块");
-        System.out.println("子非静态代码块");
+        System.out.println("子 → {}, son age : " + age);
     }
 
-    public Son() {
-        System.out.println("子构造器 " + age + " 子构造函数里查看值");
-        System.out.println("子构造器执行完毕");
+    public Son(int age) {
+        super(age + 20);
+        this.age = age;
+        System.out.println("子 → 构造方法, son age : " + age);
     }
 
     public static void main(String[] args) {
-        new Son();
+        new Son(18);
     }
 }
