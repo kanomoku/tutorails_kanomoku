@@ -1,7 +1,7 @@
 package javabasic.thread.exp.exp2.v1;
 
 
-import javabasic.thread.exp.exp2.Util;
+import javabasic.thread.exp.exp2.util.Util;
 import lombok.Data;
 
 import java.util.Random;
