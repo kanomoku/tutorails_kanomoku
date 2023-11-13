@@ -16,31 +16,32 @@ public class AsyncShop {
         random = new Random(name.charAt(0) * name.charAt(1) * name.charAt(2));
     }
 
+//    public Future<Double> getPrice(String product) {
+//        CompletableFuture<Double> futurePrice = new CompletableFuture<>();
+//
+//        new Thread(() -> {
+//            double price = calculatePrice(product);
+//            futurePrice.complete(price);
+//        }).start();
+//
+//        return futurePrice;
+//    }
+
     public Future<Double> getPrice(String product) {
         CompletableFuture<Double> futurePrice = new CompletableFuture<>();
 
         new Thread(() -> {
-            double price = calculatePrice(product);
-            futurePrice.complete(price);
+            try {
+                double price = calculatePrice(product);
+                futurePrice.complete(price);
+            } catch (Exception ex) {
+                System.out.println(ex.getMessage());
+                futurePrice.completeExceptionally(ex); // 否则就抛出导致失败的异常，完成这次Future操作
+            }
         }).start();
 
         return futurePrice;
     }
-
-//    public Future<Double> getPrice(String product) {
-//        CompletableFuture<Double> futurePrice = new CompletableFuture<>();
-//        new Thread(() -> {
-//            try {
-//                System.out.println(Thread.currentThread().getName() + " 执行线程任务");
-//                double price = calculatePrice(product);
-//                futurePrice.complete(price);
-//            } catch (Exception ex) {
-//                System.out.println(ex.getMessage());
-//                futurePrice.completeExceptionally(ex); // 否则就抛出导致失败的异常，完成这次Future操作
-//            }
-//        }).start();
-//        return futurePrice;
-//    }
 
 //    public Future<Double> getPrice(String product) {
 //        CompletableFuture<Double> futurePrice = new CompletableFuture<>();
