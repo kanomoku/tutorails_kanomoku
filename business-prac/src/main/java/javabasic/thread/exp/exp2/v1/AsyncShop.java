@@ -1,6 +1,7 @@
 package javabasic.thread.exp.exp2.v1;
 
-import javabasic.thread.exp.exp2.Util;
+
+import javabasic.thread.exp.exp2.util.Util;
 
 import java.util.Random;
 import java.util.concurrent.CompletableFuture;
