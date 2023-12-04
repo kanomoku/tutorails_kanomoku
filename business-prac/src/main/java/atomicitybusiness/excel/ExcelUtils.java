@@ -1,5 +1,6 @@
 package atomicitybusiness.excel;
 
+import io.utils.FileIUtils;
 import model.Person;
 import org.apache.commons.io.FileUtils;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -13,8 +14,6 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.*;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class ExcelUtils {
@@ -79,37 +78,26 @@ public class ExcelUtils {
         workbook.close();
     }
 
-    public static void deleteOldExcelFile(String path) throws Exception {
-        File file = new File(path);
-        if (file.exists() && file.isDirectory()) {
-            FileUtils.deleteDirectory(file);
-        }
-    }
-
-    public static void makeExcelFile(String path) throws Exception {
-        File file = new File(path);
-        if (!file.exists()) {
-            boolean mkdirs = file.mkdirs();
-            if (!mkdirs) {
-                throw new IOException("mkdirs failed");
-            }
-        }
-    }
-
     public static void writeExcel(Workbook workbook) throws Exception {
-        ExcelUtils.deleteOldExcelFile(OUT_PATH);
-        ExcelUtils.makeExcelFile(OUT_PATH);
-        FileOutputStream fileOutputStream = new FileOutputStream(genExcelName(OUT_PATH), false);
-        workbook.write(fileOutputStream);
-        fileOutputStream.close();
+        FileIUtils.deleteDirAndFiles(OUT_PATH);
+        FileIUtils.makeSureDirExist(OUT_PATH);
+
+        String exportPath = FileIUtils.genFileName(OUT_PATH, "文件名", ".xlsx");
+        try (FileOutputStream fos = new FileOutputStream(exportPath, false)) {
+            workbook.write(fos);
+        }
+        System.out.println("Exported Successful: " + exportPath);
     }
 
     public static void writeExcel2(Workbook workbook) throws Exception {
-        ExcelUtils.deleteOldExcelFile(OUT_PATH);
-        ExcelUtils.makeExcelFile(OUT_PATH);
-        OutputStream outputStream = new FileOutputStream(genExcelName(OUT_PATH));
-        workbook.write(outputStream);
-        outputStream.close();
+        FileIUtils.deleteDirAndFiles(OUT_PATH);
+        FileIUtils.makeSureDirExist(OUT_PATH);
+
+        String exportPath = FileIUtils.genFileName(OUT_PATH, "文件名", ".xlsx");
+        try (OutputStream outputStream = new FileOutputStream(exportPath)) {
+            workbook.write(outputStream);
+        }
+        System.out.println("Exported Successful: " + exportPath);
     }
 
     public static void buildData(Workbook wb, List<Person> list) {
@@ -154,8 +142,4 @@ public class ExcelUtils {
         }
     }
 
-    private static String genExcelName(String path) {
-        String postName = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHMMSS"));
-        return path + "/输出" + postName + ".xlsx";
-    }
 }
