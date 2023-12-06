@@ -70,4 +70,28 @@ public class ReflectUtils {
         }
         return result;
     }
+
+    public static <T> Object getFieldValue(T t, String filedName) {
+        try {
+            PropertyDescriptor propertyDescriptor = new PropertyDescriptor(filedName, t.getClass());
+            Method readMethod = propertyDescriptor.getReadMethod();
+            return readMethod.invoke(t);
+        } catch (IllegalAccessException | InvocationTargetException | IntrospectionException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static <T> void setFieldValue(T t, String filedName, Object value) {
+        try {
+            PropertyDescriptor propertyDescriptor = new PropertyDescriptor(filedName, t.getClass());
+            Method writeMethod = propertyDescriptor.getWriteMethod();
+            if (writeMethod != null) {
+                writeMethod.invoke(t, value);
+            } else {
+                System.out.println("not found write method");
+            }
+        } catch (IllegalAccessException | InvocationTargetException | IntrospectionException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

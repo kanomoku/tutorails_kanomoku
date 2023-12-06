@@ -4,11 +4,11 @@ import lombok.Data;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.Map;
+import java.util.*;
 
 public class ReflectUtilsTest {
     @Test
-    public void getChangeNoChange() {
+    public void testGetChangeNoChange() {
         User user1 = new User();
         user1.setName("user2");
         user1.setAge("19");
@@ -25,7 +25,7 @@ public class ReflectUtilsTest {
     }
 
     @Test
-    public void getChangeWithChange() {
+    public void testGetChangeWithChange() {
         User user1 = new User();
         user1.setName("user1");
         user1.setAge("19");
@@ -38,6 +38,68 @@ public class ReflectUtilsTest {
 
         Map<String, Map<String, Object>> change = ReflectUtils.getChange(user1, user2);
         Assert.assertEquals("{num={new=123457, origin=123456}, name={new=user2, origin=user1}, age={new=18, origin=19}}", change.toString());
+    }
+
+
+    @Test
+    public void testGetFieldValue() {
+        User user1 = new User();
+        user1.setName("user1");
+        user1.setAge("19");
+        user1.setNum("123456");
+        Assert.assertEquals("user1", ReflectUtils.getFieldValue(user1, "name"));
+        Assert.assertEquals("19", ReflectUtils.getFieldValue(user1, "age"));
+        Assert.assertEquals("123456", ReflectUtils.getFieldValue(user1, "num"));
+    }
+
+    @Test
+    public void testSetFieldValue() {
+        User user = new User();
+        ReflectUtils.setFieldValue(user, "name", "user1");
+        ReflectUtils.setFieldValue(user, "age", "19");
+        ReflectUtils.setFieldValue(user, "num", "123456");
+        Assert.assertEquals("user1", user.getName());
+        Assert.assertEquals("19", user.getAge());
+        Assert.assertEquals("123456", user.getNum());
+
+        Map<String, List<String>> map = new HashMap<>();
+        map.put("name", Arrays.asList("name1", "name2", "name3"));
+        map.put("age", Arrays.asList("11", "23", "23"));
+        map.put("num", Arrays.asList("123", "234", "345"));
+    }
+
+    @Test
+    public void testGetFieldValue2() {
+        User user1 = new User();
+        user1.setName("user1");
+        user1.setAge("19");
+        user1.setNum("123456");
+
+        List<String> strings = Arrays.asList("name", "age", "num");
+        List<Object> collect = strings.stream().map(a -> ReflectUtils.getFieldValue(user1, a)).toList();
+        System.out.println(collect);
+
+    }
+
+    @Test
+    public void testSetFieldValue2() {
+        Map<String, List<String>> map = new HashMap<>();
+        map.put("name", Arrays.asList("name1", "name2", "name3"));
+        map.put("age", Arrays.asList("11", "23", "23"));
+        map.put("num", Arrays.asList("123", "234", "345"));
+
+        List<User> users = new ArrayList<>();
+        List<String> fields = new ArrayList<>(map.keySet());
+        int size = map.get(fields.get(0)).size();
+        for (int i = 0; i < size; i++) {
+            User user1 = new User();
+            for (String field : fields) {
+                String value = map.get(field).get(i);
+                ReflectUtils.setFieldValue(user1, field, value);
+            }
+            users.add(user1);
+        }
+        System.out.println(users);
     }
 
     @Data
