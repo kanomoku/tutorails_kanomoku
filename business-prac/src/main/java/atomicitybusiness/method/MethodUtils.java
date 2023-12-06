@@ -1,76 +1,15 @@
 package atomicitybusiness.method;
 
-import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.lang3.ObjectUtils;
 
-import java.beans.IntrospectionException;
-import java.beans.PropertyDescriptor;
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Slf4j
 public class MethodUtils {
-    public static Map<String, Map<String, Object>> getChange(Object originObject, Object newObject) {
-        // 存在为null比价就没意义了
-        if (ObjectUtils.anyNull(originObject, newObject)) {
-            return new HashMap<>();
-        }
-
-        // 不同类型无法比较
-        if (ObjectUtils.notEqual(originObject.getClass(), newObject.getClass())) {
-            return new HashMap<>();
-        }
-
-        // 内容都相等所以没必要比较
-        if (Objects.deepEquals(originObject, newObject)) {
-            return new HashMap<>();
-        }
-
-        Map<String, Map<String, Object>> res = Maps.newHashMap();
-
-        Field[] declaredFields = originObject.getClass().getDeclaredFields();
-        for (Field field : declaredFields) {
-            // 检查Field是否为合成字段、如果该字段是合成字段则不进行比较
-            if (field.isSynthetic()) {
-                continue;
-            }
-
-            // serialVersionUID适用于java序列化机制,非业务属性
-            if ("serialVersionUID".equals(field.getName())) {
-                continue;
-            }
-
-            // 实现方式1
-            // field.setAccessible(true);
-            // Object o = field.get(originObject);
-            // Object n = field.get(originObject);
-
-            // 实现方式2
-            PropertyDescriptor propertyDescriptor = null;
-            try {
-                propertyDescriptor = new PropertyDescriptor(field.getName(), originObject.getClass());
-                Method readMethod = propertyDescriptor.getReadMethod();
-                Object originValue = readMethod.invoke(originObject);
-                Object newValue = readMethod.invoke(newObject);
-                if (!Objects.deepEquals(originValue, newValue)) {
-                    // 值不相等的话记录属性和值
-                    HashMap<String, Object> keyValue = new HashMap();
-                    keyValue.put("origin", originValue);
-                    keyValue.put("new", newValue);
-                    res.put(field.getName(), keyValue);
-                }
-            } catch (IntrospectionException | IllegalAccessException | InvocationTargetException e) {
-                log.error("getChange occur error" + e.getMessage());
-            }
-
-        }
-        return res;
-    }
 
     public List<Integer> processTabIds(List<Integer> newTagIds, List<Integer> addTagIds, List<Integer> deleteTagIds, List<Integer> existingTagIds) {
         List<Integer> tagIds;

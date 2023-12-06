@@ -1,14 +1,12 @@
-package method;
+package com.zhangziwa.practisesvr.utils;
 
-import atomicitybusiness.method.MethodUtils;
 import lombok.Data;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Map;
 
-public class MethodUtilsTest {
-
+public class ReflectUtilsTest {
     @Test
     public void getChangeNoChange() {
         User user1 = new User();
@@ -21,7 +19,7 @@ public class MethodUtilsTest {
         user2.setAge("19");
         user2.setNum("123456");
 
-        Map<String, Map<String, Object>> change = MethodUtils.getChange(user1, user2);
+        Map<String, Map<String, Object>> change = ReflectUtils.getChange(user1, user2);
         Assert.assertEquals("{}", change.toString());
 
     }
@@ -38,7 +36,7 @@ public class MethodUtilsTest {
         user2.setAge("18");
         user2.setNum("123457");
 
-        Map<String, Map<String, Object>> change = MethodUtils.getChange(user1, user2);
+        Map<String, Map<String, Object>> change = ReflectUtils.getChange(user1, user2);
         Assert.assertEquals("{num={new=123457, origin=123456}, name={new=user2, origin=user1}, age={new=18, origin=19}}", change.toString());
     }
 
