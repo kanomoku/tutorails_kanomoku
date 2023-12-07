@@ -102,6 +102,36 @@
             <artifactId>fastjson</artifactId>
             <version>2.0.32</version>
         </dependency>
+
+        <!--Json相关-->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>2.15.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>2.15.1</version>
+        </dependency>
+        <!--new ObjectMapper()-->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.15.1</version>
+        </dependency>
+        <!-- 引入第三方组件对JSON做验证, 调用JsonSanitizer.sanitize()进行校验，防止JSON注入-->
+        <dependency>
+            <groupId>com.mikesamuel</groupId>
+            <artifactId>json-sanitizer</artifactId>
+            <version>1.2.3</version>
+        </dependency>
+        <!-- GSON-->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.10.1</version>
+        </dependency>
     </dependencies>
 
     <build>
