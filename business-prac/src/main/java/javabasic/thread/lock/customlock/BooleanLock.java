@@ -1,9 +1,6 @@
 package javabasic.thread.lock.customlock;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.concurrent.TimeoutException;
 
 import static java.lang.System.currentTimeMillis;
@@ -82,7 +79,7 @@ public class BooleanLock implements Lock {
         synchronized (this) {
             if (currentThread == currentThread()) {//①
                 this.locked = false; // ②
-                Optional.of(currentThread().getName() + " release the lock.").ifPresent(System.out::println);
+                Optional.of(currentThread() + " release the lock.").ifPresent(System.out::println);
                 this.notifyAll(); // ③
             }
         }

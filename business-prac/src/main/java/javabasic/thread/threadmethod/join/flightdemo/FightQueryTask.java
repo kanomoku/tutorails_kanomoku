@@ -9,28 +9,42 @@ import java.util.concurrent.TimeUnit;
 public class FightQueryTask extends Thread implements FightQuery {
     private final String origin;
     private final String destination;
-    private final List<String> flightList = new ArrayList<>();
+    private final List<String> flightMsgs = new ArrayList<>();
 
+    /**
+     *
+     * @param airline 航空公司
+     * @param origin 始发站
+     * @param destination 目的地
+     */
     public FightQueryTask(String airline, String origin, String destination) {
-        super("[" + airline + "]");
+        super("[" + airline + "]"); // 学到了这里居然是给线程起名字
         this.origin = origin;
         this.destination = destination;
     }
 
     @Override
     public void run() {
-        System.out.printf("%s-query from %s to %s \n", getName(), origin, destination);
+        System.out.println(Thread.currentThread().getName() + "Query from " + origin + " to " + destination);
+
+        // 模拟业务逻辑处理
         int randomVal = ThreadLocalRandom.current().nextInt(10);
-        try {
-            TimeUnit.SECONDS.sleep(randomVal);
-            this.flightList.add(getName() + "-" + randomVal);
-            System.out.printf("The Fight：%s list query successful\n", getName());
-        } catch (InterruptedException e) {
-        }
+        shortSleep(randomVal);
+        flightMsgs.add(getName() + "-" + randomVal);
+
+        System.out.println(getName() + "query done");
     }
 
     @Override
-    public List<String> get() {
-        return this.flightList;
+    public List<String> getRes() {
+        return this.flightMsgs;
+    }
+
+    private static void shortSleep(long time) {
+        try {
+            TimeUnit.SECONDS.sleep(time);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }

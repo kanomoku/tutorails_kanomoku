@@ -1,4 +1,4 @@
-package thread.threadmethod.yield;
+package javabasic.thread.threadmethod.yield;
 
 import java.util.stream.IntStream;
 
