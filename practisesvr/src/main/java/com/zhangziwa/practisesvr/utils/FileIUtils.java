@@ -64,4 +64,16 @@ public class FileIUtils {
         }
         return files;
     }
+
+    // 判断传入路径为文件
+    public static boolean isFile(String path) {
+        File file = new File(path);
+        return file.exists() && file.isFile();
+    }
+
+    // 判断传入路径为路径
+    public static boolean isDir(String path) {
+        File file = new File(path);
+        return file.exists() && file.isDirectory();
+    }
 }
