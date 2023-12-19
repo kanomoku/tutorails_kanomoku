@@ -1,6 +1,5 @@
-package method;
+package com.zhangziwa.practisesvr.utils;
 
-import atomicitybusiness.method.YamlUtils;
 import org.junit.Assert;
 import org.junit.Test;
 
