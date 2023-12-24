@@ -11,7 +11,7 @@ public class SetLoop {
     public static void main(String[] args) {
 
         Set<Integer> set = new HashSet<>();
-        int n = 50000000;
+        int n = 5000_0000;
         for (int i = 0; i < n; i++) {
             set.add(i);
         }
@@ -19,6 +19,11 @@ public class SetLoop {
         StopWatch stopWatch = new StopWatch("每种循环各遍历" + n + "次");
 
         // Set 没有fori 的遍历方式
+
+        stopWatch.start("增强for循环");
+        for (int item : set) {
+        }
+        stopWatch.stop();
 
         stopWatch.start("iterator for 循环");
         for (Iterator<Integer> iterator = set.iterator(); iterator.hasNext(); ) {
@@ -32,12 +37,6 @@ public class SetLoop {
             iterator.next();
         }
         stopWatch.stop();
-
-        stopWatch.start("for Boost 循环");
-        for (int item : set) {
-        }
-        stopWatch.stop();
-
 
         stopWatch.start("list.forEach 循环");
         set.forEach(item -> {

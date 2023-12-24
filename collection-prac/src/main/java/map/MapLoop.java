@@ -20,6 +20,8 @@ public class MapLoop {
 
         stopWatch.start("map.entrySet()");
         for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+            entry.getKey();
+            entry.getValue();
         }
         stopWatch.stop();
 
@@ -97,12 +99,6 @@ public class MapLoop {
         stopWatch.start("map.values().parallelStream().forEach");
         map.values().parallelStream().forEach((value) -> {
         });
-        stopWatch.stop();
-
-        stopWatch.start("map.keySet() → map.get(key)");
-        for (Integer key : map.keySet()) {
-            map.get(key);
-        }
         stopWatch.stop();
 
         logStopWatch(stopWatch);

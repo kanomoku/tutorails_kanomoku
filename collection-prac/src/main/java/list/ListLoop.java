@@ -24,6 +24,11 @@ public class ListLoop {
         }
         stopWatch.stop();
 
+        stopWatch.start("增强for循环");
+        for (int item : list) {
+        }
+        stopWatch.stop();
+
         stopWatch.start("iterator for 循环");
         for (Iterator<Integer> iterator = list.iterator(); iterator.hasNext(); ) {
             iterator.next();
@@ -36,12 +41,6 @@ public class ListLoop {
             iterator.next();
         }
         stopWatch.stop();
-
-        stopWatch.start("for Boost 循环");
-        for (int item : list) {
-        }
-        stopWatch.stop();
-
 
         stopWatch.start("list.forEach 循环");
         list.forEach(item -> {
