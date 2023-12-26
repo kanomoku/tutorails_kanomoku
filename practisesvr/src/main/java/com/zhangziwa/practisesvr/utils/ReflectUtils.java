@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ObjectUtils;
 
 import java.beans.IntrospectionException;
+import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -71,6 +72,7 @@ public class ReflectUtils {
         return result;
     }
 
+    // 通过反射读取属性值
     public static <T> Object getFieldValue(T t, String filedName) {
         try {
             PropertyDescriptor propertyDescriptor = new PropertyDescriptor(filedName, t.getClass());
@@ -81,6 +83,7 @@ public class ReflectUtils {
         }
     }
 
+    //  通过反射给属性赋值
     public static <T> void setFieldValue(T t, String filedName, Object value) {
         try {
             PropertyDescriptor propertyDescriptor = new PropertyDescriptor(filedName, t.getClass());
@@ -91,6 +94,27 @@ public class ReflectUtils {
                 System.out.println("not found write method");
             }
         } catch (IllegalAccessException | InvocationTargetException | IntrospectionException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * 类转map
+     */
+    public static <T> Map<String, Object> beanToMap(T entity) {
+        try {
+            PropertyDescriptor[] propertyDescriptors = Introspector.getBeanInfo(entity.getClass(), Object.class).getPropertyDescriptors();
+            Map<String, Object> map = new HashMap<>(propertyDescriptors.length);
+            for (PropertyDescriptor property : propertyDescriptors) {
+                String propertyName = property.getName();
+                if ("serialVersionUID".equals(propertyName)) {
+                    continue;
+                }
+                Method readMethod = property.getReadMethod();
+                map.put(propertyName, readMethod.invoke(entity));
+            }
+            return map;
+        } catch (IntrospectionException | InvocationTargetException | IllegalAccessException e) {
             throw new RuntimeException(e);
         }
     }
