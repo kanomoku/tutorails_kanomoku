@@ -1,6 +1,6 @@
-package atomicitybusiness.excel;
+package com.zhangziwa.practisesvr.utils;
 
-import model.Person;
+import com.zhangziwa.practisesvr.model.Person;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.junit.Test;
@@ -13,44 +13,44 @@ import java.util.List;
 public class ExcelUtilsTest {
 
     @Test
-    public void getWorkbook2_1() throws Exception {
-        String xlsx = "D:\\projects\\tutorails_kanomoku\\business-prac\\src\\main\\resources\\input\\input.xlsx";
-        Workbook workbook2 = ExcelUtils.getWorkbook2(xlsx);
-        ExcelUtils.getCell(workbook2);
-    }
-
-    @Test
-    public void getWorkbook2_2() throws Exception {
-        String xls = "D:\\projects\\tutorails_kanomoku\\business-prac\\src\\main\\resources\\input\\input2.xls";
-        Workbook workbook2 = ExcelUtils.getWorkbook2(xls);
-        ExcelUtils.getCell(workbook2);
-    }
-
-    @Test
-    public void getWorkbook3_1() throws Exception {
-        String xlsx = "D:\\projects\\tutorails_kanomoku\\business-prac\\src\\main\\resources\\input\\input.xlsx";
-        Workbook workbook2 = ExcelUtils.getWorkbook3(xlsx);
-        ExcelUtils.getCell(workbook2);
-    }
-
-    @Test
-    public void getWorkbook3_2() throws Exception {
-        String xls = "D:\\projects\\tutorails_kanomoku\\business-prac\\src\\main\\resources\\input\\input2.xls";
-        Workbook workbook2 = ExcelUtils.getWorkbook3(xls);
-        ExcelUtils.getCell(workbook2);
-    }
-
-    @Test
-    public void getWorkbook4_1() throws Exception {
-        String xlsx = "D:\\projects\\tutorails_kanomoku\\business-prac\\src\\main\\resources\\input\\input.xlsx";
+    public void getWorkbook1_xlsx() throws Exception {
+        String xlsx = "D:\\projects\\tutorails_kanomoku\\practisesvr\\src\\test\\java\\com\\zhangziwa\\practisesvr\\utils\\input\\input.xlsx";
         Workbook workbook2 = ExcelUtils.getWorkbook1(xlsx);
         ExcelUtils.getCell(workbook2);
     }
 
     @Test
-    public void getWorkbook4_2() throws Exception {
-        String xls = "D:\\projects\\tutorails_kanomoku\\business-prac\\src\\main\\resources\\input\\input2.xls";
+    public void getWorkbook1_xls() throws Exception {
+        String xls = "D:\\projects\\tutorails_kanomoku\\practisesvr\\src\\test\\java\\com\\zhangziwa\\practisesvr\\utils\\input\\input2.xls";
         Workbook workbook2 = ExcelUtils.getWorkbook1(xls);
+        ExcelUtils.getCell(workbook2);
+    }
+
+    @Test
+    public void getWorkbook2_xlsx() throws Exception {
+        String xlsx = "D:\\projects\\tutorails_kanomoku\\practisesvr\\src\\test\\java\\com\\zhangziwa\\practisesvr\\utils\\input\\input.xlsx";
+        Workbook workbook2 = ExcelUtils.getWorkbook2(xlsx);
+        ExcelUtils.getCell(workbook2);
+    }
+
+    @Test
+    public void getWorkbook2_xls() throws Exception {
+        String xls = "D:\\projects\\tutorails_kanomoku\\practisesvr\\src\\test\\java\\com\\zhangziwa\\practisesvr\\utils\\input\\input2.xls";
+        Workbook workbook2 = ExcelUtils.getWorkbook2(xls);
+        ExcelUtils.getCell(workbook2);
+    }
+
+    @Test
+    public void getWorkbook3_xlsx() throws Exception {
+        String xlsx = "D:\\projects\\tutorails_kanomoku\\practisesvr\\src\\test\\java\\com\\zhangziwa\\practisesvr\\utils\\input\\input.xlsx";
+        Workbook workbook2 = ExcelUtils.getWorkbook3(xlsx);
+        ExcelUtils.getCell(workbook2);
+    }
+
+    @Test
+    public void getWorkbook3_xls() throws Exception {
+        String xls = "D:\\projects\\tutorails_kanomoku\\practisesvr\\src\\test\\java\\com\\zhangziwa\\practisesvr\\utils\\input\\input2.xls";
+        Workbook workbook2 = ExcelUtils.getWorkbook3(xls);
         ExcelUtils.getCell(workbook2);
     }
 

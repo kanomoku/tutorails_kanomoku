@@ -1,4 +1,4 @@
-package atomicitybusiness.excel;
+package com.zhangziwa.practisesvr.utils;
 
 import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.*;
@@ -9,7 +9,7 @@ import java.awt.Color;
 
 public class ExcelStyleUtils {
 
-    public static Font demoFont(Workbook workbook) {
+    public static Font fontLib(Workbook workbook) {
         Font font = workbook.createFont();
         font.setFontName("等线"); // 字体
         font.setFontHeightInPoints((short) 14);// 字号
@@ -20,9 +20,9 @@ public class ExcelStyleUtils {
         return font;
     }
 
-    public static CellStyle demoStyle(Workbook workbook) {
+    public static CellStyle styleLib(Workbook workbook) {
         CellStyle cellStyle = workbook.createCellStyle();
-        cellStyle.setFont(demoFont(workbook)); // 字体
+        cellStyle.setFont(fontLib(workbook)); // 字体
         cellStyle.setAlignment(HorizontalAlignment.CENTER); // 居中
         cellStyle.setWrapText(true); // 自动换行
         cellStyle.setBorderTop(BorderStyle.THIN); // 单元格边框

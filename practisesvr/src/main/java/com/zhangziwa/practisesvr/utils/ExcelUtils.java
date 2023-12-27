@@ -1,59 +1,42 @@
-package atomicitybusiness.excel;
+package com.zhangziwa.practisesvr.utils;
 
-import io.utils.FileIUtils;
-import model.Person;
+import com.zhangziwa.practisesvr.model.Person;
 import org.apache.commons.io.FileUtils;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.*;
 import java.util.List;
 
 public class ExcelUtils {
-    public static final String OUT_PATH = "D:\\projects\\tutorails_kanomoku\\business-prac\\src\\main\\resources\\output\\";
+    public static final String OUT_PATH = "D:\\projects\\tutorails_kanomoku\\practisesvr\\src\\test\\java\\com\\zhangziwa\\practisesvr\\utils\\output\\";
 
-    @PostMapping(value = "/upload")
-    @ResponseBody
-    public String uploadExcel(HttpServletRequest request) throws Exception {
-        MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest) request;
-        MultipartFile file = multipartHttpServletRequest.getFile("fileName");
-        InputStream inputStream = file.getInputStream();
-        String fileName = file.getName();
-        return null;
-    }
-
-    public static Workbook getWorkbook1(String path) throws Exception {
-        File file = new File(path);
-        InputStream inputStream = new FileInputStream(file);
+    public static Workbook getWorkbook1(String filePath) throws Exception {
+        File file = new File(filePath);
         String fileName = file.getName();
 
-        Workbook workbook;
-        String fileType = fileName.substring(fileName.lastIndexOf("."));
-        if (".xls".equals(fileType)) {
-            workbook = new HSSFWorkbook(inputStream);
-        } else if (".xlsx".equals(fileType)) {
-            workbook = new XSSFWorkbook(inputStream);
-        } else {
-            throw new Exception("请上传Excel");
+        Workbook workbook = null;
+        try (FileInputStream inputStream = new FileInputStream(file)) {
+            String fileType = fileName.substring(fileName.lastIndexOf("."));
+            if (".xls".equals(fileType)) {
+                workbook = new HSSFWorkbook(inputStream);
+            } else if (".xlsx".equals(fileType)) {
+                workbook = new XSSFWorkbook(inputStream);
+            } else {
+                System.out.println("非Excel文件");;
+            }
         }
-        inputStream.close();
         return workbook;
     }
 
-    public static Workbook getWorkbook2(String path) throws IOException, InvalidFormatException {
-        InputStream inputStream = new FileInputStream(path);
+    public static Workbook getWorkbook2(String filePath) throws IOException {
+        InputStream inputStream = new FileInputStream(filePath);
         return WorkbookFactory.create(inputStream);
     }
 
-    public static Workbook getWorkbook3(String path) throws IOException, InvalidFormatException {
-        FileInputStream inputStream = FileUtils.openInputStream(new File(path));
+    public static Workbook getWorkbook3(String filePath) throws IOException {
+        FileInputStream inputStream = FileUtils.openInputStream(new File(filePath));
         return WorkbookFactory.create(inputStream);
     }
 
@@ -61,19 +44,21 @@ public class ExcelUtils {
         Sheet sheet;
         Row row;
         Cell cell;
-        // sheet页3页时则NumberOfSheets=3，下标索引取值0-2
+
+        // 2sheet页时则NumberOfSheets=2，下标索引取值0-1
         for (int i = 0; i < workbook.getNumberOfSheets(); i++) {
             sheet = workbook.getSheetAt(i);
-            // 3行数据时,FirstRowNum=0,LastRowNum=2
+            // 6行数据时,FirstRowNum=0,LastRowNum=5
             for (int j = sheet.getFirstRowNum(); j <= sheet.getLastRowNum(); j++) {
                 row = sheet.getRow(j);
-                // 2列时,FirstCellNum=0,LastCellNum=2
+                // 4列时,FirstCellNum=0,LastCellNum=4
                 for (int k = row.getFirstCellNum(); k < row.getLastCellNum(); k++) {
                     cell = row.getCell(k);
-                    System.out.print(cell + "  ");
+                    System.out.print(workbook.getNumberOfSheets() + "-" + sheet.getFirstRowNum() + "-" + sheet.getLastRowNum() + "-" + row.getFirstCellNum() + "-" + row.getLastCellNum() + ":" + cell + "  ");
                 }
                 System.out.println();
             }
+            System.out.println();
         }
         workbook.close();
     }
