@@ -21,7 +21,8 @@ public class ReflectUtilsTest {
 
         Map<String, Map<String, Object>> change = ReflectUtils.getChange(user1, user2);
         Assert.assertEquals("{}", change.toString());
-
+        Map<String, List<Object>> change2 = ReflectUtils.getChange2(user1, user2);
+        Assert.assertEquals("{}", change2.toString());
     }
 
     @Test
@@ -38,8 +39,9 @@ public class ReflectUtilsTest {
 
         Map<String, Map<String, Object>> change = ReflectUtils.getChange(user1, user2);
         Assert.assertEquals("{num={new=123457, origin=123456}, name={new=user2, origin=user1}, age={new=18, origin=19}}", change.toString());
+        Map<String, List<Object>> change2 = ReflectUtils.getChange2(user1, user2);
+        Assert.assertEquals("{num=[123456, 123457], name=[user1, user2], age=[19, 18]}", change2.toString());
     }
-
 
     @Test
     public void testGetFieldValue() {

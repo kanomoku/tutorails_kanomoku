@@ -10,15 +10,17 @@ import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
+
+import static org.apache.commons.lang3.ObjectUtils.allNull;
+import static org.apache.commons.lang3.ObjectUtils.anyNull;
 
 @Slf4j
 public class ReflectUtils {
+    // 获取对象被更新的属性和值
     public static Map<String, Map<String, Object>> getChange(Object originObject, Object newObject) {
         // 存在为null比价就没意义了
-        if (ObjectUtils.anyNull(originObject, newObject)) {
+        if (anyNull(originObject, newObject)) {
             return new HashMap<>();
         }
 
@@ -72,6 +74,47 @@ public class ReflectUtils {
         return result;
     }
 
+    // 获取对象被更新的属性和值
+    public static <T> Map<String, List<Object>> getChange2(T prev, T after) {
+        Set<String> exceptFields = new HashSet<>(Arrays.asList("id", "created_at", "updated_at"));
+        Map<String, List<Object>> res = new HashMap<>();
+        Class<?> aClass = prev.getClass();
+        PropertyDescriptor[] properties = new PropertyDescriptor[0];
+        try {
+            properties = Introspector.getBeanInfo(aClass, Object.class).getPropertyDescriptors();
+        } catch (IntrospectionException e) {
+            System.out.println("Introspector.getBeanInfo exception" + e.getMessage());
+        }
+
+        for (PropertyDescriptor propertyDescriptor : properties) {
+            String propertyName = propertyDescriptor.getName();
+            if ("serialVersionUID".equals(propertyName)) {
+                continue;
+            }
+            if (exceptFields.contains(propertyName)){
+                continue;
+            }
+            Method readMethod = propertyDescriptor.getReadMethod();
+            try {
+                Object preValue = readMethod.invoke(prev);
+                Object afterValue = readMethod.invoke(after);
+                if (allNull(preValue, afterValue)) {
+                    continue;
+                }
+                if (anyNull(preValue, afterValue)) {
+                    res.put(propertyName, Arrays.asList(preValue, afterValue));
+                    continue;
+                }
+                if (!preValue.equals(afterValue)){
+                    res.put(propertyName, Arrays.asList(preValue, afterValue));
+                }
+            } catch (IllegalAccessException | InvocationTargetException e) {
+                System.out.println("data compare occur error" + e.getMessage());
+            }
+        }
+        return res;
+    }
+
     // 通过反射读取属性值
     public static <T> Object getFieldValue(T t, String filedName) {
         try {
@@ -83,7 +126,7 @@ public class ReflectUtils {
         }
     }
 
-    //  通过反射给属性赋值
+    // 通过反射给属性赋值
     public static <T> void setFieldValue(T t, String filedName, Object value) {
         try {
             PropertyDescriptor propertyDescriptor = new PropertyDescriptor(filedName, t.getClass());
@@ -98,9 +141,7 @@ public class ReflectUtils {
         }
     }
 
-    /**
-     * 类转map
-     */
+    // 类转map
     public static <T> Map<String, Object> beanToMap(T entity) {
         try {
             PropertyDescriptor[] propertyDescriptors = Introspector.getBeanInfo(entity.getClass(), Object.class).getPropertyDescriptors();
