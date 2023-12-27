@@ -1,5 +1,6 @@
 package com.zhangziwa.practisesvr.utils;
 
+import com.monitorjbl.xlsx.StreamingReader;
 import com.zhangziwa.practisesvr.model.Person;
 import org.apache.commons.io.FileUtils;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -41,7 +42,18 @@ public class ExcelUtils {
         return WorkbookFactory.create(inputStream);
     }
 
-    public static void getCell(Workbook workbook) throws Exception {
+    // Java 读取超大excel文件
+    public static Workbook getStreamWorkbook(String filePath) throws FileNotFoundException {
+        FileInputStream in = new FileInputStream(filePath);
+        Workbook wk = StreamingReader.builder()
+                .rowCacheSize(100)  //缓存到内存中的行数，默认是10
+                .bufferSize(4096)   //读取资源时，缓存到内存的字节大小，默认是1024
+                .open(in);          //打开资源，必须，可以是InputStream或者是File，注意：只能打开XLSX格式的文件
+        return wk;
+    }
+
+    // ForI遍历方式读取Excel
+    public static void getCellForI(Workbook workbook) throws Exception {
         Sheet sheet;
         Row row;
         Cell cell;
@@ -55,7 +67,25 @@ public class ExcelUtils {
                 // 4列时,FirstCellNum=0,LastCellNum=4
                 for (int k = row.getFirstCellNum(); k < row.getLastCellNum(); k++) {
                     cell = row.getCell(k);
+                    // String stringCellValue = convertCellValueToString(cell);
                     System.out.print(workbook.getNumberOfSheets() + "-" + sheet.getFirstRowNum() + "-" + sheet.getLastRowNum() + "-" + row.getFirstCellNum() + "-" + row.getLastCellNum() + ":" + cell + "  ");
+                }
+                System.out.println();
+            }
+            System.out.println();
+        }
+        workbook.close();
+    }
+
+    // ForEach遍历方式读取Excel
+    public static void getCell2ForEach(Workbook workbook) throws Exception {
+        Sheet sheet;
+        for (int i = 0; i < workbook.getNumberOfSheets(); i++) {
+            sheet = workbook.getSheetAt(i);
+            for (Row row : sheet) {
+                for (Cell cell : row) {
+                    // String stringCellValue = convertCellValueToString(cell);
+                    System.out.print(cell + "  ");
                 }
                 System.out.println();
             }

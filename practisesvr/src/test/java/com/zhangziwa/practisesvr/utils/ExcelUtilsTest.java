@@ -15,43 +15,50 @@ public class ExcelUtilsTest {
     @Test
     public void getWorkbook1_xlsx() throws Exception {
         String xlsx = "D:\\projects\\tutorails_kanomoku\\practisesvr\\src\\test\\java\\com\\zhangziwa\\practisesvr\\utils\\input\\input.xlsx";
-        Workbook workbook2 = ExcelUtils.getWorkbook1(xlsx);
-        ExcelUtils.getCell(workbook2);
+        Workbook workbook = ExcelUtils.getWorkbook1(xlsx);
+        ExcelUtils.getCellForI(workbook);
+        ExcelUtils.getCell2ForEach(workbook);
+        Workbook workbook2 = ExcelUtils.getStreamWorkbook(xlsx);
+        ExcelUtils.getCell2ForEach(workbook2);
     }
 
     @Test
     public void getWorkbook1_xls() throws Exception {
         String xls = "D:\\projects\\tutorails_kanomoku\\practisesvr\\src\\test\\java\\com\\zhangziwa\\practisesvr\\utils\\input\\input2.xls";
         Workbook workbook2 = ExcelUtils.getWorkbook1(xls);
-        ExcelUtils.getCell(workbook2);
+        ExcelUtils.getCellForI(workbook2);
     }
 
     @Test
     public void getWorkbook2_xlsx() throws Exception {
         String xlsx = "D:\\projects\\tutorails_kanomoku\\practisesvr\\src\\test\\java\\com\\zhangziwa\\practisesvr\\utils\\input\\input.xlsx";
         Workbook workbook2 = ExcelUtils.getWorkbook2(xlsx);
-        ExcelUtils.getCell(workbook2);
+        ExcelUtils.getCellForI(workbook2);
+        ExcelUtils.getCell2ForEach(workbook2);
     }
 
     @Test
     public void getWorkbook2_xls() throws Exception {
         String xls = "D:\\projects\\tutorails_kanomoku\\practisesvr\\src\\test\\java\\com\\zhangziwa\\practisesvr\\utils\\input\\input2.xls";
         Workbook workbook2 = ExcelUtils.getWorkbook2(xls);
-        ExcelUtils.getCell(workbook2);
+        ExcelUtils.getCellForI(workbook2);
+        ExcelUtils.getCell2ForEach(workbook2);
     }
 
     @Test
     public void getWorkbook3_xlsx() throws Exception {
         String xlsx = "D:\\projects\\tutorails_kanomoku\\practisesvr\\src\\test\\java\\com\\zhangziwa\\practisesvr\\utils\\input\\input.xlsx";
         Workbook workbook2 = ExcelUtils.getWorkbook3(xlsx);
-        ExcelUtils.getCell(workbook2);
+        ExcelUtils.getCellForI(workbook2);
+        ExcelUtils.getCell2ForEach(workbook2);
     }
 
     @Test
     public void getWorkbook3_xls() throws Exception {
         String xls = "D:\\projects\\tutorails_kanomoku\\practisesvr\\src\\test\\java\\com\\zhangziwa\\practisesvr\\utils\\input\\input2.xls";
         Workbook workbook2 = ExcelUtils.getWorkbook3(xls);
-        ExcelUtils.getCell(workbook2);
+        ExcelUtils.getCellForI(workbook2);
+        ExcelUtils.getCell2ForEach(workbook2);
     }
 
     @Test
