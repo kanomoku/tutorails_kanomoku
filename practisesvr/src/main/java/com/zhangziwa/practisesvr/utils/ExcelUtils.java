@@ -7,6 +7,7 @@ import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.*;
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class ExcelUtils {
@@ -127,4 +128,52 @@ public class ExcelUtils {
         }
     }
 
+
+    // 将单元格内容转化为字符串
+    private static String convertCellValueToString(Cell cell) {
+        if (null == cell) {
+            return null;
+        }
+        String returnValue = null;
+        switch (cell.getCellType()) {
+            case STRING:  //字符串
+                returnValue = cell.getStringCellValue();
+                break;
+            case NUMERIC: //数字
+                double numericCellValue = cell.getNumericCellValue();
+                boolean isInteger = isInteger(numericCellValue);
+                if (isInteger) {
+                    DecimalFormat df = new DecimalFormat("0");
+                    returnValue = df.format(numericCellValue);
+                } else {
+                    returnValue = Double.toString(numericCellValue);
+                }
+                break;
+            case BOOLEAN: //布尔
+                boolean booleanCellValue = cell.getBooleanCellValue();
+                returnValue = Boolean.toString(booleanCellValue);
+                break;
+            case BLANK: //空值
+                break;
+            case FORMULA: //公式
+                // returnValue = cell.getCellFormula();
+                try {
+                    returnValue = String.valueOf(cell.getNumericCellValue());
+                } catch (IllegalStateException e) {
+                    returnValue = String.valueOf(cell.getRichStringCellValue());
+                }
+                break;
+            case ERROR: //故障
+                break;
+            default:
+                break;
+        }
+        return returnValue;
+    }
+
+    // 判断是否为整数，是返回true，否则返回false.
+    public static boolean isInteger(Double num) {
+        double eqs = 1e-10; //精度范围
+        return num - Math.floor(num) < eqs;
+    }
 }
