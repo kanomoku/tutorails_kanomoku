@@ -3,7 +3,7 @@ package com.zhangziwa.practisesvr.utils;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.parser.Feature;
-import lombok.Data;
+import com.zhangziwa.practisesvr.model.User;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.Consts;
 import org.apache.http.HttpStatus;
@@ -18,7 +18,12 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
+import java.beans.IntrospectionException;
+import java.beans.Introspector;
+import java.beans.PropertyDescriptor;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.*;
 
 public class HttpPostUtils {
@@ -33,30 +38,36 @@ public class HttpPostUtils {
             return null;
         }
 
-        // 构建HttpClient
-        CloseableHttpClient client = HttpClients.custom().setRetryHandler(new RetryHandler()).build();
+        // 第一步:构建HttpClient客户端
+        CloseableHttpClient client = HttpClients.custom()
+                                                .setRetryHandler(new RetryHandler()) // 失败重试机制
+                                                .build();
 
-        // 构建请求
+        // 第2步:构建请求
         HttpPost httpPost = new HttpPost(uri);
-        // 设置请求体
+        // 构建请求: 设置请求体
         StringEntity entity = new StringEntity(json, ContentType.APPLICATION_JSON);
         httpPost.setEntity(entity);
-        // 设置超时时间
-        RequestConfig config = RequestConfig.custom().setConnectionRequestTimeout(5000) // 超5秒还没返回新的可用链接，抛ConnectionPoolTimeoutException。默认值为0，表示无限等待。
-                .setConnectTimeout(5000) // 超5秒还没建立链接，抛ConnectTimeoutException。默认值为0，表示无限等待。
-                .setSocketTimeout(5000) // 超5秒还没返回数据，抛SocketTimeoutException。默认值为0，表示无限等待。
-                .build();
+        // 构建请求: 设置超时时间
+        RequestConfig config = RequestConfig.custom()
+                                            .setConnectionRequestTimeout(5000) // 超5秒还没返回新的可用链接，抛ConnectionPoolTimeoutException。默认值为0，表示无限等待。
+                                            .setConnectTimeout(5000) // 超5秒还没建立链接，抛ConnectTimeoutException。默认值为0，表示无限等待。
+                                            .setSocketTimeout(5000) // 超5秒还没返回数据，抛SocketTimeoutException。默认值为0，表示无限等待。
+                                            .build();
         httpPost.setConfig(config);
 
-        // Response
+        // 第3步: 客户端HttpClient 执行 请求HttpPost
         CloseableHttpResponse response = null;
         String responseContent = null;
         try {
             response = client.execute(httpPost, HttpClientContext.create());
+
+            // 第4步: 解析返回的结果
             if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
                 responseContent = EntityUtils.toString(response.getEntity(), Consts.UTF_8.name());
             }
         } finally {
+            // 第5步: 关闭资源
             if (response != null) {
                 response.close();
             }
@@ -67,46 +78,81 @@ public class HttpPostUtils {
         return responseContent;
     }
 
-    public static List<User> parserJsonToUser() {
+    private static List<User> getResJsonToUsers2(String resJson) {
+        // fastjson
+        JSONObject jsonObject = JSON.parseObject(resJson, Feature.OrderedField);
+        // 返回的属性
+        List<String> fields = new ArrayList<>(jsonObject.keySet());
+        // 属性有几个值
+        int size = jsonObject.getJSONArray(fields.get(0)).size();
+
+        List<User> res = new ArrayList<>();
+        PropertyDescriptor[] properties;
+        try {
+            properties = Introspector.getBeanInfo(User.class, Object.class).getPropertyDescriptors();
+
+            for (int i = 0; i < size; i++) {
+                User tempUser = new User();
+                for (PropertyDescriptor property : properties) {
+                    String propertyName = property.getName();
+                    if ("serialVersionUID".equals(propertyName)) {
+                        continue;
+                    }
+                    if (!fields.contains(propertyName)) {
+                        continue;
+                    }
+                    Method writeMethod = property.getWriteMethod();
+                    Object value = jsonObject.getJSONArray(propertyName).get(i);
+                    writeMethod.invoke(tempUser, value);
+                }
+                res.add(tempUser);
+            }
+        } catch (IntrospectionException | InvocationTargetException | IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
+        return res;
+    }
+
+    private static List<User> getResJsonToUsers(String resJson) {
+        // fastjson
+        JSONObject jsonObject = JSON.parseObject(resJson, Feature.OrderedField);
+        // 返回的属性
+        List<String> fields = new ArrayList<>(jsonObject.keySet());
+        // 属性有几个值
+        int size = jsonObject.getJSONArray(fields.get(0)).size();
+
+        List<User> users = new ArrayList<>();
+        for (int i = 0; i < size; i++) {
+            User tempUser = new User();
+            for (String field : fields) {
+                Object value = jsonObject.getJSONArray(field).get(i);
+                ReflectUtils.setFieldValue(tempUser, field, value);
+            }
+            users.add(tempUser);
+        }
+        return users;
+    }
+
+    public static void parserJsonToUser() {
         // 模拟返回的Json串
         Map<String, List<String>> map = new HashMap<>();
         map.put("name", Arrays.asList("name1", "name2", "name3"));
         map.put("age", Arrays.asList("11", "23", "23"));
         map.put("num", Arrays.asList("123", "234", "345"));
-        String json1 = JsonUtils.toJson(map);
-        System.out.println(json1);
+        String resJson = JsonUtils.toJson(map);
+        System.out.println(resJson);
+        // {"num":["123","234","345"],"name":["name1","name2","name3"],"age":["11","23","23"]}
 
-
-        // fastjson
-        JSONObject jsonObject = JSON.parseObject(json1, Feature.OrderedField);
-
-        // 返回的属性
-        List<String> fields = new ArrayList<>(map.keySet());
-        // 几份值
-        int size = jsonObject.getJSONArray(fields.get(0)).size();
-
-        List<User> users = new ArrayList<>();
-        for (int i = 0; i < size; i++) {
-            User user1 = new User();
-            for (String field : fields) {
-                Object value = jsonObject.getJSONArray(field).get(i);
-                ReflectUtils.setFieldValue(user1, field, value);
-            }
-            users.add(user1);
-        }
+        List<User> users = getResJsonToUsers(resJson);
+        List<User> users2 = getResJsonToUsers2(resJson);
 
         System.out.println(users);
-        return users;
+        // [User(name=name1, age=11, num=123), User(name=name2, age=23, num=234), User(name=name3, age=23, num=345)]
+        System.out.println(users2);
+        // [User(name=name1, age=11, num=123), User(name=name2, age=23, num=234), User(name=name3, age=23, num=345)]
     }
 
     public static void main(String[] args) {
         parserJsonToUser();
-    }
-
-    @Data
-    static class User {
-        private String name;
-        private String age;
-        private String num;
     }
 }
