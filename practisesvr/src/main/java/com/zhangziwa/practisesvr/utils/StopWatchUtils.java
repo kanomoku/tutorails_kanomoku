@@ -1,24 +1,25 @@
 package com.zhangziwa.practisesvr.utils;
 
+import com.zhangziwa.practisesvr.excuter.summation.ForkJoinSumCalculator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.StopWatch;
+
+import java.util.function.Function;
 
 @Slf4j
 public class StopWatchUtils {
     public static void logStopWatch(StopWatch stopWatch) {
-        String format = String.format("%s total cost time = %s ms", stopWatch.getId(), stopWatch.getTotalTimeMillis());
-        System.out.println(format);
-        log.info("{} total cost time = {}} ms", stopWatch.getId(), stopWatch.getTotalTimeMillis());
+        System.out.println(String.format("%s total cost time : %s ms", stopWatch.getId(), stopWatch.getTotalTimeMillis()));
+//        log.info("{} total cost time = {}} ms", stopWatch.getId(), stopWatch.getTotalTimeMillis());
         for (StopWatch.TaskInfo taskInfo : stopWatch.getTaskInfo()) {
             String present = String.format("%.2f", (float) taskInfo.getTimeMillis() / stopWatch.getTotalTimeMillis() * 100);
-            String format1 = String.format("%s cost : %s ms, %s%%", postFillSpace(taskInfo.getTaskName()), taskInfo.getTimeMillis(), present);
-            System.out.println(format1);
-            log.info("{} cost : {} ms, {}%", postFillSpace(taskInfo.getTaskName()), taskInfo.getTimeMillis(), present);
+            System.out.println(String.format("%s cost : %s ms, %s%%", postFillSpace(taskInfo.getTaskName()), taskInfo.getTimeMillis(), present));
+//            log.info("{} cost : {} ms, {}%", postFillSpace(taskInfo.getTaskName()), taskInfo.getTimeMillis(), present);
         }
     }
 
     public static String postFillSpace(String str) {
-        if (str.length() >= 10) {
+        if (str.length() >= 40) {
             return str;
         }
         return postFillSpace(str + " ");
@@ -52,5 +53,36 @@ public class StopWatchUtils {
 
         // 记录耗时信息
         StopWatchUtils.logStopWatch(stopWatch);
+
+        System.out.println(measureDuration(ForkJoinSumCalculator::forkJoinSum, 10_000_000L));
+    }
+
+    // 传统统计用时实现方案
+    public static <T, R> R measureDuration(Function<T, R> f, T input) {
+        long start = System.nanoTime();
+        R result = f.apply(input);
+        long duration = (System.nanoTime() - start) / 1_000_000;
+        System.out.println("执行用时 " + duration + " seconds");
+        return result;
+    }
+
+
+    // 测量性能
+    // 这个方法接受一个函数和一个参数。调用10次，记录每次执行的时间（以毫秒为单位），并返回最短的一次执行时间
+    public static <T, R> long measurePerf(Function<T, R> f, T input) {
+        long fastest = Long.MAX_VALUE;
+
+        for (int i = 0; i < 10; i++) {
+            long start = System.nanoTime();
+            R sum = f.apply(input);
+            long duration = (System.nanoTime() - start) / 1_000_000;
+            System.out.println("Result：" + sum);
+
+            if (duration < fastest) {
+                fastest = duration;
+            }
+        }
+
+        return fastest;
     }
 }
