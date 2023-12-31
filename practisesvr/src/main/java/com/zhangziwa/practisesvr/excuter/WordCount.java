@@ -1,4 +1,4 @@
-package java8ebook.lambdasinaction.chap7;
+package com.zhangziwa.practisesvr.excuter;
 
 import java.util.Spliterator;
 import java.util.function.Consumer;
