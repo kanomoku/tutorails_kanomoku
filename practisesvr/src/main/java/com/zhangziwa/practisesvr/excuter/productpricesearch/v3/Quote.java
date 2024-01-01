@@ -1,4 +1,4 @@
-package javabasic.thread.exp.exp2.v3;
+package com.zhangziwa.practisesvr.excuter.productpricesearch.v3;
 
 import lombok.Data;
 

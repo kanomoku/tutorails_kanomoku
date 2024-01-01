@@ -1,7 +1,7 @@
-package javabasic.thread.exp.exp2.v3;
+package com.zhangziwa.practisesvr.excuter.productpricesearch.v3;
 
 
-import javabasic.thread.exp.exp2.util.Util;
+import com.zhangziwa.practisesvr.utils.DelayUtils;
 import lombok.Data;
 
 import java.util.Random;
@@ -17,16 +17,20 @@ public class DiscountShop {
         random = new Random(name.charAt(0) * name.charAt(1) * name.charAt(2));
     }
 
-    // 根据产品名称返回价格折扣信息
+    // 对商品组装报价
     public String getPrice(String product) {
+        // 获取价格
         double price = calculatePrice(product);
+        // 获取折扣
         Discount.Code code = Discount.Code.values()[random.nextInt(Discount.Code.values().length)];
+        // 提供报价
         return name + ":" + price + ":" + code;
     }
 
-    public double calculatePrice(String product) {
-        Util.delay();
+    // 获取商品价格
+    private double calculatePrice(String product) {
+        DelayUtils.delay();
         // 依据产品的名称，生成一个随机值作为价格
-        return Util.format(random.nextDouble() * product.charAt(0) + product.charAt(1));
+        return DelayUtils.format(random.nextDouble() * product.charAt(0) + product.charAt(1));
     }
 }

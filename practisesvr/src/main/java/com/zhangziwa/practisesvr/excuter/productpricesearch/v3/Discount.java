@@ -1,7 +1,7 @@
-package javabasic.thread.exp.exp2.v3;
+package com.zhangziwa.practisesvr.excuter.productpricesearch.v3;
 
 
-import javabasic.thread.exp.exp2.util.Util;
+import com.zhangziwa.practisesvr.utils.DelayUtils;
 
 // 折扣服务
 public class Discount {
@@ -23,7 +23,7 @@ public class Discount {
 
     // 价格打折
     private static double apply(double price, Code code) {
-        Util.delay();
-        return Util.format(price * (100 - code.percentage) / 100);
+        DelayUtils.delay();
+        return DelayUtils.format(price * (100 - code.percentage) / 100);
     }
 }
