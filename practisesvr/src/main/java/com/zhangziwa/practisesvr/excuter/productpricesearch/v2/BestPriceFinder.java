@@ -1,7 +1,7 @@
-package javabasic.thread.exp.exp2.v2;
+package com.zhangziwa.practisesvr.excuter.productpricesearch.v2;
 
-import javabasic.thread.exp.exp2.v1.Shop;
-import javabasic.thread.threadfactory.ExecuterThreadFactoryBuilder;
+import com.zhangziwa.practisesvr.excuter.productpricesearch.v1.Shop;
+import com.zhangziwa.practisesvr.excuter.threadfactory.ExecuterThreadFactoryBuilder;
 
 import java.util.Arrays;
 import java.util.List;
@@ -9,6 +9,8 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
+
+import static com.zhangziwa.practisesvr.utils.DelayUtils.getMoment;
 
 public class BestPriceFinder {
 
@@ -20,17 +22,17 @@ public class BestPriceFinder {
 
     private final Executor executor = Executors.newFixedThreadPool(shops.size(), ExecuterThreadFactoryBuilder.build());
 
-    // 采用顺序查询所有商店的方式
+    // 采用顺序查询所有商店
     public List<String> findPricesSequential(String product) {
         return shops.stream()
-                .map(shop -> shop.getName() + " price is " + shop.getPrice(product))
+                .map(shop -> getMoment() + " " + shop.getName() + " price is " + shop.getPrice(product))
                 .collect(Collectors.toList());
     }
 
     // 使用并行流对请求进行并行操作
     public List<String> findPricesParallel(String product) {
         return shops.parallelStream()
-                .map(shop -> shop.getName() + " price is " + shop.getPrice(product))
+                .map(shop -> getMoment() + " " + shop.getName() + " price is " + shop.getPrice(product))
                 .collect(Collectors.toList());
     }
 
@@ -38,7 +40,7 @@ public class BestPriceFinder {
     public List<String> findPricesFuture(String product) {
         List<CompletableFuture<String>> priceFutures =
                 shops.stream()
-                        .map(shop -> CompletableFuture.supplyAsync(() -> Thread.currentThread().getName() + shop.getName() + "-" + shop.getPrice(product)))// 内部采用的通用线程池，默认都使用固定数目的线程，具体线程数取决于Runtime.getRuntime().availableProcessors()的返回值。
+                        .map(shop -> CompletableFuture.supplyAsync(() -> getMoment() + " " + Thread.currentThread().getName() + shop.getName() + "-" + shop.getPrice(product)))// 内部采用的通用线程池，默认都使用固定数目的线程，具体线程数取决于Runtime.getRuntime().availableProcessors()的返回值。
                         .collect(Collectors.toList());
 
         List<String> prices = priceFutures.stream()
@@ -51,7 +53,7 @@ public class BestPriceFinder {
     public List<String> findPricesFutureCustom(String product) {
         List<CompletableFuture<String>> priceFutures =
                 shops.stream()
-                        .map(shop -> CompletableFuture.supplyAsync(() -> Thread.currentThread().getName() + shop.getName() + "-" + shop.getPrice(product), executor))
+                        .map(shop -> CompletableFuture.supplyAsync(() -> getMoment() + " " + Thread.currentThread().getName() + shop.getName() + "-" + shop.getPrice(product), executor))
                         .collect(Collectors.toList());
 
         List<String> prices = priceFutures.stream()

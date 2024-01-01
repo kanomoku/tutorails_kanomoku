@@ -1,7 +1,7 @@
-package javabasic.thread.exp.exp2.v2;
+package com.zhangziwa.practisesvr.excuter.productpricesearch.v2;
 
-import javabasic.log.StopWatchUtils;
-import javabasic.thread.exp.exp2.v1.Shop;
+import com.zhangziwa.practisesvr.excuter.productpricesearch.v1.Shop;
+import com.zhangziwa.practisesvr.utils.StopWatchUtils;
 import org.springframework.util.StopWatch;
 
 import java.util.ArrayList;
@@ -10,7 +10,7 @@ import java.util.function.Supplier;
 
 public class BestPriceFinderMain {
     private static BestPriceFinder bestPriceFinder = new BestPriceFinder();
-    private List<Shop> shops = new ArrayList<>();
+    private final List<Shop> shops = new ArrayList<>();
 
     {
         for (int i = 0; i < 64; i++) {
