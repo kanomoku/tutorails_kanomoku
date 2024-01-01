@@ -1,11 +1,13 @@
-package javabasic.thread.exp.exp2.util;
+package com.zhangziwa.practisesvr.utils;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import java.util.Random;
 
-public class Util {
+public class DelayUtils {
     private static final DecimalFormat formatter = new DecimalFormat("#.##", new DecimalFormatSymbols(Locale.US));
 
     private static final Random random = new Random();
@@ -34,5 +36,9 @@ public class Util {
         synchronized (formatter) {
             return new Double(formatter.format(number));
         }
+    }
+
+    public static String getMoment() {
+        return LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd_HHMMSS"));
     }
 }

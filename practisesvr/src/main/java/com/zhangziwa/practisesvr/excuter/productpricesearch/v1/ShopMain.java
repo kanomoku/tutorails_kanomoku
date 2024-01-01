@@ -1,10 +1,12 @@
-package javabasic.thread.exp.exp2.v1;
+package com.zhangziwa.practisesvr.excuter.productpricesearch.v1;
 
-import javabasic.log.StopWatchUtils;
+import com.zhangziwa.practisesvr.utils.StopWatchUtils;
 import org.springframework.util.StopWatch;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
+
+import static com.zhangziwa.practisesvr.utils.DelayUtils.getMoment;
 
 public class ShopMain {
 
@@ -20,7 +22,7 @@ public class ShopMain {
 
         stopWatch.start("getPrice");
         double price = shop.getPrice("product name");
-        System.out.printf(Thread.currentThread().getName() + " Price is %.2f%n", price);
+        System.out.printf(getMoment() + " " + Thread.currentThread().getName() + " Price is %.2f%n", price);
         stopWatch.stop();
 
         stopWatch.start("doSomethingElse");
@@ -47,7 +49,7 @@ public class ShopMain {
         stopWatch.start("futurePrice.get()");
         try {
             double price = futurePrice.get();
-            System.out.printf(Thread.currentThread().getName() + " Price is %.2f%n", price);
+            System.out.printf(getMoment() + " " + Thread.currentThread().getName() + " Price is %.2f%n", price);
         } catch (ExecutionException | InterruptedException e) {
             throw new RuntimeException(e);
         }
@@ -58,6 +60,6 @@ public class ShopMain {
 
 
     private static void doSomethingElse() {
-        System.out.println(Thread.currentThread().getName() + " Do some more tasks, like querying other shops...");
+        System.out.println(getMoment() + " " + Thread.currentThread().getName() + " Do some more tasks, like querying other shops...");
     }
 }

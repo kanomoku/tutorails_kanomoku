@@ -1,12 +1,14 @@
-package javabasic.thread.exp.exp2.v1;
+package com.zhangziwa.practisesvr.excuter.productpricesearch.v1;
 
 
-import javabasic.thread.exp.exp2.util.Util;
+import com.zhangziwa.practisesvr.utils.DelayUtils;
 import lombok.Data;
 
 import java.util.Random;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Future;
+
+import static com.zhangziwa.practisesvr.utils.DelayUtils.getMoment;
 
 @Data
 public class Shop {
@@ -37,8 +39,8 @@ public class Shop {
     }
 
     private double calculatePrice(String product) {
-        Util.delay();
-        System.out.println(Thread.currentThread().getName() + " 线程执行 calculatePrice");
+        DelayUtils.delay();
+        System.out.println(getMoment() + " " + Thread.currentThread().getName() + " 线程执行 calculatePrice");
         // 依据产品的名称，生成一个随机值作为价格
         return random.nextDouble() * product.charAt(0) + product.charAt(1);
     }
