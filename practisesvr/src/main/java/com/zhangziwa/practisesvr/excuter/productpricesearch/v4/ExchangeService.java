@@ -1,8 +1,9 @@
-package javabasic.thread.exp.exp2.v4;
+package com.zhangziwa.practisesvr.excuter.productpricesearch.v4;
 
 
-import javabasic.thread.exp.exp2.util.Util;
+import com.zhangziwa.practisesvr.utils.DelayUtils;
 
+// 汇率换算服务
 public class ExchangeService {
 
     public enum Money {
@@ -20,8 +21,7 @@ public class ExchangeService {
     }
 
     private static double getRateWithDelay(Money source, Money destination) {
-        Util.delay();
+        DelayUtils.delay();
         return destination.rate / source.rate;
     }
-
 }

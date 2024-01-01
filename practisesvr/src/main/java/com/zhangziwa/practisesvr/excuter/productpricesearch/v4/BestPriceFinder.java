@@ -1,8 +1,8 @@
-package javabasic.thread.exp.exp2.v4;
+package com.zhangziwa.practisesvr.excuter.productpricesearch.v4;
 
-import javabasic.thread.exp.exp2.v1.Shop;
-import javabasic.thread.exp.exp2.v4.ExchangeService.Money;
-import javabasic.thread.threadfactory.ExecuterThreadFactoryBuilder;
+import com.zhangziwa.practisesvr.excuter.productpricesearch.v1.Shop;
+import com.zhangziwa.practisesvr.excuter.productpricesearch.v4.ExchangeService.Money;
+import com.zhangziwa.practisesvr.excuter.threadfactory.ExecuterThreadFactoryBuilder;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,6 +23,7 @@ public class BestPriceFinder {
     // 为了更直观地感受一下使用CompletableFuture在代码可读性上带来的巨大提升，尝试仅使用Java 7中提供的特性实现以下如上实现
     public List<String> findPricesInUSDJava7(String product) {
         ExecutorService executor = Executors.newCachedThreadPool();
+
         List<Future<Double>> priceFutures = new ArrayList<>();
         for (Shop shop : shops) {
             final Future<Double> futureRate = executor.submit(new Callable<Double>() {
@@ -105,6 +106,22 @@ public class BestPriceFinder {
             .stream()
             .map(CompletableFuture::join)
             .collect(Collectors.toList());
+        return prices;
+    }
+
+    public List<String> findPricesInUSD4(String product) {
+        List<CompletableFuture<String>> priceFutures = shops
+                .stream()
+                .map(shop -> CompletableFuture
+                        .supplyAsync(() -> shop.getPrice(product),executor)
+                        .thenCombine(CompletableFuture.supplyAsync(() -> ExchangeService.getRate(Money.EUR, Money.USD),executor), (price, rate) -> price * rate)
+                        .thenApply(price -> shop.getName() + " price is " + price))
+                .collect(Collectors.toList());
+
+        List<String> prices = priceFutures
+                .stream()
+                .map(CompletableFuture::join)
+                .collect(Collectors.toList());
         return prices;
     }
 
