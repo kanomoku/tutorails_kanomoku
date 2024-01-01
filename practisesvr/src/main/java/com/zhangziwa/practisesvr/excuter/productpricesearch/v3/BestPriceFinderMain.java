@@ -1,10 +1,12 @@
-package javabasic.thread.exp.exp2.v3;
+package com.zhangziwa.practisesvr.excuter.productpricesearch.v3;
 
-import javabasic.log.StopWatchUtils;
+import com.zhangziwa.practisesvr.utils.StopWatchUtils;
 import org.springframework.util.StopWatch;
 
 import java.util.List;
 import java.util.function.Supplier;
+
+import static com.zhangziwa.practisesvr.utils.DelayUtils.getMoment;
 
 public class BestPriceFinderMain {
 
@@ -21,7 +23,7 @@ public class BestPriceFinderMain {
 
     private static void execute(String msg, Supplier<List<String>> s, StopWatch stopWatch) {
         stopWatch.start(msg);
-        System.out.println(s.get());
+        System.out.println(getMoment() + " " + Thread.currentThread().getName() + " " + s.get());
         stopWatch.stop();
         System.out.println();
     }

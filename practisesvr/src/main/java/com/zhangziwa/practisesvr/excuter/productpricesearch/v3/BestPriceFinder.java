@@ -1,6 +1,6 @@
-package javabasic.thread.exp.exp2.v3;
+package com.zhangziwa.practisesvr.excuter.productpricesearch.v3;
 
-import javabasic.thread.threadfactory.ExecuterThreadFactoryBuilder;
+import com.zhangziwa.practisesvr.excuter.threadfactory.ExecuterThreadFactoryBuilder;
 
 import java.util.Arrays;
 import java.util.List;
@@ -8,6 +8,9 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
+
+import static com.zhangziwa.practisesvr.utils.DelayUtils.getMoment;
+import static com.zhangziwa.practisesvr.utils.StopWatchUtils.postFillSpace;
 
 public class BestPriceFinder {
 
@@ -60,10 +63,10 @@ public class BestPriceFinder {
                 .map(discountShop -> CompletableFuture.supplyAsync(() -> discountShop.getPrice(product), executor))
                 .map(future -> future.thenApply(Quote::parse))
                 .map(future -> future.thenCompose(quote -> CompletableFuture.supplyAsync(() -> Discount.applyDiscount(quote), executor)))
-                .peek(f -> f.thenAccept(s -> System.out.println(s + " (done in " + ((System.nanoTime() - start) / 1_000_000) + " msecs)")))
+                .peek(f -> f.thenAccept(s -> System.out.println(postFillSpace(s) + getMoment() + " " + Thread.currentThread().getName() + " (done in " + ((System.nanoTime() - start) / 1_000_000) + " msecs)")))
                 .toArray(size -> new CompletableFuture[size]);
 
-        System.out.println("All shops have now responded in " + ((System.nanoTime() - start) / 1_000_000) + " msecs");
+        System.out.println(getMoment() + " " + Thread.currentThread().getName() + " All shops finished in " + ((System.nanoTime() - start) / 1_000_000) + " msecs");
 
         CompletableFuture.allOf(priceFutures).join();
         return null; // 仅为了统一使用stopwatch加的返回值
