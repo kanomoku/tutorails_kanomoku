@@ -1,4 +1,4 @@
-package javabasic.thread.threadfactory;
+package com.zhangziwa.practisesvr.excuter.threadfactory;
 
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import lombok.AccessLevel;
