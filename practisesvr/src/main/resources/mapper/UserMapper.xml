@@ -5,7 +5,7 @@
     <select id="getInfo" parameterType="String" resultType="com.zhangziwa.practisesvr.model.Student">
         SELECT *
         FROM students
-        WHERE name = #{name}
+        WHERE username = #{name} and password = #{password}
     </select>
 
 </mapper>

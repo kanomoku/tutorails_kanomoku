@@ -2,11 +2,9 @@ package com.zhangziwa.practisesvr.mapper;
 
 import com.zhangziwa.practisesvr.model.Student;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
-@Component
+@Repository
 public interface UserMapper {
-
-    Student getInfo(@Param("name") String name, @Param("password")String password);
-
+    Student getInfo(@Param("name") String name, @Param("password") String password);
 }

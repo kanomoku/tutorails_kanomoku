@@ -1,11 +1,9 @@
 package com.zhangziwa.practisesvr.service;
 
 import com.zhangziwa.practisesvr.model.Student;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
+@Service
 public interface UserService {
-
     Student loginIn(String name, String password);
-
 }
