@@ -14,7 +14,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Student loginIn(String name, String password) {
-        System.out.println("222222222");
+        System.out.println("2name " + name + " 2password " + password);
         return userMapper.getInfo(name, password);
     }
 }

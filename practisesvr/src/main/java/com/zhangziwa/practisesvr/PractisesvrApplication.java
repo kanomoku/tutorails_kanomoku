@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@MapperScan("com.zhangziwa.practisesvr")
+@MapperScan("com.zhangziwa.practisesvr.mapper")
 public class PractisesvrApplication {
 
     public static void main(String[] args) {

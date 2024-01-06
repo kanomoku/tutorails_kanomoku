@@ -3,7 +3,9 @@
 <mapper namespace="com.zhangziwa.practisesvr.mapper.UserMapper">
 
     <select id="getInfo" parameterType="String" resultType="com.zhangziwa.practisesvr.model.Student">
-        SELECT * FROM students WHERE name = #{name} AND password = #{password}
+        SELECT *
+        FROM students
+        WHERE name = #{name}
     </select>
 
 </mapper>

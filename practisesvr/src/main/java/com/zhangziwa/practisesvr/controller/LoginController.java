@@ -20,12 +20,12 @@ public class LoginController {
 
     @RequestMapping(value = "/loginIn", method = RequestMethod.POST)
     public String login(String name, String password) {
-        System.out.println("111111111");
+        System.out.println("name " + name + " password " + password);
         Student student = null;
         try {
             student = userService.loginIn(name, password);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
         System.out.println(student);
         if (student != null) {
