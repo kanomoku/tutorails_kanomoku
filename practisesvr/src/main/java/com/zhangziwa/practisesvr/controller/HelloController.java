@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HelloController {
     @RequestMapping("/map1")
     public String index() {
-        return "index.html";
+        return "redirect:index.html";
     }
 
     @RequestMapping("/map2")
     public String map2() {
-        return "index2.html";
+        return "redirect:index2.html";
     }
 }

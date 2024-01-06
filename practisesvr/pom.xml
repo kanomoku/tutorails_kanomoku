@@ -188,14 +188,6 @@
             <artifactId>dom4j</artifactId>
             <version>1.6.1</version>
         </dependency>
-
-        <!--使用thymeleaf-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-thymeleaf</artifactId>
-            <version>3.0.4</version>
-        </dependency>
-
     </dependencies>
 
     <build>
