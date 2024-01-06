@@ -13,3 +13,13 @@ spring:
   web:
     resources:
       static-locations: classpath:/templates/,classpath:/static/
+
+
+mybatis:
+#  mapper-locations: classpath:mapper/*.xml  #配置映射文件
+#  type-aliases-package: com.zhangziwa.practisesvr.model #配置实体类
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
+  typeAliasesPackage: XXXX
+  mapper-locations: classpath*:**/xml/*Mapper.xml
