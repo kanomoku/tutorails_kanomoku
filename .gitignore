@@ -119,3 +119,5 @@ fabric.properties
 /.idea/leetcode/editor.xml
 !/applog/logs/
 !/.idea/
+!/applog/logs/
+/applog/logs/
