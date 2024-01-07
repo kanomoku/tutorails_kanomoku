@@ -8,6 +8,7 @@ class PractisesvrApplicationTests {
 
     @Test
     void contextLoads() {
+        System.out.println("测试跑通 PractisesvrApplicationTests");
     }
 
 }
