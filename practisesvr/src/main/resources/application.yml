@@ -26,3 +26,9 @@ mybatis:
     map-underscore-to-camel-case: true
   mapper-locations: classpath:mapper/*.xml  #配置映射文件
 #  type-aliases-package: com.zhangziwa.practisesvr.model #配置实体类
+
+page-helper:
+  default-page-num: 1
+  default-page-size: 10
+  max-page-size: 50
+  count-total-or-not: true

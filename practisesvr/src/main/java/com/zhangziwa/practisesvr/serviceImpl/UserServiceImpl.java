@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.zhangziwa.practisesvr.mapper.UserMapper;
 import com.zhangziwa.practisesvr.model.Student;
 import com.zhangziwa.practisesvr.service.UserService;
+import com.zhangziwa.practisesvr.utils.PageUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<Student> listStudents(Integer pageNum, Integer PageSize) {
-        PageHelper.startPage(1, 10, true);
+        PageHelper.startPage(PageUtils.getPageNum(pageNum), PageUtils.getPageSize(PageSize), PageUtils.isQueryTotalCount());
         PageHelper.orderBy("age asc");
         List<Student> students = userMapper.listStudents();
         PageInfo<Student> studentPageInfo = PageInfo.of(students);
