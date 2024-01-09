@@ -8,12 +8,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Student {
-    private int id;
+    private Integer id;
     private String username;
     private String password;
-    private int age;
-    private int height;
+    private Integer age;
+    private Integer height;
     private String gender;
-    private int classId;
-    private boolean logicDelete;
+    private Integer classId;
+    private Boolean logicDelete;
 }

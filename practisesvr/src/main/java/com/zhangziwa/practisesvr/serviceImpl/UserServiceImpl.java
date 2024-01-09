@@ -1,5 +1,7 @@
 package com.zhangziwa.practisesvr.serviceImpl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.zhangziwa.practisesvr.mapper.UserMapper;
 import com.zhangziwa.practisesvr.model.Student;
 import com.zhangziwa.practisesvr.service.UserService;
@@ -7,6 +9,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @Slf4j
@@ -23,5 +27,14 @@ public class UserServiceImpl implements UserService {
             return null;
         }
         return userMapper.getInfo(name, password);
+    }
+
+    @Override
+    public List<Student> listStudents(Integer pageNum, Integer PageSize) {
+        PageHelper.startPage(1, 10, true);
+        PageHelper.orderBy("age asc");
+        List<Student> students = userMapper.listStudents();
+        PageInfo<Student> studentPageInfo = PageInfo.of(students);
+        return students;
     }
 }
