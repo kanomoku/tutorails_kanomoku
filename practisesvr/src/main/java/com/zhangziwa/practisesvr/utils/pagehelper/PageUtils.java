@@ -1,4 +1,4 @@
-package com.zhangziwa.practisesvr.utils;
+package com.zhangziwa.practisesvr.utils.pagehelper;
 
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
