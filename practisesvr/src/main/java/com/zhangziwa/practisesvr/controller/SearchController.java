@@ -17,8 +17,15 @@ public class SearchController {
     UserService userService;
 
     @RequestMapping(value = "/getAllStudents", method = RequestMethod.GET)
-    public List<Student> login() {
+    public List<Student> getAllStudents() {
         List<Student> students = userService.listStudents(1, 10);
+        students.forEach(System.out::println);
+        return students;
+    }
+
+    @RequestMapping(value = "/getAllStudents2", method = RequestMethod.GET)
+    public List<Student> getAllStudents2() {
+        List<Student> students = userService.listStudents2(1, 10);
         students.forEach(System.out::println);
         return students;
     }

@@ -1,7 +1,8 @@
 package com.zhangziwa.practisesvr.utils.pagehelper;
 
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
-import com.zhangziwa.practisesvr.utils.response.ResponseUtils;
+import com.zhangziwa.practisesvr.utils.response.ResponseContext;
 
 public class PageHeaderUtils {
     private static final String PAGE_NUM = "page_num"; // 当前第几页
@@ -11,27 +12,55 @@ public class PageHeaderUtils {
     private static final String TOTAL_COUNT = "total_count"; // 总条数
     private static final String TOTAL_PAGE = "total_page"; // 总页数
 
+    public static <E> void setPageHeader(Page<E> page) {
+        if (page == null) {
+            return;
+        }
+        ResponseContext.addHeaders(PAGE_NUM, String.valueOf(page.getPageNum()));
+        ResponseContext.addHeaders(PAGE_SIZE, String.valueOf(page.getPageSize()));
+        ResponseContext.addHeaders(TOTAL_COUNT, String.valueOf(page.getTotal()));
+        ResponseContext.addHeaders(TOTAL_PAGE, String.valueOf(page.getPages() == 0 ? 1 : page.getPages()));
+        if (page.getPages() == 0 || page.getPages() == 1) {
+            ResponseContext.addHeaders(PREV_PAGE, "");
+            ResponseContext.addHeaders(NEXT_PAGE, "");
+        } else if (page.getPageNum() == 1) {
+            ResponseContext.addHeaders(PREV_PAGE, "");
+            ResponseContext.addHeaders(NEXT_PAGE, String.valueOf(page.getPages() + 1));
+        } else if (page.getPageNum() == page.getPages()) {
+            ResponseContext.addHeaders(PREV_PAGE, String.valueOf(page.getPages() - 1));
+            ResponseContext.addHeaders(NEXT_PAGE, "");
+        } else {
+            ResponseContext.addHeaders(PREV_PAGE, String.valueOf(page.getPages() - 1));
+            ResponseContext.addHeaders(NEXT_PAGE, String.valueOf(page.getPages() + 1));
+        }
+    }
+
+    /**
+     * 设置分页头信息
+     * @param page 分页对象
+     * @param <E> 分页对象的数据类型
+     */
     public static <E> void setPageHeader(PageInfo<E> page) {
         if (page == null) {
             return;
         }
-        ResponseUtils.addHeaders(PAGE_NUM, String.valueOf(page.getPageNum()));
-        ResponseUtils.addHeaders(PAGE_SIZE, String.valueOf(page.getPageSize()));
-        ResponseUtils.addHeaders(TOTAL_COUNT, String.valueOf(page.getTotal()));
-        ResponseUtils.addHeaders(TOTAL_PAGE, String.valueOf(page.getPages() == 0 ? 1 : page.getPages()));
+        ResponseContext.addHeaders(PAGE_NUM, String.valueOf(page.getPageNum()));  // 设置当前页码
+        ResponseContext.addHeaders(PAGE_SIZE, String.valueOf(page.getPageSize()));  // 设置每页显示数量
+        ResponseContext.addHeaders(TOTAL_COUNT, String.valueOf(page.getTotal()));  // 设置总记录数
+        ResponseContext.addHeaders(TOTAL_PAGE, String.valueOf(page.getPages() == 0 ? 1 : page.getPages()));  // 设置总页数
         // page.getPages()=1表示就1页,前后页都不存在,故也算特殊场景.也为了page.getPages()+1和page.getPages()-1不会对[1,page.getPages()]越界
         if (page.getPages() == 0 || page.getPages() == 1) {
-            ResponseUtils.addHeaders(PREV_PAGE, "");
-            ResponseUtils.addHeaders(NEXT_PAGE, "");
+            ResponseContext.addHeaders(PREV_PAGE, "");  // 上一页
+            ResponseContext.addHeaders(NEXT_PAGE, "");  // 下一页
         } else if (page.getPageNum() == 1) {
-            ResponseUtils.addHeaders(PREV_PAGE, "");
-            ResponseUtils.addHeaders(NEXT_PAGE, String.valueOf(page.getPages() + 1));
+            ResponseContext.addHeaders(PREV_PAGE, "");  // 上一页
+            ResponseContext.addHeaders(NEXT_PAGE, String.valueOf(page.getPages() + 1));  // 下一页
         } else if (page.getPageNum() == page.getPages()) {
-            ResponseUtils.addHeaders(PREV_PAGE, String.valueOf(page.getPages() - 1));
-            ResponseUtils.addHeaders(NEXT_PAGE, "");
+            ResponseContext.addHeaders(PREV_PAGE, String.valueOf(page.getPages() - 1));  // 上一页
+            ResponseContext.addHeaders(NEXT_PAGE, "");  // 下一页
         } else {
-            ResponseUtils.addHeaders(PREV_PAGE, String.valueOf(page.getPages() - 1));
-            ResponseUtils.addHeaders(NEXT_PAGE, String.valueOf(page.getPages() + 1));
+            ResponseContext.addHeaders(PREV_PAGE, String.valueOf(page.getPages() - 1));  // 上一页
+            ResponseContext.addHeaders(NEXT_PAGE, String.valueOf(page.getPages() + 1));  // 下一页
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.zhangziwa.practisesvr.serviceImpl;
 
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.zhangziwa.practisesvr.mapper.UserMapper;
@@ -7,7 +8,7 @@ import com.zhangziwa.practisesvr.model.Student;
 import com.zhangziwa.practisesvr.service.UserService;
 import com.zhangziwa.practisesvr.utils.pagehelper.PageHeaderUtils;
 import com.zhangziwa.practisesvr.utils.pagehelper.PageUtils;
-import com.zhangziwa.practisesvr.utils.response.ResponseUtils;
+import com.zhangziwa.practisesvr.utils.response.ResponseContext;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,8 +46,19 @@ public class UserServiceImpl implements UserService {
         PageHeaderUtils.setPageHeader(studentPageInfo);
 
         // 收集HttpStatus到 ThreadLocal
-        // ResponseUtils.setResponseCode(num2HttpStatus("200")); // 为了使用一下num2HttpStatus方法
-        ResponseUtils.setResponseCode(HttpStatus.OK);
+        // ResponseContext.setResponseCode(num2HttpStatus("200")); // 为了使用一下num2HttpStatus方法
+        ResponseContext.setResponseCode(HttpStatus.OK);
+        return students;
+    }
+
+    @Override
+    public List<Student> listStudents2(Integer pageNum, Integer PageSize) {
+        PageHelper.startPage(PageUtils.getPageNum(pageNum), PageUtils.getPageSize(PageSize), PageUtils.isQueryTotalCount());
+        PageHelper.orderBy("age asc");
+
+        Page<Student> students = (Page<Student>) userMapper.listStudents();
+        PageHeaderUtils.setPageHeader(students);
+        ResponseContext.setResponseCode(HttpStatus.OK);
         return students;
     }
 }

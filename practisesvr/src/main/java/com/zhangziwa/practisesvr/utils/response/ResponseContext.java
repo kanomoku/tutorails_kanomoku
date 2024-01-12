@@ -5,7 +5,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 
 
-public class ResponseUtils {
+public class ResponseContext {
     private static ThreadLocal<HttpHeaders> ThreadLocalHeaders = new InheritableThreadLocal<>();
     private static ThreadLocal<HttpStatus> ThreadLocalStatus = new InheritableThreadLocal<>();
 

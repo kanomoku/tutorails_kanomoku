@@ -11,7 +11,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 import static java.util.Objects.nonNull;
 
 @ControllerAdvice
-public class HttpResponseBodyAdvice implements ResponseBodyAdvice {
+public class ResponsePostAdvice implements ResponseBodyAdvice {
 
 
     @Override
@@ -25,14 +25,14 @@ public class HttpResponseBodyAdvice implements ResponseBodyAdvice {
         HttpHeaders headers = response.getHeaders();
 
         // 分页信息添加到ServerHttpResponse
-        HttpHeaders headersContext = ResponseUtils.getHeaders();
+        HttpHeaders headersContext = ResponseContext.getHeaders();
         if (nonNull(headersContext) && !headersContext.isEmpty()) {
             headers.addAll(headersContext);
         }
 
         // 状态码添加到ServerHttpResponse
-        if (nonNull(ResponseUtils.getResponseCode())) {
-            response.setStatusCode(ResponseUtils.getResponseCode());
+        if (nonNull(ResponseContext.getResponseCode())) {
+            response.setStatusCode(ResponseContext.getResponseCode());
         }
         return body;
     }
