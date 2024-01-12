@@ -29,4 +29,11 @@ public class SearchController {
         students.forEach(System.out::println);
         return students;
     }
+
+    @RequestMapping(value = "/getAllStudents3", method = RequestMethod.GET)
+    public List<Student> getAllStudents3() {
+        List<Student> students = userService.listStudents3(1, 5);
+        students.forEach(System.out::println);
+        return students;
+    }
 }

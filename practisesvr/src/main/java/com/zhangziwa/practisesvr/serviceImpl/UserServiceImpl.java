@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -60,5 +61,21 @@ public class UserServiceImpl implements UserService {
         PageHeaderUtils.setPageHeader(students);
         ResponseContext.setResponseCode(HttpStatus.OK);
         return students;
+    }
+
+    @Override
+    public List<Student> listStudents3(Integer pageNum, Integer pageSize) {
+        // 模拟数据聚合
+        List<Student> students3 = new ArrayList<>();
+        List<Student> students1 = userMapper.listStudents();
+        List<Student> students2 = userMapper.listStudents();
+
+        students3.addAll(students1);
+        students3.addAll(students2);
+
+        Page<Student> studentsPage = PageHeaderUtils.manualPage(students3, pageNum, pageSize);
+        PageHeaderUtils.setPageHeader(studentsPage);
+        ResponseContext.setResponseCode(HttpStatus.OK);
+        return studentsPage;
     }
 }

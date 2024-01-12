@@ -11,4 +11,5 @@ public interface UserService {
 
     List<Student> listStudents(Integer pageNum, Integer PageSize);
     List<Student> listStudents2(Integer pageNum, Integer PageSize);
+    List<Student> listStudents3(Integer pageNum, Integer PageSize);
 }
