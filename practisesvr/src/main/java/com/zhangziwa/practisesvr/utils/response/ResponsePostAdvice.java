@@ -21,15 +21,23 @@ public class ResponsePostAdvice implements ResponseBodyAdvice {
     }
 
     @Override
-    public Object beforeBodyWrite(Object body, MethodParameter returnType, MediaType selectedContentType, Class clazz,
-                                  ServerHttpRequest request, ServerHttpResponse response) {
+    public Object beforeBodyWrite(Object body, MethodParameter returnType, MediaType selectedContentType, Class clazz, ServerHttpRequest request, ServerHttpResponse response) {
         System.err.println("***ResponsePostAdvice.beforeBodyWrite***");
         HttpHeaders headers = response.getHeaders();
 
         // 分页信息添加到ServerHttpResponse
         HttpHeaders headersContext = ResponseContext.getHeaders();
+
+        // 实现方式1: 一次性梭哈 重复项新值覆盖旧值
+//        if (nonNull(headersContext) && !headersContext.isEmpty()) {
+//            headers.addAll(headersContext);
+//        }
+
+        // 实现方式1: 逐个补充 重复项不添加
         if (nonNull(headersContext) && !headersContext.isEmpty()) {
-            headers.addAll(headersContext);
+            headersContext.forEach((key, values) -> values.forEach((value) -> {
+                headers.addIfAbsent(key, value);
+            }));
         }
 
         // 状态码添加到ServerHttpResponse

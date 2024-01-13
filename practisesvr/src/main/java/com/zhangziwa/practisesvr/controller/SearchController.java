@@ -42,8 +42,9 @@ public class SearchController {
 
     @RequestMapping(value = "/getAllStudents4", method = RequestMethod.GET)
     public ResponseEntity<List<Student>> getAllStudents4() {
-        List<Student> students = userService.listStudents3(1, 5);
+        System.err.println("***Controller.getAllStudents4***");
 
+        List<Student> students = userService.listStudents3(1, 5);
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add("test", "test");
         return ResponseEntity.ok().headers(httpHeaders).contentType(MediaType.APPLICATION_JSON).body(students);
