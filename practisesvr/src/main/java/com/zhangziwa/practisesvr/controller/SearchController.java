@@ -42,10 +42,6 @@ public class SearchController {
 
     @RequestMapping(value = "/getAllStudents4", method = RequestMethod.GET)
     public ResponseEntity<List<Student>> getAllStudents4() {
-        if (true){
-            throw new UnsupportedOperationException();
-        }
-
         List<Student> students = userService.listStudents3(1, 5);
 
         HttpHeaders httpHeaders = new HttpHeaders();

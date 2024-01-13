@@ -16,12 +16,14 @@ public class ResponsePostAdvice implements ResponseBodyAdvice {
 
     @Override
     public boolean supports(MethodParameter returnType, Class converterType) {
+        System.err.println("***ResponsePostAdvice.supports***");
         return true;
     }
 
     @Override
     public Object beforeBodyWrite(Object body, MethodParameter returnType, MediaType selectedContentType, Class clazz,
                                   ServerHttpRequest request, ServerHttpResponse response) {
+        System.err.println("***ResponsePostAdvice.beforeBodyWrite***");
         HttpHeaders headers = response.getHeaders();
 
         // 分页信息添加到ServerHttpResponse
