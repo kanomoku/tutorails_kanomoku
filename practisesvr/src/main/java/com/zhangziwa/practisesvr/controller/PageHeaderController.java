@@ -15,7 +15,7 @@ import java.util.List;
 
 @RestController
 @Slf4j
-public class SearchController {
+public class PageHeaderController {
     @Autowired
     UserService userService;
 
