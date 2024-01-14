@@ -41,7 +41,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
         //对于index.html的请求,设置返回的视图为index.htl
         registry.addViewController("/index.html").setViewName("/index.htl");
         //所有以.do结尾的请求重定向到/index.html请求
-        registry.addRedirectViewController("/**/*.do", "/index.html");
+        registry.addRedirectViewController("/*.do", "/index.html");
     }
 
     /**
