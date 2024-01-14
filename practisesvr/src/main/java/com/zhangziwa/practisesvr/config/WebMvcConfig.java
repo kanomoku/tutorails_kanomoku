@@ -1,5 +1,6 @@
 package com.zhangziwa.practisesvr.config;
 
+import com.zhangziwa.practisesvr.config.argumentresolver.CustomDateArgumentResolver;
 import com.zhangziwa.practisesvr.interceptor.ResponsePostInterceptor;
 import org.apache.http.client.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.format.FormatterRegistry;
 import org.springframework.http.CacheControl;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
+import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
@@ -99,5 +101,17 @@ public class WebMvcConfig implements WebMvcConfigurer {
     public void addFormatters(FormatterRegistry registry) {
         //注册一个日期格式转换器
         registry.addConverter(String.class, Date.class, DateUtils::parseDate);
+    }
+
+    /**
+     * 向SpringMVC框架中添加自定义参数解析器
+     *
+     * @param argumentResolvers SpringMVC已有的参数解析器列表，用于处理控制器方法的参数解析工作
+     */
+    @Override
+    public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
+        // 添加一个自定义解析器，它能将请求中的字符串参数转换为Date类型，
+        // 例如：假设前端传递的是"2022-12-31"这样的日期字符串，通过此解析器可直接注入到控制器方法的Date类型参数中。
+        argumentResolvers.add(new CustomDateArgumentResolver());
     }
 }
