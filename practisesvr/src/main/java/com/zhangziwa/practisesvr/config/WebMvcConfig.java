@@ -1,6 +1,5 @@
 package com.zhangziwa.practisesvr.config;
 
-import com.zhangziwa.practisesvr.config.argumentresolver.CustomDateArgumentResolver;
 import com.zhangziwa.practisesvr.interceptor.ResponsePostInterceptor;
 import org.apache.http.client.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -99,8 +98,9 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addFormatters(FormatterRegistry registry) {
-        //注册一个日期格式转换器
-        registry.addConverter(String.class, Date.class, DateUtils::parseDate);
+        // 注册一个String转Date的转换器
+        String[] format = {"yyyy-MM-dd"};
+        registry.addConverter(String.class, Date.class, source -> DateUtils.parseDate(source, format));
     }
 
     /**
@@ -112,6 +112,6 @@ public class WebMvcConfig implements WebMvcConfigurer {
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
         // 添加一个自定义解析器，它能将请求中的字符串参数转换为Date类型，
         // 例如：假设前端传递的是"2022-12-31"这样的日期字符串，通过此解析器可直接注入到控制器方法的Date类型参数中。
-        argumentResolvers.add(new CustomDateArgumentResolver());
+//        argumentResolvers.add(new CustomDateArgumentResolver());
     }
 }
