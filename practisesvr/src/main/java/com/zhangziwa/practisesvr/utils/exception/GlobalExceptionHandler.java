@@ -17,9 +17,15 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred");
     }
 
-    @ExceptionHandler(NotFoundException.class)
+    @ExceptionHandler(value = {NotFoundException.class})
     public ResponseEntity<String> handleNotFoundException(NotFoundException ex) {
         System.err.println("***GlobalExceptionHandler.handleNotFoundException***");
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Resource not found");
+    }
+
+    @ExceptionHandler(value = {NullPointerException.class, IllegalArgumentException.class})
+    public ResponseEntity<String> handleException(RuntimeException ex) {
+        // 处理并返回错误响应
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
     }
 }
