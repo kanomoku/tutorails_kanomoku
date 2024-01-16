@@ -32,7 +32,7 @@ public class StudentController {
     @GetMapping
     public ResponseEntity<List<Student>> queryByPage(Student student,
                                                      @RequestParam(value = "pageNum") Integer pageNum,
-                                                     @RequestParam(value = "PageSize") Integer pageSize) {
+                                                     @RequestParam(value = "pageSize") Integer pageSize) {
         return ResponseEntity.ok(studentService.queryByPage(student, pageNum, pageSize));
     }
 
