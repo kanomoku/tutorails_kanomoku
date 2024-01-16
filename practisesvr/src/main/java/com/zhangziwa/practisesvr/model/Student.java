@@ -15,5 +15,5 @@ public class Student {
     private Integer height;
     private String gender;
     private Integer classId;
-    private Boolean logicDelete;
+    private Boolean isDelete;
 }
