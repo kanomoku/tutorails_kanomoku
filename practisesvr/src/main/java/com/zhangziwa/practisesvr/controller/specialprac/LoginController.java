@@ -1,4 +1,4 @@
-package com.zhangziwa.practisesvr.controller;
+package com.zhangziwa.practisesvr.controller.specialprac;
 
 import com.zhangziwa.practisesvr.model.Student;
 import com.zhangziwa.practisesvr.service.UserService;
