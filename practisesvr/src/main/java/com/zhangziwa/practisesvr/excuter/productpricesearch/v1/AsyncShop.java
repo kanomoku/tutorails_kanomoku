@@ -1,14 +1,14 @@
 package com.zhangziwa.practisesvr.excuter.productpricesearch.v1;
 
 
-import com.zhangziwa.practisesvr.utils.DelayUtils;
+import com.zhangziwa.practisesvr.utils.thread.DelayUtils;
 
 import java.util.Random;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionException;
 import java.util.concurrent.Future;
 
-import static com.zhangziwa.practisesvr.utils.DelayUtils.getMoment;
+import static com.zhangziwa.practisesvr.utils.thread.DelayUtils.getMoment;
 
 public class AsyncShop {
 

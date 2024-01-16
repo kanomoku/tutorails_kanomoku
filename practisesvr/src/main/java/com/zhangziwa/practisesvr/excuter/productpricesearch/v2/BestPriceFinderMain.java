@@ -1,7 +1,7 @@
 package com.zhangziwa.practisesvr.excuter.productpricesearch.v2;
 
 import com.zhangziwa.practisesvr.excuter.productpricesearch.v1.Shop;
-import com.zhangziwa.practisesvr.utils.StopWatchUtils;
+import com.zhangziwa.practisesvr.utils.log.StopWatchUtils;
 import org.springframework.util.StopWatch;
 
 import java.util.ArrayList;

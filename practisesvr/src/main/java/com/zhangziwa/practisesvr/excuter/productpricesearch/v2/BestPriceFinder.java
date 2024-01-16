@@ -10,7 +10,7 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 
-import static com.zhangziwa.practisesvr.utils.DelayUtils.getMoment;
+import static com.zhangziwa.practisesvr.utils.thread.DelayUtils.getMoment;
 
 public class BestPriceFinder {
 

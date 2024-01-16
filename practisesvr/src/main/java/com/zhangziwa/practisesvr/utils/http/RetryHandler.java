@@ -1,4 +1,4 @@
-package com.zhangziwa.practisesvr.utils;
+package com.zhangziwa.practisesvr.utils.http;
 
 import org.apache.http.HttpEntityEnclosingRequest;
 import org.apache.http.HttpRequest;

@@ -9,8 +9,8 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 
-import static com.zhangziwa.practisesvr.utils.DelayUtils.getMoment;
-import static com.zhangziwa.practisesvr.utils.StopWatchUtils.postFillSpace;
+import static com.zhangziwa.practisesvr.utils.thread.DelayUtils.getMoment;
+import static com.zhangziwa.practisesvr.utils.log.StopWatchUtils.postFillSpace;
 
 public class BestPriceFinder {
 

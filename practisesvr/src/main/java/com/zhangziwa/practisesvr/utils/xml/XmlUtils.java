@@ -1,4 +1,4 @@
-package com.zhangziwa.practisesvr.utils;
+package com.zhangziwa.practisesvr.utils.xml;
 
 import org.dom4j.Document;
 import org.dom4j.Element;

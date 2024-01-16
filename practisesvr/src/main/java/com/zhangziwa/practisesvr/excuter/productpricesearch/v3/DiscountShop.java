@@ -1,7 +1,7 @@
 package com.zhangziwa.practisesvr.excuter.productpricesearch.v3;
 
 
-import com.zhangziwa.practisesvr.utils.DelayUtils;
+import com.zhangziwa.practisesvr.utils.thread.DelayUtils;
 import lombok.Data;
 
 import java.util.Random;

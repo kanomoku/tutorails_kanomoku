@@ -1,12 +1,12 @@
 package com.zhangziwa.practisesvr.excuter.productpricesearch.v1;
 
-import com.zhangziwa.practisesvr.utils.StopWatchUtils;
+import com.zhangziwa.practisesvr.utils.log.StopWatchUtils;
 import org.springframework.util.StopWatch;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
-import static com.zhangziwa.practisesvr.utils.DelayUtils.getMoment;
+import static com.zhangziwa.practisesvr.utils.thread.DelayUtils.getMoment;
 
 public class ShopMain {
 

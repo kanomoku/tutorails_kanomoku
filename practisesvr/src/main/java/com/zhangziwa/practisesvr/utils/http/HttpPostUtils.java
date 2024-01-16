@@ -1,9 +1,11 @@
-package com.zhangziwa.practisesvr.utils;
+package com.zhangziwa.practisesvr.utils.http;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.parser.Feature;
 import com.zhangziwa.practisesvr.model.User;
+import com.zhangziwa.practisesvr.utils.JsonUtils;
+import com.zhangziwa.practisesvr.utils.reflect.ReflectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.Consts;
 import org.apache.http.HttpStatus;

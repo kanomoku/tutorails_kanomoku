@@ -3,7 +3,7 @@ package com.zhangziwa.practisesvr.excuter.productpricesearch.v1;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
-import static com.zhangziwa.practisesvr.utils.DelayUtils.getMoment;
+import static com.zhangziwa.practisesvr.utils.thread.DelayUtils.getMoment;
 
 public class AsyncShopClient {
 

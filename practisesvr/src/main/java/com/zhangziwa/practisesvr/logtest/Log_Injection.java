@@ -2,7 +2,7 @@ package com.zhangziwa.practisesvr.logtest;
 
 import lombok.extern.slf4j.Slf4j;
 
-import static com.zhangziwa.practisesvr.utils.logUtils.cleanMsg;
+import static com.zhangziwa.practisesvr.utils.log.logUtils.cleanMsg;
 
 @Slf4j
 public class Log_Injection {

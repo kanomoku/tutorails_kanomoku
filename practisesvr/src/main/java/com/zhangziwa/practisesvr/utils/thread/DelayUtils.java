@@ -1,4 +1,4 @@
-package com.zhangziwa.practisesvr.utils;
+package com.zhangziwa.practisesvr.utils.thread;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;

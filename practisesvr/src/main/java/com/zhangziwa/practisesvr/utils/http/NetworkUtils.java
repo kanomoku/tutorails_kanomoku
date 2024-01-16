@@ -1,4 +1,4 @@
-package com.zhangziwa.practisesvr.utils;
+package com.zhangziwa.practisesvr.utils.http;
 
 import org.apache.commons.lang3.StringUtils;
 

@@ -1,4 +1,4 @@
-package com.zhangziwa.practisesvr.utils;
+package com.zhangziwa.practisesvr.utils.log;
 
 import com.zhangziwa.practisesvr.excuter.summation.ForkJoinSumCalculator;
 import lombok.extern.slf4j.Slf4j;

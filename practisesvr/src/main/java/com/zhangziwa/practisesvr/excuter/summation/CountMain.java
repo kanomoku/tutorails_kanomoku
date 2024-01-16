@@ -1,9 +1,9 @@
 package com.zhangziwa.practisesvr.excuter.summation;
 
-import com.zhangziwa.practisesvr.utils.StopWatchUtils;
+import com.zhangziwa.practisesvr.utils.log.StopWatchUtils;
 import org.springframework.util.StopWatch;
 
-import static com.zhangziwa.practisesvr.utils.StopWatchUtils.measurePerf;
+import static com.zhangziwa.practisesvr.utils.log.StopWatchUtils.measurePerf;
 
 public class CountMain {
 //    public static <T, R> void measurePerf(Function<T, R> f, T input) {

@@ -1,4 +1,4 @@
-package com.zhangziwa.practisesvr.utils;
+package com.zhangziwa.practisesvr.utils.reflect;
 
 import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;

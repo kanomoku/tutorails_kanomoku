@@ -1,7 +1,7 @@
 package com.zhangziwa.practisesvr.excuter.productpricesearch.v4;
 
 
-import com.zhangziwa.practisesvr.utils.DelayUtils;
+import com.zhangziwa.practisesvr.utils.thread.DelayUtils;
 
 // 汇率换算服务
 public class ExchangeService {
