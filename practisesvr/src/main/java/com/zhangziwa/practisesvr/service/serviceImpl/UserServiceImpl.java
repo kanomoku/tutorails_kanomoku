@@ -1,4 +1,4 @@
-package com.zhangziwa.practisesvr.serviceImpl;
+package com.zhangziwa.practisesvr.service.serviceImpl;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
