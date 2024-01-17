@@ -1,4 +1,4 @@
-package com.zhangziwa.practisesvr.interceptor;
+package com.zhangziwa.practisesvr.utils.interceptor;
 
 import com.github.pagehelper.page.PageMethod;
 import com.zhangziwa.practisesvr.utils.response.ResponseContext;
