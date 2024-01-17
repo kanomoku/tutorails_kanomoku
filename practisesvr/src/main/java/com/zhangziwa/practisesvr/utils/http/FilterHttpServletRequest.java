@@ -36,7 +36,7 @@ public class FilterHttpServletRequest extends HttpServletRequestWrapper {
     public String getParameter(String name) {
         String value = super.getParameter(name);
         if (value != null) {
-            // 对请求参数值进行XSS过滤
+            // 使用StringEscapeUtils.escapeHtml4对请求参数进行XSS攻击过滤
             return StringEscapeUtils.escapeHtml4(value);
         }
         return null;
