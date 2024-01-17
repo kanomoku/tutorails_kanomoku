@@ -71,6 +71,7 @@ public class StudentController {
      */
     @PutMapping
     public ResponseEntity<Student> edit(@RequestBody Student student) {
+        System.out.println("***StudentController.edit***");
         return ResponseEntity.ok(studentService.update(student));
     }
 

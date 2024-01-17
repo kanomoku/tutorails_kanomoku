@@ -5,6 +5,7 @@ import com.github.pagehelper.page.PageMethod;
 import com.zhangziwa.practisesvr.mapper.StudentsMapper;
 import com.zhangziwa.practisesvr.model.Student;
 import com.zhangziwa.practisesvr.service.StudentService;
+import com.zhangziwa.practisesvr.utils.http.RequestIUtils;
 import com.zhangziwa.practisesvr.utils.pagehelper.PageHeaderUtils;
 import com.zhangziwa.practisesvr.utils.pagehelper.PageUtils;
 import com.zhangziwa.practisesvr.utils.response.ResponseContext;
@@ -13,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * (Students)表服务实现类
@@ -80,6 +82,20 @@ public class StudentServiceImpl implements StudentService {
      */
     @Override
     public Student update(Student student) {
+        Map<String, Object> requestBody = RequestIUtils.getRequestBodyBody();
+
+        Student stu = new Student();
+        stu.setId(student.getId());
+        stu.setUsername(student.getUsername());
+        stu.setPassword(student.getPassword());
+        stu.setAge(student.getAge());
+        stu.setHeight(student.getHeight());
+        stu.setGender(student.getGender());
+        if (requestBody.containsKey("classId")){
+            stu.setClassId(student.getClassId());
+        }
+        stu.setIsDelete(student.getIsDelete());
+
         this.studentsMapper.update(student);
         return this.queryById(student.getId());
     }

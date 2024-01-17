@@ -15,7 +15,7 @@ public class FilterHttpServletRequest extends HttpServletRequestWrapper {
     private ServletInputStream servletInputStream;
     private BufferedReader bufferedReader;
 
-    public FilterHttpServletRequest(HttpServletRequest request) throws Exception {
+    public FilterHttpServletRequest(HttpServletRequest request) throws IOException {
         super(request);
         body = StreamIUtils.readStream2Bytes(request.getInputStream());
         byteArrayInputStream = new ByteArrayInputStream(body);

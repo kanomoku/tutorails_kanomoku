@@ -14,7 +14,7 @@ public class StreamIUtils {
      * @return 转换后的字节数组
      * @throws Exception 抛出异常
      */
-    public static byte[] readStream2Bytes(InputStream inputStream) throws Exception {
+    public static byte[] readStream2Bytes(InputStream inputStream) throws IOException {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         copyStream(inputStream, byteArrayOutputStream, 102400);
         return byteArrayOutputStream.toByteArray();
@@ -29,7 +29,7 @@ public class StreamIUtils {
      * @return 返回复制的总字节数
      * @throws Exception 如果流为空或复制过程中发生异常
      */
-    public static int copyStream(InputStream inputStream, OutputStream outputStream, long byteCount) throws Exception {
+    public static int copyStream(InputStream inputStream, OutputStream outputStream, long byteCount) throws IOException {
         // 检查流是否为空
         if (inputStream == null || outputStream == null) {
             throw new IOException("流为空");
