@@ -1,6 +1,7 @@
 package com.zhangziwa.practisesvr.config;
 
-import com.zhangziwa.practisesvr.interceptor.ResponsePostInterceptor;
+import com.zhangziwa.practisesvr.utils.interceptor.LogInterceptor;
+import com.zhangziwa.practisesvr.utils.interceptor.ResponsePostInterceptor;
 import org.apache.http.client.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -20,6 +21,8 @@ import java.util.concurrent.TimeUnit;
 public class WebMvcConfig implements WebMvcConfigurer {
     @Autowired
     private ResponsePostInterceptor responsePostInterceptor;
+    @Autowired
+    private LogInterceptor logInterceptor;
 
     /**
      * 为拦截器注册表添加拦截器
@@ -30,6 +33,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         // 在Spring MVC配置中注册一个名为responsePostInterceptor的拦截器，使其能够对匹配路径“/**”（即对应用程序中的所有路径）的请求进行拦截
         registry.addInterceptor(responsePostInterceptor).addPathPatterns("/**");
+        registry.addInterceptor(logInterceptor).addPathPatterns("/**");
     }
 
     /**
