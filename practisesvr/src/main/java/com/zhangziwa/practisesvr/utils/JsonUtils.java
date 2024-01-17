@@ -8,6 +8,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.json.JsonSanitizer;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -71,16 +72,30 @@ public class JsonUtils {
         return gson.toJson(object);
     }
 
-    // 常用用法
-    public static <T> T jsonToT(String json, Class<T> clazz) {
-        ObjectMapper objectMapper = new ObjectMapper();
-        T t = null;
-        try {
-            t = objectMapper.readValue(JsonSanitizer.sanitize(json), clazz);
-        } catch (JsonProcessingException e) {
-            log.info("occur error:{}", e.getMessage());
+    /**
+     * 将JSON字符串转换为指定类型的对象
+     *
+     * @param jsonStr 需要转换的JSON格式字符串
+     * @param clazz 目标类型对应的Class对象
+     * @param <T> 泛型参数，表示目标类型
+     * @return 转换成功返回对应类型的实例，若jsonStr为空或转换失败，则返回null
+     */
+    public static <T> T jsonToT(String jsonStr, Class<T> clazz) {
+        if (StringUtils.isBlank(jsonStr)) {
+            return null;
         }
-        return t;
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            // 使用JsonSanitizer对JSON字符串进行处理后，再进行反序列化
+            return objectMapper.readValue(JsonSanitizer.sanitize(jsonStr), clazz);
+        } catch (JsonProcessingException e) {
+            // 记录更详细的日志信息
+            log.error("JSON processing error: {}", e.getClass().getName());
+            log.error("JSON String: {}", jsonStr);
+            log.error("Error Message: {}", e.getMessage());
+            return null;
+        }
     }
 
     // 定制化用法
