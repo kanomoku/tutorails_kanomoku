@@ -1,7 +1,7 @@
 package com.zhangziwa.practisesvr.utils;
 
+import com.zhangziwa.practisesvr.model.User;
 import com.zhangziwa.practisesvr.utils.reflect.ReflectUtils;
-import lombok.Data;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -103,12 +103,5 @@ public class ReflectUtilsTest {
             users.add(user1);
         }
         System.out.println(users);
-    }
-
-    @Data
-    static class User {
-        private String name;
-        private String age;
-        private String num;
     }
 }
