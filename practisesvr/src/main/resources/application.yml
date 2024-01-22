@@ -4,12 +4,10 @@ server:
 spring:
   datasource:
     name: practisedb  #数据库名
-#    url: jdbc:mysql://localhost:3306/practisedb?useUnicode=true&characterEncoding=utf-8&useSSL=false #url
     url: jdbc:mysql://localhost:3306/practisedb?useSSL=false&useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT
     #url
     username: root  #用户名
     password: 123456  #密码
-#    driver-class-name: com.mysql.jdbc.Driver  #数据库链接驱动
     driver-class-name: com.mysql.cj.jdbc.Driver  #数据库链接驱动
 
   mvc:
@@ -22,7 +20,7 @@ spring:
 
 mybatis:
   configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    #    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     map-underscore-to-camel-case: true
   mapper-locations: classpath:mapper/*.xml  #配置映射文件
 #  type-aliases-package: com.zhangziwa.practisesvr.model #配置实体类
@@ -32,3 +30,7 @@ page-helper:
   default-page-size: 10
   max-page-size: 50
   count-total-or-not: true
+
+thread:
+  cpu_time_enabled: true
+  allocated_memory_enabled: true

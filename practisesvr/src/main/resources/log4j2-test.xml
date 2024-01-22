@@ -6,7 +6,7 @@
         <Property name="FILE_NAME" value="practisesvr"/>
         <!--        <Property name="LOG_PATTERN" value="[%d{yyyy-MM-dd HH:mm:ss}] [%-5level] [%thread] [%file:%line] → [%m]%n"/>-->
 <!--        <Property name="LOG_PATTERN" value="[%d{yyyy-MM-dd HH:mm:ss}] [%-5level] [%thread] [%file:%line] → [%enc{%m}{CRLF}]%n"/>-->
-        <Property name="LOG_PATTERN" value="[%d{yyyy-MM-dd HH:mm:ss}] [%-5level] [%thread] [%file:%line] → [%replace{%enc{%m}{CRLF}}{\\r|\\n|%0D|%0A|%0a|%0d}{}]%n"/>
+        <Property name="LOG_PATTERN" value="[%d{yyyy-MM-dd HH:mm:ss.SSS_SSS}] [%-5p] [%thread] [%file:%line] → [%replace{%enc{%m}{CRLF}}{\\r|\\n|%0D|%0A|%0a|%0d}{}]%n"/>
     </properties>
 
     <appenders>
