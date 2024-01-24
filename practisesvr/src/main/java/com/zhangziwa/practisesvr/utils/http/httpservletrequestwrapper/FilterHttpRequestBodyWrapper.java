@@ -1,4 +1,4 @@
-package com.zhangziwa.practisesvr.utils.http;
+package com.zhangziwa.practisesvr.utils.http.httpservletrequestwrapper;
 
 import com.zhangziwa.practisesvr.utils.stream.StreamIUtils;
 import jakarta.servlet.ReadListener;
@@ -9,21 +9,21 @@ import org.apache.commons.text.StringEscapeUtils;
 
 import java.io.*;
 
-public class FilterHttpServletRequest extends HttpServletRequestWrapper {
-    private final byte[] body;
-    private ByteArrayInputStream byteArrayInputStream;
-    private ServletInputStream servletInputStream;
-    private BufferedReader bufferedReader;
+public class FilterHttpRequestBodyWrapper extends HttpServletRequestWrapper {
+    private final byte[] bodyByteArr; // 字节数组
+    private final ByteArrayInputStream byteArrayInputStream; // 从字节数组读取数据的输入流
 
-    public FilterHttpServletRequest(HttpServletRequest request) throws IOException {
+    private BufferedReader bufferedReader; // getReader()
+    private ServletInputStream servletInputStream; // getInputStream()
+
+    public FilterHttpRequestBodyWrapper(HttpServletRequest request) throws IOException {
         super(request);
-        body = StreamIUtils.readStream2Bytes(request.getInputStream());
-        byteArrayInputStream = new ByteArrayInputStream(body);
+        bodyByteArr = StreamIUtils.readStream2Bytes(request.getInputStream());
+        byteArrayInputStream = new ByteArrayInputStream(bodyByteArr);
     }
 
-    public String getBody() throws UnsupportedEncodingException {
-        String characterEncoding = this.getCharacterEncoding();
-        return new String(body, characterEncoding);
+    public String getBodyByteArr() throws UnsupportedEncodingException {
+        return new String(bodyByteArr, getCharacterEncoding());
     }
 
     /**
@@ -50,9 +50,7 @@ public class FilterHttpServletRequest extends HttpServletRequestWrapper {
      */
     @Override
     public String getCharacterEncoding() {
-        // 调用父类的getCharacterEncoding方法获取字符编码
         String encoding = super.getCharacterEncoding();
-        // 如果字符编码为空，则默认为utf-8
         return encoding == null ? "utf-8" : encoding;
     }
 
@@ -63,27 +61,14 @@ public class FilterHttpServletRequest extends HttpServletRequestWrapper {
      */
     @Override
     public BufferedReader getReader() {
-        // 如果输入流尚未初始化，则使用请求体内容创建一个新的ByteArrayInputStream
-        if (byteArrayInputStream == null) {
-            byteArrayInputStream = new ByteArrayInputStream(body);
-        }
-
-        // 如果BufferedReader还未创建，则进行以下逻辑：
         if (bufferedReader == null) {
-            // 获取当前请求的字符编码方式
-            String characterEncoding = getCharacterEncoding();
-
             try {
-                // 使用获取到的字符编码方式以及已有的ByteArrayInputStream创建一个InputStreamReader对象
-                // 并在此基础上封装一个BufferedReader对象以提高读取效率
-                bufferedReader = new BufferedReader(new InputStreamReader(byteArrayInputStream, characterEncoding));
+                // 封装一个BufferedReader对象以提高读取效率
+                bufferedReader = new BufferedReader(new InputStreamReader(byteArrayInputStream, getCharacterEncoding()));
             } catch (UnsupportedEncodingException e) {
-                // 若遇到不支持的字符编码异常，捕获并抛出一个包含详细错误信息的RuntimeException
-                throw new RuntimeException("Unsupported encoding: " + characterEncoding, e);
+                throw new RuntimeException("Unsupported encoding: ", e);
             }
         }
-
-        // 返回已经创建好的BufferedReader对象
         return bufferedReader;
     }
 
@@ -136,12 +121,10 @@ public class FilterHttpServletRequest extends HttpServletRequestWrapper {
                      */
                     @Override
                     public void setReadListener(ReadListener readListener) {
-                        // 留给子类实现
                     }
                 };
             }
         }
-        // 返回已初始化的 servletInputStream
-        return this.servletInputStream;
+        return servletInputStream;
     }
 }

@@ -1,6 +1,6 @@
 package com.zhangziwa.practisesvr.utils.filter;
 
-import com.zhangziwa.practisesvr.utils.http.FilterHttpServletRequest;
+import com.zhangziwa.practisesvr.utils.http.httpservletrequestwrapper.FilterHttpRequestBodyWrapper;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletRequest;
@@ -31,8 +31,8 @@ public class RequestCheckFilter extends GenericFilterBean {
             return;
         }
 
-        FilterHttpServletRequest filterHttpRequest = new FilterHttpServletRequest(httpRequest);
-        String body = filterHttpRequest.getBody();
+        FilterHttpRequestBodyWrapper filterHttpRequest = new FilterHttpRequestBodyWrapper(httpRequest);
+        String body = filterHttpRequest.getBodyByteArr();
         filterHttpRequest.setAttribute("requestBodyData", body);
 
         // 继续执行filter链
