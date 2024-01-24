@@ -19,7 +19,7 @@ public class LogInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         System.err.println("***LogInterceptor.preHandle***");
 
-        LogContext.setTraceId(logUtils.genUUID());
+        LogContext.setTraceId(logUtils.generateUUIDString());
         LogContext.initSqlCount();
         LogContext.initSqlCost();
         LogContext.initSqlSearchedRowCount();
@@ -58,7 +58,7 @@ public class LogInterceptor implements HandlerInterceptor {
         }
 
         String apiJson = logUtils.buildApiJsonLog(request, response, executionCost);
-        log.info(apiJson);
+        logUtils.logInfo(apiJson);
         LogContext.clear();
     }
 }
