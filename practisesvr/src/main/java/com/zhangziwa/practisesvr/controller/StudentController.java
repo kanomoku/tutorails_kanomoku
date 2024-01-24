@@ -33,11 +33,13 @@ public class StudentController {
     public ResponseEntity<List<Student>> queryByPage(Student student,
                                                      @RequestParam(value = "pageNum") Integer pageNum,
                                                      @RequestParam(value = "pageSize") Integer pageSize) {
+        System.out.println("***StudentController.queryByPage***");
         return ResponseEntity.ok(studentService.queryByPage(student, pageNum, pageSize));
     }
 
     @GetMapping("/count")
     public ResponseEntity<Long> queryCount(Student student) {
+        System.out.println("***StudentController.queryCount***");
         return ResponseEntity.ok(studentService.queryCount(student));
     }
 
@@ -49,6 +51,7 @@ public class StudentController {
      */
     @GetMapping("{id}")
     public ResponseEntity<Student> queryById(@PathVariable("id") Integer id) {
+        System.out.println("***StudentController.queryById***");
         return ResponseEntity.ok(studentService.queryById(id));
     }
 
@@ -60,6 +63,7 @@ public class StudentController {
      */
     @PostMapping
     public ResponseEntity<Student> add(@RequestBody Student student) {
+        System.out.println("***StudentController.add***");
         return ResponseEntity.ok(studentService.insert(student));
     }
 
@@ -83,6 +87,7 @@ public class StudentController {
      */
     @DeleteMapping("{id}")
     public ResponseEntity<String> deleteById(@PathVariable("id") Integer id) {
+        System.out.println("***StudentController.deleteById***");
         boolean body = studentService.deleteById(id);
         if (body) {
             return ResponseEntity.noContent().build();

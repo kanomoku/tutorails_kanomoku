@@ -20,8 +20,9 @@ public class LogInterceptor implements HandlerInterceptor {
         System.err.println("***LogInterceptor.preHandle***");
 
         LogContext.setTraceId(logUtils.genUUID());
+        LogContext.initSqlCount();
         LogContext.initSqlCost();
-        LogContext.initSqlCost();
+        LogContext.initSqlSearchedRowCount();
         if (Boolean.TRUE.equals(ThreadMXBeanUtils.isThreadCpuTimeEnabled())) {
             LogContext.initCurrentThreadTime();
             LogContext.initCurrentThreadUserTime();

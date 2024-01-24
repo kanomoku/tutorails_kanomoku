@@ -6,6 +6,7 @@ import java.util.concurrent.atomic.AtomicLong;
 public class LogContext {
     private static ThreadLocal<AtomicInteger> sql_count = new InheritableThreadLocal<>();
     private static ThreadLocal<AtomicLong> sql_cost = new InheritableThreadLocal<>();
+    private static ThreadLocal<AtomicInteger> sql_searched_row_count = new InheritableThreadLocal<>();
     private static ThreadLocal<String> traceid = new InheritableThreadLocal<>();
     private static ThreadLocal<Long> acclocated_memory = new InheritableThreadLocal<>();
     private static ThreadLocal<Long> total_cpu_cost = new InheritableThreadLocal<>();
@@ -39,6 +40,21 @@ public class LogContext {
 
     public static Long getSqlCost() {
         return sql_cost.get().longValue();
+    }
+
+    public static void initSqlSearchedRowCount() {
+        sql_searched_row_count.set(new AtomicInteger(0));
+    }
+
+    public static void incrementSqlSearchedRowCount(int size) {
+        if (sql_searched_row_count.get() == null) {
+            sql_searched_row_count.set(new AtomicInteger(0));
+        }
+        sql_searched_row_count.get().addAndGet(size);
+    }
+
+    public static int getSqlSearchedRowCount() {
+        return sql_searched_row_count.get().intValue();
     }
 
     public static void setTraceId(String traceId) {

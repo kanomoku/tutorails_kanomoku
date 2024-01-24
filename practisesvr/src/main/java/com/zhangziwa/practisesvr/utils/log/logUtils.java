@@ -40,7 +40,9 @@ public class logUtils {
         apiJsonMap.put("requestURI", request.getRequestURI());
         apiJsonMap.put("status", response.getStatus());
         apiJsonMap.put("requestContentLength", request.getContentLengthLong());
-        apiJsonMap.put("sql_count", LogContext.getSqlCost());
+        apiJsonMap.put("sql_count", LogContext.getSqlCount());
+        apiJsonMap.put("sql_cost", LogContext.getSqlCost());
+        apiJsonMap.put("sql_searched_row_count", LogContext.getSqlSearchedRowCount());
         if (Boolean.TRUE.equals(ThreadMXBeanUtils.isThreadCpuTimeEnabled())) {
             apiJsonMap.put("currentThreadTime", ThreadMXBeanUtils.getCurrentThreadTime());
             apiJsonMap.put("currentThreadUserTime", ThreadMXBeanUtils.getCurrentThreadUserTime());
