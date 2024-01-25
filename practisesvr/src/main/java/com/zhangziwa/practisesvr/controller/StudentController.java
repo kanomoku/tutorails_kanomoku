@@ -52,7 +52,13 @@ public class StudentController {
     @GetMapping("{id}")
     public ResponseEntity<Student> queryById(@PathVariable("id") Integer id) {
         System.out.println("***StudentController.queryById***");
-        return ResponseEntity.ok(studentService.queryById(id));
+
+        Student body = studentService.queryById(id);
+        System.out.println(body);
+
+        System.out.println(studentService.queryById(id));
+
+        return ResponseEntity.ok(body);
     }
 
     /**

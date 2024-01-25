@@ -1,6 +1,7 @@
 package com.zhangziwa.practisesvr.utils.interceptor;
 
 import com.github.pagehelper.page.PageMethod;
+import com.zhangziwa.practisesvr.utils.holder.StudentContextHolder;
 import com.zhangziwa.practisesvr.utils.response.ResponseContext;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -30,5 +31,6 @@ public class ResponsePostInterceptor implements HandlerInterceptor {
         System.err.println("***ResponsePostInterceptor.afterCompletion***");
         ResponseContext.clear(); // 清除业务层分页信息上下文
         PageMethod.clearPage(); // 清除PageHelper的分页信息上下文
+        StudentContextHolder.clear(); //  清除student上下文
     }
 }

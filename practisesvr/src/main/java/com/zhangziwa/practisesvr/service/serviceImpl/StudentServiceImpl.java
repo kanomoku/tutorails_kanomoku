@@ -5,6 +5,7 @@ import com.github.pagehelper.page.PageMethod;
 import com.zhangziwa.practisesvr.mapper.StudentsMapper;
 import com.zhangziwa.practisesvr.model.Student;
 import com.zhangziwa.practisesvr.service.StudentService;
+import com.zhangziwa.practisesvr.utils.holder.StudentContextHolder;
 import com.zhangziwa.practisesvr.utils.http.RequestIUtils;
 import com.zhangziwa.practisesvr.utils.pagehelper.PageHeaderUtils;
 import com.zhangziwa.practisesvr.utils.pagehelper.PageUtils;
@@ -15,6 +16,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+
+import static java.util.Objects.nonNull;
 
 /**
  * (Students)表服务实现类
@@ -35,7 +39,21 @@ public class StudentServiceImpl implements StudentService {
      */
     @Override
     public Student queryById(Integer id) {
-        return this.studentsMapper.queryById(id);
+        if (Objects.isNull(id)) {
+            return null;
+        }
+
+        // 线程缓存里去
+        Student student = StudentContextHolder.getStudent(id);
+        if (nonNull(student)) {
+            return student;
+        }
+
+        student = studentsMapper.queryById(id);
+
+        // 查询数据库值先存缓存
+        StudentContextHolder.setStudent(id, student);
+        return student;
     }
 
     /**
