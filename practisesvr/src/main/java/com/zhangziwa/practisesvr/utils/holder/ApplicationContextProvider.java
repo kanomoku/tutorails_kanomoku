@@ -3,6 +3,7 @@ package com.zhangziwa.practisesvr.utils.holder;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.core.env.Environment;
 
 public class ApplicationContextProvider implements ApplicationContextAware {
     private static ApplicationContext applicationContext;
@@ -62,5 +63,12 @@ public class ApplicationContextProvider implements ApplicationContextAware {
         // 使用ApplicationContext获取指定名称和类型的Bean
         return applicationContext.getBean(name, clazz);
     }
-}
 
+    public static Environment getEnvironment() {
+        return applicationContext.getEnvironment();
+    }
+
+    public static String getApplicationName() {
+        return applicationContext.getApplicationName();
+    }
+}
