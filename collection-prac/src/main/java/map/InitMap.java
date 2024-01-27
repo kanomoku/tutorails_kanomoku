@@ -10,46 +10,69 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class InitMap {
-    private static final Map<String, String> myMap = new HashMap<>();
+    private static final Map<String, String> map1 = new HashMap<>();
+
+    static {
+        map1.put("key1", "value1");
+        map1.put("key2", "value2");
+    }
+
     /*慎用！  非静态内部类/ 匿名内部类包含了外围实例的引用， 如果拥有比 外部类更长的生命周期，有内存泄露隐患*/
-    private static final HashMap<String, String> myMap1 = new HashMap<>() {{
+    private static final HashMap<String, String> map2 = new HashMap<>() {{
         put("key1", "value1");
         put("key2", "value2");
     }};
-    private static final Map<String, String> myMap20 = Map.of(); //不可变集合
-    private static final Map<String, String> myMap2 = Map.of("kye1", "value1", "key2", "value2"); //不可变集合
-    private static final Map<String, String> myMap21 =
-        Map.of("kye1", "value1", "key2", "value2", "kye3", "value1", "kye4", "value1", "kye5", "value1", "kye6",
-            "value1", "kye7", "value1", "kye8", "value1", "kye9", "value10", "kye10", "value1"); //不可变集合
 
-    static {
-        myMap.put("key1", "value1");
-        myMap.put("key2", "value2");
+    private static final Map<String, String> map3 = Map.of("kye1", "value1", "key2", "value2"); //不可变集合
+
+    Map<String, String> map4 = ImmutableMap.of("kye1", "value1", "key2", "value2");
+    Map<String, String> map5 = ImmutableMap.<String, String>builder().put("kye1", "value1").put("key2", "value2").build();
+
+    @Test
+    void test1() {
+        System.out.println(map1);
+        map1.put("key3", "value3");
+        System.out.println(map1);
     }
 
-    Map<String, String> myMap3 = ImmutableMap.of("kye1", "value1", "key2", "value2");
-    Map<String, String> myMap4 =
-        ImmutableMap.<String, String>builder().put("kye1", "value1").put("key2", "value2").build();
-
-    @Test void test() {
-        System.out.println(myMap);
-        System.out.println(myMap1);
-        System.out.println(myMap2);
-        System.out.println(myMap3);
-        System.out.println(myMap4);
-        System.out.println(myMap21);
-        System.out.println(myMap20);
-
-        Map<String, String> myMap = new HashMap<>();
-        myMap.put("key1", "value1");
-        Map<String, String> myMap1 = Maps.newHashMap();
-        Map<String, String> myMap3 = Collections.emptyMap();
-        Map myMap2 = MapUtils.EMPTY_MAP;
-        Map myMap4 = Collections.EMPTY_MAP;
-
+    @Test
+    void test2() {
+        System.out.println(map2);
+        map2.put("key3", "value3");
+        System.out.println(map2);
     }
 
-    @Test void test2() {
+    @Test
+    void test3() {
+        System.out.println(map3);
+        map3.put("key3", "value3");
+    }
+
+    @Test
+    void test4() {
+        System.out.println(map4);
+        map4.put("key3", "value3");
+    }
+
+    @Test
+    void test5() {
+        System.out.println(map5);
+        map5.put("key3", "value3");
+    }
+
+    @Test
+    void test6() {
+        Map<String, String> immutableMap = Collections.unmodifiableMap(new HashMap<>() {{
+            put("key1", "value1");
+            put("key2", "value2");
+        }});
+
+        System.out.println(immutableMap); // {key1=value1, key2=value2}
+        immutableMap.put("key3", "value3"); // java.lang.UnsupportedOperationException
+    }
+
+    @Test
+    void testEmpty() {
         // Constructs an empty HashMap with the default initial capacity (16) and the default load factor (0.75).
         // Since:1.2
         Map<String, String> myMap = new HashMap<>();
