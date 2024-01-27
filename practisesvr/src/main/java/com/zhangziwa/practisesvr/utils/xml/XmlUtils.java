@@ -1,11 +1,17 @@
 package com.zhangziwa.practisesvr.utils.xml;
 
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.JAXBException;
+import jakarta.xml.bind.Marshaller;
+import jakarta.xml.bind.Unmarshaller;
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 import org.xml.sax.SAXException;
 
 import java.io.File;
+import java.io.StringReader;
+import java.io.StringWriter;
 import java.util.List;
 
 public class XmlUtils {
@@ -54,6 +60,47 @@ public class XmlUtils {
             }
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    /**
+     * 将XML字符串转换为指定类型的Java对象
+     * @param xmlStr XML字符串
+     * @param clazz 对象的类型
+     * @param <T> 对象类型
+     * @return 转换后得到的对象
+     * @throws RuntimeException 如果转换失败，则抛出运行时异常
+     */
+    public static <T> T xmlToBean(String xmlStr, Class<T> clazz) {
+        try {
+            JAXBContext context = JAXBContext.newInstance(clazz);
+            Unmarshaller unmarshaller = context.createUnmarshaller();
+            return (T) unmarshaller.unmarshal(new StringReader(xmlStr));
+        } catch (JAXBException e) {
+            // 将JAXBException转换为更具体的异常类型，或者添加堆栈跟踪信息。
+            // 这里可以包装成一个具体的XML解析异常，例如XMLParsingException，并添加错误信息和原始异常。
+            throw new RuntimeException("XML parsing failed for class: " + clazz.getName(), e);
+        }
+    }
+
+    /**
+     * 将Java对象转换为XML字符串
+     * @param bean 要转换的Java对象
+     * @return 转换后的XML字符串
+     * @throws JAXBException 当转换发生错误时抛出该异常
+     */
+    public static String beanToXml(Object bean) {
+        try {
+            JAXBContext context = JAXBContext.newInstance(bean.getClass());
+            Marshaller marshaller = context.createMarshaller();
+
+            // 这意味着在生成的XML中不会包含XML声明（如<?xml version="1.0" encoding="UTF-8"?>）
+            marshaller.setProperty(Marshaller.JAXB_FRAGMENT, true);
+            StringWriter writer = new StringWriter();
+            marshaller.marshal(bean, writer);
+            return writer.toString();
+        } catch (JAXBException e) {
+            throw new RuntimeException(e);
         }
     }
 }

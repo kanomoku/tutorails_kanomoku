@@ -238,6 +238,20 @@
             <artifactId>commons-text</artifactId>
             <version>1.10.0</version>
         </dependency>
+
+        <!-- JAXB API -->
+        <dependency>
+            <groupId>jakarta.xml.bind</groupId>
+            <artifactId>jakarta.xml.bind-api</artifactId>
+            <version>3.0.1</version> <!-- 或者使用最新的稳定版本 -->
+        </dependency>
+
+        <!-- JAXB RI 实现 -->
+        <dependency>
+            <groupId>org.glassfish.jaxb</groupId>
+            <artifactId>jaxb-runtime</artifactId>
+            <version>4.0.0</version> <!-- 或者使用与 jakarta.xml.bind-api 版本相匹配的实现 -->
+        </dependency>
     </dependencies>
 
     <build>
