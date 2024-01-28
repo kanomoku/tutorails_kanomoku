@@ -70,7 +70,7 @@ public class YamlUtils {
     }
 
     public static Map<String, Object> yamlFileToMap(String yamlFilePath) {
-        FileIUtils.checkFileExist(yamlFilePath);
+        FileIUtils.doesFileExist(yamlFilePath);
 
         Map<String, Object> map = new HashMap<>();
         try (FileInputStream inputStream = new FileInputStream(yamlFilePath)){
