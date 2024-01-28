@@ -34,3 +34,7 @@ page-helper:
 thread:
   cpu_time_enabled: true
   allocated_memory_enabled: true
+
+storage:
+  path: C:\Users\zhang\Desktop\test
+  needCheck: true
