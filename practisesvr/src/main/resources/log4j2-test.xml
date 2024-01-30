@@ -4,7 +4,7 @@
     <properties>
         <property name="LOG_HOME">./applog/logs</property>
         <Property name="FILE_NAME" value="practisesvr"/>
-                <Property name="LOG_PATTERN" value="[%d{yyyy-MM-dd HH:mm:ss}] [%-5level] [%thread] [%file:%line] → [%m]%n"/>
+        <Property name="LOG_PATTERN" value="[%d{yyyy-MM-dd HH:mm:ss}] [%-5level] [%thread] [%file:%line] → [%m]%n"/>
         <!--        <Property name="LOG_PATTERN" value="[%d{yyyy-MM-dd HH:mm:ss}] [%-5level] [%thread] [%file:%line] → [%enc{%m}{CRLF}]%n"/>-->
         <!--        <Property name="LOG_PATTERN" value="[%d{yyyy-MM-dd HH:mm:ss.SSSSSS}] [%-5p] [%thread] [%file:%line] → [%replace{%enc{%m}{CRLF}}{\\r|\\n|%0D|%0A|%0a|%0d}{}]%n"/>-->
     </properties>
@@ -13,7 +13,7 @@
         <console name="CONSOLE" target="SYSTEM_OUT">
             <PatternLayout pattern="${LOG_PATTERN}"/>
             <Filters>
-                <ThresholdFilter level="error" onMatch="DENY" onMismatch="NEUTRAL"/>
+                <!--<ThresholdFilter level="error" onMatch="DENY" onMismatch="NEUTRAL"/>-->
                 <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>
             </Filters>
         </console>
@@ -25,7 +25,7 @@
             <ThresholdFilter level="WARN" onMatch="ACCEPT" onMismatch="DENY"/>
         </File>
 
-        <RollingFile name="api_json"
+        <RollingFile name="API_JSON"
                      fileName="${LOG_HOME}/${FILE_NAME}.log"
                      filePattern="${LOG_HOME}/${FILE_NAME}_%d{yyyy-MM-dd-HH}_%i.log.gz"
                      createOnDemand="true">
@@ -47,7 +47,7 @@
             </DefaultRolloverStrategy>
         </RollingFile>
 
-        <RollingFile name="storage_check"
+        <RollingFile name="STORAGE_CHECK"
                      fileName="${LOG_HOME}/storage_check.log"
                      filePattern="${LOG_HOME}/storage_check_%d{yyyy-MM-dd-HH}_%i.log.gz"
                      createOnDemand="true">
@@ -77,11 +77,11 @@
 
         <logger name="com.zhangziwa.practisesvr.utils.log.logUtils" level="info" additivity="false">
             <AppenderRef ref="CONSOLE"/>
-            <AppenderRef ref="api_json"/>
+            <AppenderRef ref="API_JSON"/>
         </logger>
         <logger name="com.zhangziwa.practisesvr.utils.task.StorageHealthyCheckTask" level="info" additivity="false">
             <AppenderRef ref="CONSOLE"/>
-            <AppenderRef ref="storage_check"/>
+            <AppenderRef ref="STORAGE_CHECK"/>
         </logger>
     </loggers>
 </configuration>

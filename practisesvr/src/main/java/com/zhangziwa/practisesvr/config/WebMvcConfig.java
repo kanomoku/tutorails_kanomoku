@@ -37,19 +37,6 @@ public class WebMvcConfig implements WebMvcConfigurer {
     }
 
     /**
-     * 向控制器注册表中添加视图控制器
-     *
-     * @param registry 控制器注册表
-     */
-    @Override
-    public void addViewControllers(ViewControllerRegistry registry) {
-        //对于index.html的请求,设置返回的视图为index.htl
-        registry.addViewController("/index.html").setViewName("/index.htl");
-        //所有以.do结尾的请求重定向到/index.html请求
-        registry.addRedirectViewController("/*.do", "/index.html");
-    }
-
-    /**
      * 用于添加资源处理器
      *
      * @param registry 资源处理器注册表
@@ -60,6 +47,19 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 .addResourceLocations("classpath:/static/resources/")
                 .setCacheControl(CacheControl.maxAge(365, TimeUnit.DAYS));
     }
+
+    /**
+     * 向控制器注册表中添加视图控制器
+     *
+     * @param registry 控制器注册表
+     */
+//    @Override
+//    public void addViewControllers(ViewControllerRegistry registry) {
+//        //对于index.html的请求,设置返回的视图为index.htl
+//        registry.addViewController("/index.html").setViewName("/index.htl");
+//        //所有以.do结尾的请求重定向到/index.html请求
+//        registry.addRedirectViewController("/*.do", "/index.html");
+//    }
 
     /**
      * 配置视图解析器（ViewResolver）,用于在Spring应用程序中自定义如何解析视图
