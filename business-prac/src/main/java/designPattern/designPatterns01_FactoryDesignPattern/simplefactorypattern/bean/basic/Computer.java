@@ -1,6 +1,6 @@
-package designPattern.designPatterns01_FactoryDesignPattern;
+package designPattern.designPatterns01_FactoryDesignPattern.simplefactorypattern.bean.basic;
 
-public abstract class A1_Computer {
+public abstract class Computer {
 
 	public abstract String getRAM();
 
