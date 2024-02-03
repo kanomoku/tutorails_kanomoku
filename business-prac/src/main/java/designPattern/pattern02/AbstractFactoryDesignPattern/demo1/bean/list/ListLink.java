@@ -1,6 +1,6 @@
-package designPattern.designPatterns02_AbstractFactoryDesignPattern.demo1.bean.list;
+package designPattern.pattern02.AbstractFactoryDesignPattern.demo1.bean.list;
 
-import designPattern.designPatterns02_AbstractFactoryDesignPattern.demo1.bean.basic.Link;
+import designPattern.pattern02.AbstractFactoryDesignPattern.demo1.bean.basic.Link;
 
 public class ListLink extends Link {
     public ListLink(String caption, String url) {

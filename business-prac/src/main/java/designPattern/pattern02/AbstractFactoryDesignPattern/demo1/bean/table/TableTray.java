@@ -1,7 +1,7 @@
-package designPattern.designPatterns02_AbstractFactoryDesignPattern.demo1.bean.table;
+package designPattern.pattern02.AbstractFactoryDesignPattern.demo1.bean.table;
 
-import designPattern.designPatterns02_AbstractFactoryDesignPattern.demo1.bean.basic.Tray;
-import designPattern.designPatterns02_AbstractFactoryDesignPattern.demo1.bean.basic.rule.Item;
+import designPattern.pattern02.AbstractFactoryDesignPattern.demo1.bean.basic.Tray;
+import designPattern.pattern02.AbstractFactoryDesignPattern.demo1.bean.basic.rule.Item;
 
 public class TableTray extends Tray {
     public TableTray(String caption) {

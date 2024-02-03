@@ -1,6 +1,6 @@
-package designPattern.designPatterns02_AbstractFactoryDesignPattern.demo1.bean.table;
+package designPattern.pattern02.AbstractFactoryDesignPattern.demo1.bean.table;
 
-import designPattern.designPatterns02_AbstractFactoryDesignPattern.demo1.bean.basic.Link;
+import designPattern.pattern02.AbstractFactoryDesignPattern.demo1.bean.basic.Link;
 
 public class TableLink extends Link {
     public TableLink(String caption, String url) {

@@ -1,6 +1,6 @@
-package designPattern.designPatterns02_AbstractFactoryDesignPattern.demo1.bean.basic;
+package designPattern.pattern02.AbstractFactoryDesignPattern.demo1.bean.basic;
 
-import designPattern.designPatterns02_AbstractFactoryDesignPattern.demo1.bean.basic.rule.Item;
+import designPattern.pattern02.AbstractFactoryDesignPattern.demo1.bean.basic.rule.Item;
 
 import java.util.ArrayList;
 import java.util.List;

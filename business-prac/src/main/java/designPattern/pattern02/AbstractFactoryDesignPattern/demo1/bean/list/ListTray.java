@@ -1,7 +1,7 @@
-package designPattern.designPatterns02_AbstractFactoryDesignPattern.demo1.bean.list;
+package designPattern.pattern02.AbstractFactoryDesignPattern.demo1.bean.list;
 
-import designPattern.designPatterns02_AbstractFactoryDesignPattern.demo1.bean.basic.Tray;
-import designPattern.designPatterns02_AbstractFactoryDesignPattern.demo1.bean.basic.rule.Item;
+import designPattern.pattern02.AbstractFactoryDesignPattern.demo1.bean.basic.Tray;
+import designPattern.pattern02.AbstractFactoryDesignPattern.demo1.bean.basic.rule.Item;
 
 public class ListTray extends Tray {
     public ListTray(String caption) {

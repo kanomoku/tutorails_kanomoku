@@ -1,10 +1,10 @@
-package designPattern.designPatterns02_AbstractFactoryDesignPattern.demo1;
+package designPattern.pattern02.AbstractFactoryDesignPattern.demo1;
 
-import designPattern.designPatterns02_AbstractFactoryDesignPattern.demo1.bean.basic.Link;
-import designPattern.designPatterns02_AbstractFactoryDesignPattern.demo1.bean.basic.Tray;
-import designPattern.designPatterns02_AbstractFactoryDesignPattern.demo1.factory.TableFactory;
-import designPattern.designPatterns02_AbstractFactoryDesignPattern.demo1.factory.basic.IFactory;
-import designPattern.designPatterns02_AbstractFactoryDesignPattern.demo1.page.basic.Page;
+import designPattern.pattern02.AbstractFactoryDesignPattern.demo1.bean.basic.Link;
+import designPattern.pattern02.AbstractFactoryDesignPattern.demo1.bean.basic.Tray;
+import designPattern.pattern02.AbstractFactoryDesignPattern.demo1.factory.TableFactory;
+import designPattern.pattern02.AbstractFactoryDesignPattern.demo1.factory.basic.IFactory;
+import designPattern.pattern02.AbstractFactoryDesignPattern.demo1.page.basic.Page;
 
 public class Main {
     public static void main(String[] args) {
