@@ -1,11 +1,12 @@
-package com.zhangziwa.practisesvr.model.builder.AbstractFactoryPattern.factory;
+package designPattern.pattern02.AbstractFactoryDesignPattern.demo2.factory;
 
-import com.zhangziwa.practisesvr.model.builder.AbstractFactoryPattern.bean.ITutor;
-import com.zhangziwa.practisesvr.model.builder.AbstractFactoryPattern.bean.MathTutor;
+import designPattern.pattern02.AbstractFactoryDesignPattern.demo2.bean.basic.ITutor;
+import designPattern.pattern02.AbstractFactoryDesignPattern.demo2.bean.MathTutor;
 import com.zhangziwa.practisesvr.model.builder.FactoryMethodPattern.bean.ITeacher;
 import com.zhangziwa.practisesvr.model.builder.FactoryMethodPattern.bean.MathTeacher;
+import designPattern.pattern02.AbstractFactoryDesignPattern.demo2.factory.basic.IGroup;
 
-public class MathGroup extends Group {
+public class MathIGroup implements IGroup {
 
     @Override
     public ITutor createTutor() {

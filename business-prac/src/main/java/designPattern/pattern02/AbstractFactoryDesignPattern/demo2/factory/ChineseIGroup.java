@@ -1,11 +1,12 @@
-package com.zhangziwa.practisesvr.model.builder.AbstractFactoryPattern.factory;
+package designPattern.pattern02.AbstractFactoryDesignPattern.demo2.factory;
 
-import com.zhangziwa.practisesvr.model.builder.AbstractFactoryPattern.bean.ChineseTutor;
-import com.zhangziwa.practisesvr.model.builder.AbstractFactoryPattern.bean.ITutor;
+import designPattern.pattern02.AbstractFactoryDesignPattern.demo2.bean.ChineseTutor;
+import designPattern.pattern02.AbstractFactoryDesignPattern.demo2.bean.basic.ITutor;
 import com.zhangziwa.practisesvr.model.builder.FactoryMethodPattern.bean.ChineseTeacher;
 import com.zhangziwa.practisesvr.model.builder.FactoryMethodPattern.bean.ITeacher;
+import designPattern.pattern02.AbstractFactoryDesignPattern.demo2.factory.basic.IGroup;
 
-public class ChineseGroup extends Group {
+public class ChineseIGroup implements IGroup {
 
     @Override
     public ITutor createTutor() {
