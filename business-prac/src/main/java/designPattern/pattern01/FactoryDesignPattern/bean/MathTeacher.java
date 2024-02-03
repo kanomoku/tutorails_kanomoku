@@ -1,4 +1,6 @@
-package com.zhangziwa.practisesvr.model.builder.FactoryMethodPattern.bean;
+package designPattern.pattern01.FactoryDesignPattern.bean;
+
+import designPattern.pattern01.FactoryDesignPattern.bean.basic.ITeacher;
 
 public class MathTeacher implements ITeacher {
 

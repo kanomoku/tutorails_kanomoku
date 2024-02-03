@@ -1,6 +1,6 @@
-package com.zhangziwa.practisesvr.model.builder.FactoryMethodPattern.factory;
+package designPattern.pattern01.FactoryDesignPattern.factory.basic;
 
-import com.zhangziwa.practisesvr.model.builder.FactoryMethodPattern.bean.ITeacher;
+import designPattern.pattern01.FactoryDesignPattern.bean.basic.ITeacher;
 
 public abstract class TeacherFactory {
     public ITeacher create() {
