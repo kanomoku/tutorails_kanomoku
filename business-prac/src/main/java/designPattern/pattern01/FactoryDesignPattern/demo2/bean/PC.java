@@ -1,12 +1,14 @@
-package designPattern.designPatterns02_AbstractFactoryDesignPattern;
+package designPattern.pattern01.FactoryDesignPattern.demo2.bean;
 
-public class A3_Server extends A1_Computer {
+import designPattern.pattern01.FactoryDesignPattern.demo2.bean.basic.Computer;
+
+public class PC extends Computer {
  
     private String ram;
     private String hdd;
     private String cpu;
      
-    public A3_Server(String ram, String hdd, String cpu){
+    public PC(String ram, String hdd, String cpu){
         this.ram=ram;
         this.hdd=hdd;
         this.cpu=cpu;

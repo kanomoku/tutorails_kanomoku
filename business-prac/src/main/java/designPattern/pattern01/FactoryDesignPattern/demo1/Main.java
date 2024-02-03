@@ -1,10 +1,10 @@
-package designPattern.pattern01.FactoryDesignPattern;
+package designPattern.pattern01.FactoryDesignPattern.demo1;
 
-import designPattern.pattern01.FactoryDesignPattern.factory.ChineseTeacherFactory;
-import designPattern.pattern01.FactoryDesignPattern.factory.MathTeacherFactory;
-import designPattern.pattern01.FactoryDesignPattern.factory.basic.TeacherFactory;
-import designPattern.pattern01.FactoryDesignPattern.bean.ChineseTeacher;
-import designPattern.pattern01.FactoryDesignPattern.bean.MathTeacher;
+import designPattern.pattern01.FactoryDesignPattern.demo1.factory.ChineseTeacherFactory;
+import designPattern.pattern01.FactoryDesignPattern.demo1.factory.MathTeacherFactory;
+import designPattern.pattern01.FactoryDesignPattern.demo1.factory.basic.TeacherFactory;
+import designPattern.pattern01.FactoryDesignPattern.demo1.bean.ChineseTeacher;
+import designPattern.pattern01.FactoryDesignPattern.demo1.bean.MathTeacher;
 
 public class Main {
     public static void main(String[] args) {

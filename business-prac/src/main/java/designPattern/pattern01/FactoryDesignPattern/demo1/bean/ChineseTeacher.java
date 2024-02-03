@@ -1,6 +1,6 @@
-package designPattern.pattern01.FactoryDesignPattern.bean;
+package designPattern.pattern01.FactoryDesignPattern.demo1.bean;
 
-import designPattern.pattern01.FactoryDesignPattern.bean.basic.ITeacher;
+import designPattern.pattern01.FactoryDesignPattern.demo1.bean.basic.ITeacher;
 
 public class ChineseTeacher implements ITeacher {
 
