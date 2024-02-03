@@ -1,4 +1,4 @@
-package designPattern.designPatterns03_BuilderDesignPattern;
+package designPattern.pattern03_BuilderDesignPattern;
 
 public class Computer {
 
