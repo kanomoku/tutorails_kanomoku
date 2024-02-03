@@ -1,4 +1,4 @@
-package designPattern.designPatterns01_FactoryDesignPattern.simplefactorypattern.bean.basic;
+package designPattern.pattern01.simplefactorypattern.bean.basic;
 
 public abstract class Computer {
 

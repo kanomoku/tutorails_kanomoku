@@ -1,6 +1,6 @@
-package designPattern.designPatterns01_FactoryDesignPattern.simplefactorypattern.bean;
+package designPattern.pattern01.simplefactorypattern.bean;
 
-import designPattern.designPatterns01_FactoryDesignPattern.simplefactorypattern.bean.basic.Computer;
+import designPattern.pattern01.simplefactorypattern.bean.basic.Computer;
 
 public class Server extends Computer {
 

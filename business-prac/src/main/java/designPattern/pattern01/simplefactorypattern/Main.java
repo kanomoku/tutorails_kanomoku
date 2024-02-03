@@ -1,6 +1,6 @@
-package designPattern.designPatterns01_FactoryDesignPattern.simplefactorypattern;
+package designPattern.pattern01.simplefactorypattern;
 
-import designPattern.designPatterns01_FactoryDesignPattern.simplefactorypattern.bean.basic.Computer;
+import designPattern.pattern01.simplefactorypattern.bean.basic.Computer;
 
 public class Main {
 
