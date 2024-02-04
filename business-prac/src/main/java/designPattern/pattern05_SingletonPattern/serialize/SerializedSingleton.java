@@ -1,4 +1,4 @@
-package designPattern.designPatterns05_SingletonPattern;
+package designPattern.pattern05_SingletonPattern.serialize;
 
 import java.io.Serializable;
 
@@ -10,16 +10,16 @@ import java.io.Serializable;
 //whenever we deserialize it, it will create a new instance of the class
 public class SerializedSingleton implements Serializable {
 
-	private static final long serialVersionUID = -7604766932017737115L;
+    private static final long serialVersionUID = -7604766932017737115L;
 
-	private SerializedSingleton() {
-	}
+    private SerializedSingleton() {
+    }
 
-	private static class SingletonHelper {
-		private static final SerializedSingleton instance = new SerializedSingleton();
-	}
+    private static class SingletonHelper {
+        private static final SerializedSingleton instance = new SerializedSingleton();
+    }
 
-	public static SerializedSingleton getInstance() {
-		return SingletonHelper.instance;
-	}
+    public static SerializedSingleton getInstance() {
+        return SingletonHelper.instance;
+    }
 }

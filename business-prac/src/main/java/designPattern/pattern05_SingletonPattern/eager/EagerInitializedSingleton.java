@@ -1,4 +1,4 @@
-package designPattern.designPatterns05_SingletonPattern;
+package designPattern.pattern05_SingletonPattern.eager;
 
 public class EagerInitializedSingleton {
 
