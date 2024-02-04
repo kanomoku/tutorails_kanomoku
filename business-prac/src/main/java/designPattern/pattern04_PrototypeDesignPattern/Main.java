@@ -1,20 +1,18 @@
-package designPattern.designPatterns04_PrototypeDesignPattern;
+package designPattern.pattern04_PrototypeDesignPattern;
 
 import java.util.List;
 
-public class PrototypePatternTest {
+public class Main {
 
 	public static void main(String[] args) throws CloneNotSupportedException {
 		Employees emps = new Employees();
 		emps.loadData();
 		
-		//Use the clone method to get the Employee object
-//		Employees empsNew = (Employees) emps.clone();
-//		Employees empsNew1 = (Employees) emps.clone();
 		Employees empsNew = (Employees) emps.deepClone();
-		Employees empsNew1 = (Employees) emps.deepClone();
 		List<String> list = empsNew.getEmpList();
 		list.add("John");
+
+		Employees empsNew1 = (Employees) emps.deepClone();
 		List<String> list1 = empsNew1.getEmpList();
 		list1.remove("Pankaj");
 		
