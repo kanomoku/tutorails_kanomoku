@@ -1,21 +1,29 @@
-package designPattern.designPatterns07_BridgeDesignPattern;
-public class B1_Display {
-    private B3_DisplayImpl impl;
-    public B1_Display(B3_DisplayImpl impl) {
+package designPattern.patterns07_BridgeDesignPattern.demo2.bridge;
+
+import designPattern.patterns07_BridgeDesignPattern.demo2.interfaces.IPrint;
+
+public class Display {
+    private IPrint impl;
+
+    public Display(IPrint impl) {
         this.impl = impl;
     }
+
     public void open() {
         impl.rawOpen();
     }
+
     public void print() {
         impl.rawPrint();
     }
+
     public void close() {
         impl.rawClose();
     }
+
     public final void display() {
         open();
-        print();                    
+        print();
         close();
     }
 }
