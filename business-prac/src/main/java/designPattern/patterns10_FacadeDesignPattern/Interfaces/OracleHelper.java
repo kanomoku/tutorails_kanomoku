@@ -1,8 +1,8 @@
-package designPattern.designPatterns10_FacadeDesignPattern;
+package designPattern.patterns10_FacadeDesignPattern.Interfaces;
 
 import java.sql.Connection;
 
-public class A2_OracleHelper {
+public class OracleHelper {
 
 	public static Connection getOracleDBConnection(){
 		//get Oracle DB connection using connection parameters

@@ -1,8 +1,8 @@
-package designPattern.designPatterns10_FacadeDesignPattern;
+package designPattern.patterns10_FacadeDesignPattern.Interfaces;
 
 import java.sql.Connection;
 
-public class A1_MySqlHelper {
+public class MySqlHelper {
 
 	public static Connection getMySqlDBConnection() {
 		// get MySql DB connection using connection parameters
