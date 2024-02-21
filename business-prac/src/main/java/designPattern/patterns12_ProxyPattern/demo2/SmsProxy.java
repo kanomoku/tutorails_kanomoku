@@ -1,10 +1,10 @@
-package designPattern.designPatterns12_ProxyPattern;
+package designPattern.patterns12_ProxyPattern.demo2;
 
-public class B3_SmsProxy implements B1_SmsService {
+public class SmsProxy implements IsmsService {
 
-    private final B1_SmsService smsService;
+    private final IsmsService smsService;
 
-    public B3_SmsProxy(B1_SmsService smsService) {
+    public SmsProxy(IsmsService smsService) {
         this.smsService = smsService;
     }
 

@@ -1,6 +1,6 @@
-package designPattern.designPatterns12_ProxyPattern;
+package designPattern.patterns12_ProxyPattern.demo2;
 
-public class B2_SmsServiceImpl implements B1_SmsService {
+public class SmsServiceImpl implements IsmsService {
     public String send(String message) {
         System.out.println("send message:" + message);
         return message;
