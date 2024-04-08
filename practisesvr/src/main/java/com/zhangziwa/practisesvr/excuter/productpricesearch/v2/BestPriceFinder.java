@@ -33,9 +33,7 @@ public class BestPriceFinder {
 
     // 使用并行流对请求进行并行操作
     public List<String> findPricesParallel(String product) {
-        return shops.parallelStream()
-                .map(shop -> getMoment() + " " + shop.getName() + " price is " + shop.getPrice(product))
-                .collect(Collectors.toList());
+        return shops.parallelStream().map(shop -> getPriceStr(product, shop)).collect(Collectors.toList());
     }
 
     // 使用CompletableFuture发起异步请求
