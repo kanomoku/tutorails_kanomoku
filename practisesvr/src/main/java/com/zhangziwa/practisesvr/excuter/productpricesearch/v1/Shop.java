@@ -25,11 +25,15 @@ public class Shop {
     }
 
     // 依据指定产品名称返回价格,将同步方法转换为异步方法
+    // 当前实现存在的问题：
+    // 用于提示错误的异常会被限制在试图计算商品价格的当前线程的范围内，最终会杀死该线程，而这会导致等待get方法返回结果的客户端永久地被阻塞
+    // 查询价格线程 终止，但 main 线程未停止，程序阻塞
     public Future<Double> getPriceAsync(String product) {
         CompletableFuture<Double> futurePrice = new CompletableFuture<>();
 
         new Thread(() -> {
-            double price = calculatePrice(product);
+//            double price = calculatePrice(product);  // 无异常场景
+            double price = calculatePriceErr(product); // 发生异常场景
             futurePrice.complete(price); // 如果价格计算正常结束，完成Future操作并设置商品价格
         }, "查询价格线程").start();
 
@@ -41,5 +45,15 @@ public class Shop {
         System.out.println(DelayUtils.getMoment() + " " + Thread.currentThread().getName() + "线程 执行calculatePrice");
         // 依据产品的名称，生成一个随机值作为价格
         return random.nextDouble() * product.charAt(0) + product.charAt(1);
+    }
+
+    private double calculatePriceErr(String product) {
+        DelayUtils.delay();
+        System.out.println(DelayUtils.getMoment() + " " + Thread.currentThread().getName() + "线程 执行calculatePrice");
+
+        // 模拟发生异常
+        if (true) throw new RuntimeException(Thread.currentThread().getName() + "模拟异常的异常信息");
+
+        return 0;
     }
 }
