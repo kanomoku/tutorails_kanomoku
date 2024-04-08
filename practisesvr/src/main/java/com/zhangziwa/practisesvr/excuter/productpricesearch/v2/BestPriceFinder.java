@@ -37,14 +37,11 @@ public class BestPriceFinder {
     }
 
     // 使用CompletableFuture发起异步请求
-    public List<String> findPricesFuture(String product) {
-        List<CompletableFuture<String>> priceFutures =
-                shops.stream()
-                        .map(shop -> CompletableFuture.supplyAsync(() -> getMoment() + " " + Thread.currentThread().getName() + shop.getName() + "-" + shop.getPrice(product)))// 内部采用的通用线程池，默认都使用固定数目的线程，具体线程数取决于Runtime.getRuntime().availableProcessors()的返回值。
-                        .collect(Collectors.toList());
+    public List<String> findPricesCompletableFuture(String product) {
+        List<CompletableFuture<String>> priceFutures = shops.stream().map(shop -> CompletableFuture.supplyAsync(() -> getPriceStr(product, shop)))// 内部采用的通用线程池，默认都使用固定数目的线程，具体线程数取决于Runtime.getRuntime().availableProcessors()的返回值。
+                .collect(Collectors.toList());
 
-        List<String> prices = priceFutures.stream()
-                .map(CompletableFuture::join) // 对List中的所有future对象执行join操作，一个接一个地等待它们运行结束
+        List<String> prices = priceFutures.stream().map(CompletableFuture::join) // 对List中的所有future对象执行join操作，一个接一个地等待它们运行结束
                 .collect(Collectors.toList());
         return prices;
     }
