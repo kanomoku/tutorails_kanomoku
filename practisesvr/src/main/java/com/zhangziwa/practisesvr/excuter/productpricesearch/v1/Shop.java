@@ -57,6 +57,22 @@ public class Shop {
         return futurePrice;
     }
 
+    // catch住Excetpion后一定要抛出去，不然也会阻塞死
+    public Future<Double> getPriceAsync2(String product) {
+        CompletableFuture<Double> futurePrice = new CompletableFuture<>();
+
+        new Thread(() -> {
+            try {
+                double price = calculatePriceErr(product);
+                futurePrice.complete(price);
+            } catch (Exception ex) {
+                System.out.println(DelayUtils.getMoment() + " " + ex.getMessage());
+            }
+        }, "查询价格线程").start();
+
+        return futurePrice;
+    }
+
     private double calculatePrice(String product) {
         DelayUtils.delay();
         System.out.println(DelayUtils.getMoment() + " " + Thread.currentThread().getName() + "线程 执行calculatePrice");
