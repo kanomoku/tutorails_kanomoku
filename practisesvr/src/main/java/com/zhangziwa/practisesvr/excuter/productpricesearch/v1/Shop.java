@@ -6,6 +6,7 @@ import lombok.Data;
 
 import java.util.Random;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionException;
 import java.util.concurrent.Future;
 
 @Data
@@ -75,6 +76,17 @@ public class Shop {
 
     public Future<Double> getPriceAsync3(String product) {
         return CompletableFuture.supplyAsync(() -> calculatePriceErr(product));
+    }
+
+    public Future<Double> getPriceAsync4(String product) {
+        CompletableFuture<Double> futurePrice = CompletableFuture
+                .supplyAsync(() -> calculatePriceErr(product))
+                .exceptionally(e -> {
+                    CompletionException ex = new CompletionException(e);
+                    System.out.println(DelayUtils.getMoment() + " " + Thread.currentThread().getName() + "自定义项目调用异常: " + e.getMessage());
+                    throw ex;
+                });
+        return futurePrice;
     }
 
     private double calculatePrice(String product) {

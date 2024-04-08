@@ -40,7 +40,7 @@ public class ShopMain {
         StopWatch stopWatch = new StopWatch("异步实现用时统计");
 
         stopWatch.start("发起异步查询商品价格");
-        Future<Double> futurePrice = shop.getPriceAsync3("虾条");
+        Future<Double> futurePrice = shop.getPriceAsync4("虾条");
         stopWatch.stop();
 
         stopWatch.start("其他业务处理");
