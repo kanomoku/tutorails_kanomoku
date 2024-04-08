@@ -1,9 +1,8 @@
 package com.zhangziwa.practisesvr.excuter.productpricesearch.v2;
 
-import com.zhangziwa.practisesvr.excuter.productpricesearch.v1.Shop;
 import com.zhangziwa.practisesvr.excuter.threadfactory.ExecuterThreadFactoryBuilder;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
@@ -14,13 +13,25 @@ import static com.zhangziwa.practisesvr.utils.thread.DelayUtils.getMoment;
 
 public class BestPriceFinder {
 
-    private final List<Shop> shops = Arrays.asList(new Shop("BestPrice"),
-                                                   new Shop("LetsSaveBig"),
-                                                   new Shop("MyFavoriteShop"),
-                                                   new Shop("BuyItAll")                                                 ,
-                                                   new Shop("ShopEasy"));
+//    private final List<Shop> shops = Arrays.asList(new Shop("BestPrice"),
+//                                                   new Shop("LetsSaveBig"),
+//                                                   new Shop("MyFavoriteShop"),
+//                                                   new Shop("BuyItAll")                                                 ,
+//                                                   new Shop("ShopEasy"));
 
-    private final Executor executor = Executors.newFixedThreadPool(shops.size(), ExecuterThreadFactoryBuilder.build());
+    private final List<Shop> shops = new ArrayList<>();
+    {
+        for (int i = 0; i < 1600; i++) {
+            shops.add(new Shop("LetsSaveBig3" + i));
+        }
+        System.out.println(shops.size());
+    }
+
+    private final Executor executorSize = Executors.newFixedThreadPool(shops.size(), ExecuterThreadFactoryBuilder.build());
+    private final Executor executor100 = Executors.newFixedThreadPool(Math.min(shops.size(), 100), ExecuterThreadFactoryBuilder.build());
+
+    private static final int PROCESSORS = Runtime.getRuntime().availableProcessors();
+    private final Executor executorProcessors = Executors.newFixedThreadPool(Math.min(shops.size(), PROCESSORS), ExecuterThreadFactoryBuilder.build());
 
     private String getPriceStr(String product, Shop shop) {
         return getMoment() + " " + Thread.currentThread().getName() + "线程 获取商店" + shop.getName() + " 最低价为: " + shop.getPrice(product);
@@ -47,8 +58,18 @@ public class BestPriceFinder {
     }
 
     // 使用CompletableFuture发起异步请求+使用定制的执行器
-    public List<String> findPricesCompletableFutureCustom(String product) {
-        List<CompletableFuture<String>> priceFutures = shops.stream().map(shop -> CompletableFuture.supplyAsync(() -> getPriceStr(product, shop), executor)).collect(Collectors.toList());
+    public List<String> findPricesCompletableFutureCustomSize(String product) {
+        List<CompletableFuture<String>> priceFutures = shops.stream().map(shop -> CompletableFuture.supplyAsync(() -> getPriceStr(product, shop), executorSize)).collect(Collectors.toList());
+        List<String> prices = priceFutures.stream().map(CompletableFuture::join).collect(Collectors.toList());
+        return prices;
+    }
+    public List<String> findPricesCompletableFutureCustom100(String product) {
+        List<CompletableFuture<String>> priceFutures = shops.stream().map(shop -> CompletableFuture.supplyAsync(() -> getPriceStr(product, shop), executor100)).collect(Collectors.toList());
+        List<String> prices = priceFutures.stream().map(CompletableFuture::join).collect(Collectors.toList());
+        return prices;
+    }
+    public List<String> findPricesCompletableFutureCustomProcessors(String product) {
+        List<CompletableFuture<String>> priceFutures = shops.stream().map(shop -> CompletableFuture.supplyAsync(() -> getPriceStr(product, shop), executorProcessors)).collect(Collectors.toList());
         List<String> prices = priceFutures.stream().map(CompletableFuture::join).collect(Collectors.toList());
         return prices;
     }
