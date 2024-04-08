@@ -73,6 +73,10 @@ public class Shop {
         return futurePrice;
     }
 
+    public Future<Double> getPriceAsync3(String product) {
+        return CompletableFuture.supplyAsync(() -> calculatePriceErr(product));
+    }
+
     private double calculatePrice(String product) {
         DelayUtils.delay();
         System.out.println(DelayUtils.getMoment() + " " + Thread.currentThread().getName() + "线程 执行calculatePrice");
