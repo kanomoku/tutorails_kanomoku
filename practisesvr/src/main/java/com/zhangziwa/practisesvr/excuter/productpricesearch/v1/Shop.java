@@ -40,6 +40,23 @@ public class Shop {
         return futurePrice;
     }
 
+    // 使用CompletableFuture的completeExceptionally方法将导致CompletableFuture内发生问题的异常抛出
+    public Future<Double> getPriceAsync1(String product) {
+        CompletableFuture<Double> futurePrice = new CompletableFuture<>();
+
+        new Thread(() -> {
+            try {
+                double price = calculatePriceErr(product);
+                futurePrice.complete(price);
+            } catch (Exception ex) {
+                System.out.println("log记录异常: " + ex.getMessage());
+                futurePrice.completeExceptionally(ex); // 否则就抛出导致失败的异常，完成这次Future操作
+            }
+        }, "查询价格线程").start();
+
+        return futurePrice;
+    }
+
     private double calculatePrice(String product) {
         DelayUtils.delay();
         System.out.println(DelayUtils.getMoment() + " " + Thread.currentThread().getName() + "线程 执行calculatePrice");
@@ -52,7 +69,7 @@ public class Shop {
         System.out.println(DelayUtils.getMoment() + " " + Thread.currentThread().getName() + "线程 执行calculatePrice");
 
         // 模拟发生异常
-        if (true) throw new RuntimeException(Thread.currentThread().getName() + "模拟异常的异常信息");
+        if (true) throw new RuntimeException(Thread.currentThread().getName() + " 模拟异常的异常信息");
 
         return 0;
     }
