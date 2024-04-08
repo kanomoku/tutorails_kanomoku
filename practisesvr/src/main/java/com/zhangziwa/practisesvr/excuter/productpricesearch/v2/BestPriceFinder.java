@@ -22,11 +22,13 @@ public class BestPriceFinder {
 
     private final Executor executor = Executors.newFixedThreadPool(shops.size(), ExecuterThreadFactoryBuilder.build());
 
+    private String getPriceStr(String product, Shop shop) {
+        return getMoment() + " " + Thread.currentThread().getName() + "线程 获取商店" + shop.getName() + " 最低价为: " + shop.getPrice(product);
+    }
+
     // 采用顺序查询所有商店
     public List<String> findPricesSequential(String product) {
-        return shops.stream()
-                .map(shop -> getMoment() + " " + shop.getName() + " price is " + shop.getPrice(product))
-                .collect(Collectors.toList());
+        return shops.stream().map(shop -> getPriceStr(product, shop)).collect(Collectors.toList());
     }
 
     // 使用并行流对请求进行并行操作

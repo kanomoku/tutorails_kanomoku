@@ -39,6 +39,6 @@ public class DelayUtils {
     }
 
     public static String getMoment() {
-        return LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd_HHMMSS"));
+        return LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
     }
 }

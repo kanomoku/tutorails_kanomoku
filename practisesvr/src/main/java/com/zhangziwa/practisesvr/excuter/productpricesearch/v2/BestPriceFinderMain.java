@@ -23,9 +23,9 @@ public class BestPriceFinderMain {
     public static void main(String[] args) {
         StopWatch stopWatch = new StopWatch("性能比较");
         execute("sequential", () -> bestPriceFinder.findPricesSequential("myPhone27S"), stopWatch);
-        execute("parallelStream", () -> bestPriceFinder.findPricesParallel("myPhone27S"), stopWatch);
-        execute("CompletableFuture", () -> bestPriceFinder.findPricesFuture("myPhone27S"), stopWatch);
-        execute("CompletableFutureExecuter", () -> bestPriceFinder.findPricesFutureCustom("myPhone27S"), stopWatch);
+//        execute("parallelStream", () -> bestPriceFinder.findPricesParallel("myPhone27S"), stopWatch);
+//        execute("CompletableFuture", () -> bestPriceFinder.findPricesFuture("myPhone27S"), stopWatch);
+//        execute("CompletableFutureExecuter", () -> bestPriceFinder.findPricesFutureCustom("myPhone27S"), stopWatch);
         StopWatchUtils.logStopWatch(stopWatch);
 
 //        execute("combined USD CompletableFuture", () -> bestPriceFinder.findPricesInUSD("myPhone27S"));
@@ -36,7 +36,9 @@ public class BestPriceFinderMain {
 
     private static void execute(String msg, Supplier<List<String>> s, StopWatch stopWatch) {
         stopWatch.start(msg);
-        System.out.println(s.get());
+        List<String> res = s.get();
+        res.forEach(System.out::println);
+//        System.out.println(x);
         stopWatch.stop();
     }
 }
