@@ -8,8 +8,6 @@ import java.util.Random;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Future;
 
-import static com.zhangziwa.practisesvr.utils.thread.DelayUtils.getMoment;
-
 @Data
 public class Shop {
 
@@ -40,7 +38,7 @@ public class Shop {
 
     private double calculatePrice(String product) {
         DelayUtils.delay();
-        System.out.println(getMoment() + " " + Thread.currentThread().getName() + " 线程执行 calculatePrice");
+        System.out.println(DelayUtils.getMoment() + " " + Thread.currentThread().getName() + "线程 执行calculatePrice");
         // 依据产品的名称，生成一个随机值作为价格
         return random.nextDouble() * product.charAt(0) + product.charAt(1);
     }
