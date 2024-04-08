@@ -47,16 +47,9 @@ public class BestPriceFinder {
     }
 
     // 使用CompletableFuture发起异步请求+使用定制的执行器
-    public List<String> findPricesFutureCustom(String product) {
-        List<CompletableFuture<String>> priceFutures =
-                shops.stream()
-                        .map(shop -> CompletableFuture.supplyAsync(() -> getMoment() + " " + Thread.currentThread().getName() + shop.getName() + "-" + shop.getPrice(product), executor))
-                        .collect(Collectors.toList());
-
-        List<String> prices = priceFutures.stream()
-                .map(CompletableFuture::join)
-                .collect(Collectors.toList());
-
+    public List<String> findPricesCompletableFutureCustom(String product) {
+        List<CompletableFuture<String>> priceFutures = shops.stream().map(shop -> CompletableFuture.supplyAsync(() -> getPriceStr(product, shop), executor)).collect(Collectors.toList());
+        List<String> prices = priceFutures.stream().map(CompletableFuture::join).collect(Collectors.toList());
         return prices;
     }
 }

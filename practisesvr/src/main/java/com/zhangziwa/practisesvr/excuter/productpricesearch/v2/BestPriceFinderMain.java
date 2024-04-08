@@ -24,8 +24,8 @@ public class BestPriceFinderMain {
         StopWatch stopWatch = new StopWatch("性能比较");
 //        execute("sequential", () -> bestPriceFinder.findPricesSequential("myPhone27S"), stopWatch);
 //        execute("parallelStream", () -> bestPriceFinder.findPricesParallel("myPhone27S"), stopWatch);
-        execute("CompletableFuture", () -> bestPriceFinder.findPricesCompletableFuture("myPhone27S"), stopWatch);
-//        execute("CompletableFutureExecuter", () -> bestPriceFinder.findPricesFutureCustom("myPhone27S"), stopWatch);
+//        execute("CompletableFuture", () -> bestPriceFinder.findPricesCompletableFuture("myPhone27S"), stopWatch);
+        execute("CompletableFutureExecuter", () -> bestPriceFinder.findPricesCompletableFutureCustom("myPhone27S"), stopWatch);
         StopWatchUtils.logStopWatch(stopWatch);
 
 //        execute("combined USD CompletableFuture", () -> bestPriceFinder.findPricesInUSD("myPhone27S"));
