@@ -6,6 +6,8 @@ import org.springframework.util.StopWatch;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 
 public class ShopMain {
@@ -51,9 +53,10 @@ public class ShopMain {
 
         stopWatch.start("获取异步查询结果");
         try {
-            double price = futurePrice.get();
+            System.out.println(DelayUtils.getMoment() + " " + Thread.currentThread().getName() + "线程 获取异步结果futurePrice.get()");
+            double price = futurePrice.get(3, TimeUnit.SECONDS);
             System.out.printf(DelayUtils.getMoment() + " " + Thread.currentThread().getName() + "线程 获取Price is %.2f%n", price);
-        } catch (ExecutionException | InterruptedException e) {
+        } catch (ExecutionException | InterruptedException | TimeoutException e) {
             throw new RuntimeException(e);
         }
         stopWatch.stop();
