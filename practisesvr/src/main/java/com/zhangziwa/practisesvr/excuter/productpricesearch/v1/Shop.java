@@ -31,7 +31,7 @@ public class Shop {
         new Thread(() -> {
             double price = calculatePrice(product);
             futurePrice.complete(price); // 如果价格计算正常结束，完成Future操作并设置商品价格
-        }).start();
+        }, "查询价格线程").start();
 
         return futurePrice;
     }

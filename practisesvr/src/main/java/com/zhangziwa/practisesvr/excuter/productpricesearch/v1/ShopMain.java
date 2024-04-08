@@ -11,8 +11,8 @@ import java.util.concurrent.Future;
 public class ShopMain {
 
     public static void main(String[] args) {
-//        async();
-        sync();
+        async();
+//        sync();
     }
 
     // 同步实现
@@ -36,21 +36,23 @@ public class ShopMain {
 
     // 异步实现
     private static void async() {
-        Shop shop = new Shop("BestShop");
-        StopWatch stopWatch = new StopWatch("并行用时统计");
+        Shop shop = new Shop("大雁小卖店");
+        StopWatch stopWatch = new StopWatch("异步实现用时统计");
 
-        stopWatch.start("getPrice new a thread and start");
-        Future<Double> futurePrice = shop.getPriceAsync("product name");
+        stopWatch.start("发起异步查询商品价格");
+        Future<Double> futurePrice = shop.getPriceAsync("虾条");
         stopWatch.stop();
 
-        stopWatch.start("doSomethingElse");
-        doSomethingElse();
+        stopWatch.start("其他业务处理");
+        // 模拟其他业务逻辑
+        DelayUtils.delay();
+        System.out.println(DelayUtils.getMoment() + " " + Thread.currentThread().getName() + "线程 Do some more tasks, like querying other shops...");
         stopWatch.stop();
 
-        stopWatch.start("futurePrice.get()");
+        stopWatch.start("获取异步查询结果");
         try {
             double price = futurePrice.get();
-            System.out.printf(DelayUtils.getMoment() + " " + Thread.currentThread().getName() + " Price is %.2f%n", price);
+            System.out.printf(DelayUtils.getMoment() + " " + Thread.currentThread().getName() + "线程 获取Price is %.2f%n", price);
         } catch (ExecutionException | InterruptedException e) {
             throw new RuntimeException(e);
         }
@@ -58,7 +60,6 @@ public class ShopMain {
 
         StopWatchUtils.logStopWatch(stopWatch);
     }
-
 
     private static void doSomethingElse() {
         System.out.println(DelayUtils.getMoment() + " " + Thread.currentThread().getName() + "线程 Do some more tasks, like querying other shops...");
