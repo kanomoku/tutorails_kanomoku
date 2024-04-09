@@ -30,6 +30,7 @@ public class DiscountShop {
     // 获取商品价格
     private double calculatePrice(String product) {
         DelayUtils.delay();
+//        System.out.println(DelayUtils.getMoment() + " " + Thread.currentThread().getName() + "线程 执行calculatePrice");
         // 依据产品的名称，生成一个随机值作为价格
         return DelayUtils.format(random.nextDouble() * product.charAt(0) + product.charAt(1));
     }

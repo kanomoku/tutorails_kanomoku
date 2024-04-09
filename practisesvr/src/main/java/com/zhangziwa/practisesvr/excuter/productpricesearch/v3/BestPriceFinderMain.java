@@ -23,7 +23,9 @@ public class BestPriceFinderMain {
 
     private static void execute(String msg, Supplier<List<String>> s, StopWatch stopWatch) {
         stopWatch.start(msg);
-        System.out.println(getMoment() + " " + Thread.currentThread().getName() + " " + s.get());
+        List<String> strings = s.get();
+//        strings.forEach(a-> System.out.println(getMoment() + " " + Thread.currentThread().getName() + " 线程获取结果 " + a));
+        System.out.println(getMoment() + " " + Thread.currentThread().getName() + " 线程 获取计算结果:" + strings);
         stopWatch.stop();
         System.out.println();
     }
