@@ -61,67 +61,47 @@ public class BestPriceFinder {
     public List<String> findPricesInUSD(String product) {
         List<CompletableFuture<Double>> priceFutures = new ArrayList<>();
         for (Shop shop : shops) {
-            CompletableFuture<Double> futurePriceInUSD = CompletableFuture
-                    .supplyAsync(() -> shop.getPrice(product), executor)
+            CompletableFuture<Double> futurePriceInUSD = CompletableFuture.supplyAsync(() -> shop.getPrice(product), executor)
                     .thenCombine(CompletableFuture.supplyAsync(() -> ExchangeService.getRate(Money.EUR, Money.USD), executor), (price, rate) -> price * rate);
             priceFutures.add(futurePriceInUSD);
         }
 
-        List<String> prices = priceFutures
-                .stream()
-                .map(CompletableFuture::join)
-                .map(price -> " price is " + price)
-                .collect(Collectors.toList());
-
+        List<String> prices = priceFutures.stream().map(CompletableFuture::join).map(price -> " price is " + price).collect(Collectors.toList());
         return prices;
     }
 
     public List<String> findPricesInUSD2(String product) {
         List<CompletableFuture<String>> priceFutures = new ArrayList<>();
         for (Shop shop : shops) {
-            CompletableFuture<String> futurePriceInUSD = CompletableFuture
-                            .supplyAsync(() -> shop.getPrice(product), executor)
+            CompletableFuture<String> futurePriceInUSD = CompletableFuture.supplyAsync(() -> shop.getPrice(product), executor)
                             .thenCombine(CompletableFuture.supplyAsync(() -> ExchangeService.getRate(Money.EUR, Money.USD), executor), (price, rate) -> price * rate)
                             .thenApply(price -> shop.getName() + " price is " + price);
             priceFutures.add(futurePriceInUSD);
         }
 
-        List<String> prices = priceFutures
-                .stream()
-                .map(CompletableFuture::join)
-                .collect(Collectors.toList());
+        List<String> prices = priceFutures.stream().map(CompletableFuture::join).collect(Collectors.toList());
         return prices;
     }
 
     public List<String> findPricesInUSD3(String product) {
-        List<CompletableFuture<String>> priceFutures = shops
-            .stream()
-            .map(shop -> CompletableFuture
-                .supplyAsync(() -> shop.getPrice(product))
-                .thenCombine(CompletableFuture.supplyAsync(() -> ExchangeService.getRate(Money.EUR, Money.USD)), (price, rate) -> price * rate)
-                .thenApply(price -> shop.getName() + " price is " + price))
-            .collect(Collectors.toList());
+        List<CompletableFuture<String>> priceFutures = shops.stream()
+                .map(shop -> CompletableFuture.supplyAsync(() -> shop.getPrice(product))
+                        .thenCombine(CompletableFuture.supplyAsync(() -> ExchangeService.getRate(Money.EUR, Money.USD)), (price, rate) -> price * rate)
+                        .thenApply(price -> shop.getName() + " price is " + price))
+                .collect(Collectors.toList());
 
-        List<String> prices = priceFutures
-            .stream()
-            .map(CompletableFuture::join)
-            .collect(Collectors.toList());
+        List<String> prices = priceFutures.stream().map(CompletableFuture::join).collect(Collectors.toList());
         return prices;
     }
 
     public List<String> findPricesInUSD4(String product) {
-        List<CompletableFuture<String>> priceFutures = shops
-                .stream()
-                .map(shop -> CompletableFuture
-                        .supplyAsync(() -> shop.getPrice(product),executor)
-                        .thenCombine(CompletableFuture.supplyAsync(() -> ExchangeService.getRate(Money.EUR, Money.USD),executor), (price, rate) -> price * rate)
+        List<CompletableFuture<String>> priceFutures = shops.stream()
+                .map(shop -> CompletableFuture.supplyAsync(() -> shop.getPrice(product),executor)
+                        .thenCombine(CompletableFuture.supplyAsync(() -> ExchangeService.getRate(Money.EUR, Money.USD), executor), (price, rate) -> price * rate)
                         .thenApply(price -> shop.getName() + " price is " + price))
                 .collect(Collectors.toList());
 
-        List<String> prices = priceFutures
-                .stream()
-                .map(CompletableFuture::join)
-                .collect(Collectors.toList());
+        List<String> prices = priceFutures.stream().map(CompletableFuture::join).collect(Collectors.toList());
         return prices;
     }
 

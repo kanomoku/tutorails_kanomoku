@@ -13,11 +13,11 @@ public class BestPriceFinderMain {
 
     public static void main(String[] args) {
         StopWatch stopWatch = new StopWatch("性能比较");
-        execute("combined USD CompletableFuture v1", () -> bestPriceFinder.findPricesInUSD("myPhone27S"), stopWatch);
-        execute("combined USD CompletableFuture v2", () -> bestPriceFinder.findPricesInUSD2("myPhone27S"), stopWatch);
-        execute("combined USD CompletableFuture v4", () -> bestPriceFinder.findPricesInUSD4("myPhone27S"), stopWatch);
-        execute("combined USD CompletableFuture v3", () -> bestPriceFinder.findPricesInUSD3("myPhone27S"), stopWatch);
-        execute("combined USD findPricesInUSDJava7", () -> bestPriceFinder.findPricesInUSDJava7("myPhone27S"), stopWatch);
+        execute("combined USD thenCombine", () -> bestPriceFinder.findPricesInUSD("myPhone27S"), stopWatch);
+        execute("combined USD thenCombine+thenApply", () -> bestPriceFinder.findPricesInUSD2("myPhone27S"), stopWatch);
+        execute("combined USD thenCombine+thenApply+toList+supplyAsyncExecutor", () -> bestPriceFinder.findPricesInUSD4("myPhone27S"), stopWatch);
+        execute("combined USD thenCombine+thenApply+toList+supplyAsync", () -> bestPriceFinder.findPricesInUSD3("myPhone27S"), stopWatch);
+        execute("combined USD Java7", () -> bestPriceFinder.findPricesInUSDJava7("myPhone27S"), stopWatch);
         StopWatchUtils.logStopWatch(stopWatch);
     }
 
