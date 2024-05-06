@@ -408,6 +408,71 @@ public class DoublePointeArray {
         }
     }
 
+    @Test
+    public void arrayFold5() {
+        int[] arr = new int[] {1, 2, 3, 4, 5, 6, 7, 8, 9};
+        for (int i = arr.length - 1; i >= 0; i--) {
+
+            String str = "";
+            for (int j = 0; j <= i; j++) {
+                str += arr[j] + "  ";
+            }
+            System.out.print(postFill(str));
+            System.out.print("←分水岭→  ");
+
+            str = "";
+            for (int j = i; j >= 0; j--) {
+                str += arr[j] + "  ";
+            }
+            System.out.print(postFill(str));
+
+            str = "";
+            for (int j = i; j < arr.length; j++) {
+                str += arr[j] + "  ";
+            }
+            System.out.print(postFill(str));
+
+            str = "";
+            for (int j = arr.length - 1; j >= i; j--) {
+                str += arr[j] + "  ";
+            }
+            System.out.print(postFill(str));
+            System.out.println();
+        }
+    }
+
+    @Test
+    public void arrayFold6() {
+        int[] arr = new int[] {1, 2, 3, 4, 5, 6, 7, 8, 9};
+        for (int i = arr.length - 1; i >= 0; i--) {
+
+            String str = "";
+            for (int j = 0; j <= i; j++) {
+                str += arr[i] + "  ";
+            }
+            System.out.print(postFill(str));
+            System.out.print("←分水岭→  ");
+
+            str = "";
+            for (int j = i; j >= 0; j--) {
+                str += arr[i] + "  ";
+            }
+            System.out.print(postFill(str));
+
+            str = "";
+            for (int j = i; j < arr.length; j++) {
+                str += arr[i] + "  ";
+            }
+            System.out.print(postFill(str));
+
+            str = "";
+            for (int j = arr.length - 1; j >= i; j--) {
+                str += arr[i] + "  ";
+            }
+            System.out.print(postFill(str));
+            System.out.println();
+        }
+    }
     /**
      * 数组范围截取
      */
