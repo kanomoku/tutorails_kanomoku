@@ -29,27 +29,51 @@ public class BinaryHeap {
         }
         System.out.println("下沉构建最小二叉堆：" + Arrays.toString(arr22));
 
-        //        int[] arr22 = {1, 3, 2, 9, 5, 7, 8, 6, 10, 0};
-        //        heapSort(arr22);
-        //        System.out.println("二叉堆排序：" + Arrays.toString(arr22));
+        System.out.println("===============================================");
+
+        int[] arr222 = {1, 3, 2, 9, 5, 7, 8, 6, 10, 0};
+        heapSort1(arr222);
+        System.out.println("二叉堆排序：" + Arrays.toString(arr222));
+
+        int[] arr2222 = {1, 3, 2, 9, 5, 7, 8, 6, 10, 0};
+        heapSort1(arr2222);
+        System.out.println("二叉堆排序：" + Arrays.toString(arr2222));
     }
 
     /**
      * 降序排序
      */
-    public static void heapSort(int[] arr) {
+    public static void heapSort1(int[] arr) {
         // 无序数组构造成二叉堆
-        //        smallUp2(arr);
-        //        System.out.println("上浮构建二叉堆：" + Arrays.toString(arr));
+        System.out.println("原始数据：" + Arrays.toString(arr));
+        for (int i = (arr.length - 1) / 2; i >= 0; i--) {
+            bigDown1(arr, i, arr.length);
+        }
+        System.out.println("下沉构建最小二叉堆：" + Arrays.toString(arr));
+
+        for (int i = arr.length - 1; i > 0; i--) { // i=0会出错，会把值清零
+            arr[0] = arr[0] ^ arr[i];
+            arr[i] = arr[0] ^ arr[i];
+            arr[0] = arr[0] ^ arr[i];
+            bigDown2(arr, 0, i); // 把i作为右边界
+        }
+    }
+
+    /**
+     * 降序排序
+     */
+    public static void heapSort2(int[] arr) {
+        // 无序数组构造成二叉堆
+        System.out.println("原始数据：" + Arrays.toString(arr));
+        for (int i = (arr.length - 1) / 2; i >= 0; i--) {
+            bigDown1(arr, i, arr.length);
+        }
+        System.out.println("下沉构建最小二叉堆：" + Arrays.toString(arr));
 
         for (int i = arr.length - 1; i >= 0; i--) {
-
             int temp = arr[i];
             arr[i] = arr[0];
             arr[0] = temp;
-
-            // 把i作为右边界的范围内最小的找出来
-            //            downAdjust(arr, 0, i);
             bigDown2(arr, 0, i);
         }
     }
