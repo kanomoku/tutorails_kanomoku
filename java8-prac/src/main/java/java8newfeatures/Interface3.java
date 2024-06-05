@@ -2,13 +2,14 @@ package java8newfeatures;
 
 public interface Interface3 {
     void method3();
-    default void print(String str) {
-        if (!isNull(str))
-            System.out.println("Interface3 Print: " + str);
+
+    default void defaultPrint(String str) {
+        if (!staticIsNull(str))
+            System.out.println("default-Interface3.print: " + str);
     }
 
-    static boolean isNull(String str) {
-        System.out.println("Interface Null Check: " + str);
+    static boolean staticIsNull(String str) {
+        System.out.println("static-Interface3.isNull: " + str);
         return str == null;
     }
 }
