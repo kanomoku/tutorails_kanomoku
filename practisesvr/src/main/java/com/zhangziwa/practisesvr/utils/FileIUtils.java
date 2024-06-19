@@ -5,19 +5,27 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
 @Slf4j
 public class FileIUtils {
     // ----------------------判断----------------------
-
     /**
      * 判断给定的路径是否指向一个存在的文件。
      *
@@ -119,14 +127,13 @@ public class FileIUtils {
             basePath = basePath.substring(1);
         }
 
-        // 使用标准化的分隔符
-        String fileName = Paths.get(basePath, name).toString();
-
         // 获取当前时间戳
         String time = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd_HHMMSS"));
-
         // 生成最终的文件名
-        return fileName + "_" + time + "." + suffix;
+        String fileName = name + "_" + time + "." + suffix;
+
+        // 使用标准化的分隔符
+        return Paths.get(basePath, fileName).toString();
     }
 
     /**
@@ -186,9 +193,12 @@ public class FileIUtils {
      * @param content  内容
      */
     public static void writeFile(String fileName, String content) {
-        try (FileOutputStream fos = new FileOutputStream(fileName, true); OutputStreamWriter writer = new OutputStreamWriter(fos, "GBK")) {
+        try (OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(fileName, true), "GBK")) {
+            // 将content写入文件
             writer.write(content);
+            // 刷新缓冲区，确保数据立即写入文件，但try-with-resources在结束时也会自动调用flush和close
             writer.flush();
+            // 注意：这里不需要显式调用writer.close()，try-with-resources会自动处理
         } catch (Exception e) {
             System.out.println("写文件异常" + e);
         }
@@ -204,6 +214,7 @@ public class FileIUtils {
     public static void writeFile3(String fileName, String content) {
         try (FileWriter writer = new FileWriter(fileName, true)) { // 使用FileWriter自动关闭
             writer.write(content);
+            // 这里flush实际上不是必须的，因为try-with-resources在结束时会自动调用close，而close内部会执行flush
             writer.flush();
         } catch (FileNotFoundException e) { // 更具体的异常捕获
             System.out.println("文件找不到: " + e.getMessage());
@@ -274,26 +285,47 @@ public class FileIUtils {
      * 查询并返回指定文件路径下的所有文件。如果路径指向一个目录，将返回该目录下所有文件的数组；若路径指向一个文件，则返回包含该文件的数组；
      * 若路径既不是文件也不是目录，则抛出异常或打印错误信息。
      *
-     * @param fileName 要查询的文件或目录路径字符串
+     * @param filePath 要查询的文件或目录路径字符串
      * @return 包含指定路径下文件的File数组
      * @throws IllegalArgumentException 如果提供的文件名为空或者为null，抛出此异常
      * @throws IllegalStateException    当指定路径既非文件也非目录时，抛出此异常，并附带错误信息
      */
-    public static File[] getFilesInDir(String fileName) {
-        if (isBlank(fileName)) {
+    public static File[] getFilesInDir(String filePath) {
+        if (isBlank(filePath)) {
             throw new IllegalArgumentException("文件名不能为空");
         }
 
-        File file = new File(fileName);
+        File file = new File(filePath);
         File[] files = new File[0];
         if (file.isDirectory()) {
             files = file.listFiles();
         } else if (file.isFile()) {
             files = new File[]{file};
         } else {
-            System.out.println("此路径没有文件:" + fileName);
+            System.out.println("此路径没有文件:" + filePath);
         }
         return files;
+    }
+
+    /**
+     * 查询并返回指定文件路径下的所有文件。如果路径指向一个目录，将返回该目录下所有文件的数组；若路径指向一个文件，则返回包含该文件的数组；
+     * 若路径既不是文件也不是目录，则抛出异常或打印错误信息。获取指定目录下的所有文件路径，并将结果添加到给定的列表中。
+     *
+     * @param filePath 要查询的文件或目录路径字符串
+     * @param res      用于存储结果的列表
+     */
+    public static void getFilesInDir(String filePath, List<String> res) {
+        File file = new File(filePath);
+        File[] files = file.listFiles();
+        for (File f : files) {
+            if (f.isDirectory()) {
+                getFilesInDir(f.getAbsolutePath(), res);
+            } else if (f.isFile()) {
+                res.add(f.getAbsolutePath());
+            } else {
+                System.out.println("此路径没有文件:" + filePath);
+            }
+        }
     }
 
     // 读取文件长度(字节)
@@ -315,15 +347,15 @@ public class FileIUtils {
     // 参考:https://blog.51cto.com/u_16175500/7197677
     private static void readSpecificLength(String fileName) {
         // 1. 打开文件
-        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
-            char[] buffer = new char[10]; // 2. 定义字符数组
+        try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
+            char[] bufferArr = new char[10]; // 2. 定义字符数组
             int length;
 
             // 3. 读取字符到字符数组
-            while ((length = reader.read(buffer)) != -1) {
+            while ((length = br.read(bufferArr)) != -1) {
                 // 4. 处理读取到的字符
                 for (int i = 0; i < length; i++) {
-                    System.out.print(buffer[i]);
+                    System.out.print(bufferArr[i]);
                 }
                 System.out.println();
             }
