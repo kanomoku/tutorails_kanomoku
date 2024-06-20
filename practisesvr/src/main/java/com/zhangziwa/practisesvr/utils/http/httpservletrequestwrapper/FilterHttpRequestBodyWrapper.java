@@ -7,12 +7,15 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletRequestWrapper;
 import org.apache.commons.text.StringEscapeUtils;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 
 public class FilterHttpRequestBodyWrapper extends HttpServletRequestWrapper {
     private final byte[] bodyByteArr; // 字节数组
     private final ByteArrayInputStream byteArrayInputStream; // 从字节数组读取数据的输入流
-
     private BufferedReader bufferedReader; // getReader()
     private ServletInputStream servletInputStream; // getInputStream()
 
@@ -89,10 +92,9 @@ public class FilterHttpRequestBodyWrapper extends HttpServletRequestWrapper {
                      * 从内部的 byteArrayInputStream 中读取下一个字节数据
                      *
                      * @return 下一个可读字节，如果已到达流末尾则返回 -1
-                     * @throws IOException 如果发生输入/输出错误
                      */
                     @Override
-                    public int read() throws IOException {
+                    public int read() {
                         return byteArrayInputStream.read();
                     }
 
