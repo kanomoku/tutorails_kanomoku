@@ -25,29 +25,28 @@ public class StreamIUtils {
      *
      * @param inputStream  输入流，不能为null
      * @param outputStream 输出流，不能为null
-     * @param byteCount    最大复制字节数
+     * @param maxByteCount    最大复制字节数
      * @return 返回复制的总字节数
      * @throws Exception 如果流为空或复制过程中发生异常
      */
-    public static int copyStream(InputStream inputStream, OutputStream outputStream, long byteCount) throws IOException {
-        // 检查流是否为空
-        if (inputStream == null || outputStream == null) {
+    public static int copyStream(InputStream inputStream, OutputStream outputStream, long maxByteCount)
+        throws IOException {
+        if (inputStream == null || outputStream == null) { // 检查流是否为空
             throw new IOException("流为空");
         }
 
         byte[] buffer = new byte[512]; // 这里512可以视情况调整
         int totalSize = 0;
         int count;
-        // 使用 try-with-resources 语法来自动关闭流
-        try (InputStream input = inputStream; OutputStream output = outputStream) {
+        try (InputStream input = inputStream; OutputStream output = outputStream) { // 使用 try-with-resources 语法来自动关闭流
             while ((count = input.read(buffer, 0, buffer.length)) != -1) {
                 totalSize += count;
-                if (totalSize > byteCount) {
+                if (totalSize > maxByteCount) {
                     throw new IOException("超过了最大字节数");
                 }
                 output.write(buffer, 0, count);
             }
-        } // 源代码块会自动关闭输入和输出流
+        }
 
         return totalSize;
     }
