@@ -1,4 +1,4 @@
-package generic.genericinterface;
+package javabasic.generic.genericinterface;
 
 class MessageStringImpl implements IMessage<String> {
     @Override

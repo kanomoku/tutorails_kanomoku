@@ -1,4 +1,4 @@
-package generic.genericinterface;
+package javabasic.generic.genericinterface;
 
 /**
  * 泛型接口

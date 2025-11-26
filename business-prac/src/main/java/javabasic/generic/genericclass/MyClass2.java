@@ -1,4 +1,4 @@
-package generic.genericclass;
+package javabasic.generic.genericclass;
 
 /**
  * 泛型类

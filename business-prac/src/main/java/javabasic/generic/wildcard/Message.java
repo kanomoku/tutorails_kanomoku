@@ -1,4 +1,4 @@
-package generic.wildcard;
+package javabasic.generic.wildcard;
 
 class Message<T> {
     private T message;

@@ -1,4 +1,4 @@
-package generic.genericclass;
+package javabasic.generic.genericclass;
 
 /**
  * 泛型类
@@ -13,7 +13,6 @@ class MyClass<T> {
     public String appendPrefix(T t) {
         return "appendPrefix → " + t;
     }
-
 
     public static void main(String[] args) {
         MyClass<String> myClass1 = new MyClass<>();

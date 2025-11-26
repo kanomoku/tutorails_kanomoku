@@ -1,4 +1,4 @@
-package generic.genericinterface;
+package javabasic.generic.genericinterface;
 
 class MessageImpl<T> implements IMessage<T> {
     @Override

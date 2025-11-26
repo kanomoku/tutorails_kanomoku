@@ -1,4 +1,4 @@
-package generic.genericmethod;
+package javabasic.generic.genericmethod;
 
 /**
  * 泛型方法 && 泛型类 并存
